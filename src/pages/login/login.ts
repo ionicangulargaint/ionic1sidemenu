@@ -11,12 +11,13 @@ import { MainPage } from '../';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  loginModel: any = 'email';
   // The account fields for the login form.
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
+    email: '',
+    password: ''
   };
 
   // Our translated text strings

@@ -1,39 +1,65 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      Sign In
+    </ion-title>
   </ion-navbar>
+
 
 </ion-header>
 
-
 <ion-content>
-  <form (submit)="doLogin()">
-    <ion-list>
 
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
+<div class="container-log">
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="loginModel">
+      <ion-segment-button value="email">
+        <ion-icon name="mail"></ion-icon> <span class="text">Email</span>
+        
+      </ion-segment-button>
+      <ion-segment-button value="mobile">
+        <ion-icon name="phone-portrait"></ion-icon> <span class="text">Mobile</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
-      <!--
-      Want to use a Username instead of an Email? Here you go:
-
-      <ion-item>
-        <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
-      <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
-      </div>
-
-    </ion-list>
-  </form>
+  <div [ngSwitch]="loginModel">
+    <div *ngSwitchCase="'email'">
+        <form (submit)="doLogin()" class="login-form">
+            <ion-list>        
+              <ion-item>
+                <ion-label stacked>Email*</ion-label>
+                <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+              </ion-item>                
+              <ion-item>
+                <ion-label stacked>Password*</ion-label>
+                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+              </ion-item>
+        
+              <div padding>
+                <button ion-button color="primary" block>Sign In</button>
+              </div>        
+            </ion-list>
+          </form>
+    </div>
+    <div *ngSwitchCase="'mobile'">
+        <form (submit)="doLogin()" class="login-form">
+            <ion-list>        
+              <ion-item>
+                <ion-label stacked>Mobile number*</ion-label>
+                <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+              </ion-item>                
+              <ion-item>
+                <ion-label stacked>Password*</ion-label>
+                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+              </ion-item>
+        
+              <div padding>
+                <button ion-button color="primary" block>Sign In</button>
+              </div>        
+            </ion-list>
+          </form>
+    </div>
+  </div>
+</div>
 </ion-content>
