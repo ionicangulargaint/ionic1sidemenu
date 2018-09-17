@@ -61,7 +61,7 @@
                             <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
                         </ion-item>
                         <div padding class="forgotText mobileForget">
-                            <a href="">
+                            <a (click)="navigateToForgotPassword()">
                                 <ion-icon name="lock"></ion-icon>
                                 <i> Forgot your password?</i>
                             </a>
