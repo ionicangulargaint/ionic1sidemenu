@@ -49,9 +49,12 @@
             <div *ngSwitchCase="'mobile'">
                 <form (submit)="doLogin()" class="login-form">
                     <ion-list>
-                        <ion-item>
+                        <ion-item class="hideBorder" style="margin-bottom: -9px;">
                             <ion-label stacked>Mobile number*</ion-label>
-                            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+                        </ion-item>
+                        <ion-item margin-bottom>
+                            <ion-label fixed><img [src]="currentCountry.code"> {{currentCountry.number}}</ion-label>
+                            <ion-input type="tel"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Password*</ion-label>
