@@ -1,15 +1,15 @@
 page-tutorial {
   .toolbar-background {
-    background: transparent;
+    background: #0f4187;
     border-color: transparent;
+  }
+
+  .toolbar-title {
+    color: #fff;
   }
 
   .slide-zoom {
     height: 100%;
-  }
-
-  .slide-title {
-    margin-top: 2.8rem;
   }
 
   .slide-image {
@@ -19,18 +19,54 @@ page-tutorial {
   }
 
   b {
-    font-weight: 500;
+    font-weight: 400;
   }
 
-  p {
-    padding: 0 40px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #60646B;
-
-    b {
-      color: #000000;
-    }
+  .custom-icon {
+    font-size: 25px; 
+    color: #fff;
+    margin-top: 10px; 
   }
 
+  .dashboard-wrap {
+    height: 45px;
+    width: 45px;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #235091;
+  }
+
+  .choose-wrap { 
+    background: #235091;
+    font-size: 12px ; 
+    color: #fff;
+  }
+
+  .small-white {
+    font-size: 12px ; 
+    color: #fff;
+    padding: 5px;
+  }
+
+  .content {
+    background-color: #0f4187;
+  }
+
+  .swiper-pagination-bullets {
+    bottom: 200px !important;
+  }
+
+  .border-left {
+    border-bottom-left-radius: 5px; 
+    border-top-left-radius: 5px;
+  }
+
+  .border-right {
+    border-bottom-right-radius: 5px; 
+    border-top-right-radius: 5px;
+  }
 }

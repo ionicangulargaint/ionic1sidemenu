@@ -1,25 +1,64 @@
 <ion-header no-shadow>
   <ion-navbar>
-    <ion-buttons end *ngIf="showSkip">
-      <button ion-button (click)="startApp()" color="primary">{{ 'TUTORIAL_SKIP_BUTTON' | translate}}</button>
-    </ion-buttons>
+    <button ion-button menuToggle style="color:#fff">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Anytime Check In</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Around current location "></ion-searchbar>
+  <ion-grid style="border-bottom: 2px solid #0c346d;">
+    <ion-row style="text-align:center;">
+      <ion-col col-3>
+          <div class="dashboard-wrap">
+              <ion-icon name="md-navigate" class="custom-icon"></ion-icon>
+          </div>
+          <div class="small-white">Near Me</div>
+      </ion-col>
+      <ion-col col-6>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 class="choose-wrap border-left">
+              <div class="count">1</div>
+              <div class="count-type">Room</div>
+            </ion-col>
+            <ion-col col-4 class="choose-wrap">
+                <div class="count">1</div>
+                <div class="count-type">Room</div>
+            </ion-col>
+            <ion-col col-4 class="choose-wrap border-right">
+                <div class="count">1</div>
+                <div class="count-type">Room</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col col-3>
+        <div class="dashboard-wrap">
+            <ion-icon name="ios-pin" class="custom-icon"></ion-icon>
+        </div>
+          <div class="small-white">Map</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+      <!-- <ion-item>
+          <ion-label>Day</ion-label>
+          <ion-checkbox color="dark" checked="true"></ion-checkbox>
+          <ion-label>Hours</ion-label>
+          <ion-checkbox color="dark"></ion-checkbox>
+        </ion-item> -->
+  </div>
   <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
     <ion-slide *ngFor="let slide of slides">
       <img [src]="slide.image" class="slide-image" />
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-      <p [innerHTML]="slide.description"></p>
+      <!-- <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p> -->
     </ion-slide>
     <ion-slide>
       <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">{{ 'TUTORIAL_SLIDE4_TITLE' | translate }}</h2>
-      <button ion-button icon-end large clear (click)="startApp()">
-        {{ 'TUTORIAL_CONTINUE_BUTTON' | translate }}
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
     </ion-slide>
   </ion-slides>
 </ion-content>

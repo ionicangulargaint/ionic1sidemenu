@@ -8,30 +8,14 @@ import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage = FirstRunPage;
 
   @ViewChild(Nav) nav: Nav;
 
-  pages: any[] = [
+  /*pages: any[] = [
     { title: 'Tutorial', component: 'TutorialPage' },
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Tabs', component: 'TabsPage' },
@@ -43,6 +27,14 @@ export class MyApp {
     { title: 'Menu', component: 'MenuPage' },
     { title: 'Settings', component: 'SettingsPage' },
     { title: 'Search', component: 'SearchPage' }
+  ]*/
+
+  pages: any[] = [
+    // { title: 'Login', component: 'LoginPage' },
+    // { title: 'Signup', component: 'SignupPage' },
+    { title: 'My Profile', component: 'TutorialPage' },
+    { title: 'My Bookings', component: 'WelcomePage' },
+    { title: 'Logout', component: 'TabsPage' }
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
