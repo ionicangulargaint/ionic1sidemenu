@@ -1,16 +1,16 @@
-page-login {   
-
-    ion-header .toolbar-background, .scroll-content {
+page-login {
+    ion-header .toolbar-background,
+    .scroll-content {
         background-color: #0b1a37;
-                
-      }
-       .toolbar-title, .bar-button-default-md {
-          color: white !important;
-      }
-      .toolbar .segment-md {        
+    }
+    .toolbar-title,
+    .bar-button-default-md {
+        color: white !important;
+    }
+    .toolbar .segment-md {
         background: #ffffff;
     }
-    .container-log{
+    .container-log {
         background: white;
         margin-top: 20%;
         border-radius: 5px;
@@ -21,11 +21,11 @@ page-login {
         padding: unset;
         min-height: unset;
     }
-    .container-log .segment-md .segment-button{
+    .container-log .segment-md .segment-button {
         padding: unset;
         color: #8c8c8c;
     }
-    .container-log .segment-md .segment-button .text{
+    .container-log .segment-md .segment-button .text {
         font-size: 1.9rem;
         text-transform: capitalize;
         font-weight: 400;
@@ -39,8 +39,32 @@ page-login {
     .container-log .login-form {
         margin-top: 38px;
     }
-    .container-log .login-form .item{
+    .container-log .login-form .item {
         margin-bottom: 25px;
     }
-      
+    .container-log .login-form .forgotText {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.6rem;
+    }
+    .container-log .login-form .forgotText a {
+        text-decoration: none;
+        color: #5289ff;
+    }
+    .faceBookBtn {
+        background: #3e5b99;
+        text-transform: none;
+        border-radius: 5px;
+    }
+    .facebookLoginContainer {
+        text-align: center;
+        padding: 0px 20px;
+    }
+    .facebookLoginContainer h4 {
+        color: white;
+    }
+    .mobileForget {
+        text-align: right !important;
+        margin-top: -20px !important;
+    }
 }
