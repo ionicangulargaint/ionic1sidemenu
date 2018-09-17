@@ -1,65 +1,82 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
-    <ion-title>
-      Sign In
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar no-border-bottom>
+        <ion-title>
+            Sign In
+        </ion-title>
+    </ion-navbar>
 
 
 </ion-header>
 
 <ion-content>
 
-<div class="container-log">
-  <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="loginModel">
-      <ion-segment-button value="email">
-        <ion-icon name="mail"></ion-icon> <span class="text">Email</span>
-        
-      </ion-segment-button>
-      <ion-segment-button value="mobile">
-        <ion-icon name="phone-portrait"></ion-icon> <span class="text">Mobile</span>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+    <div class="container-log">
+        <ion-toolbar no-border-top>
+            <ion-segment [(ngModel)]="loginModel">
+                <ion-segment-button value="email">
+                    <ion-icon name="mail"></ion-icon> <span class="text">Email</span>
 
-  <div [ngSwitch]="loginModel">
-    <div *ngSwitchCase="'email'">
-        <form (submit)="doLogin()" class="login-form">
-            <ion-list>        
-              <ion-item>
-                <ion-label stacked>Email*</ion-label>
-                <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-              </ion-item>                
-              <ion-item>
-                <ion-label stacked>Password*</ion-label>
-                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-              </ion-item>
-        
-              <div padding>
-                <button ion-button color="primary" block>Sign In</button>
-              </div>        
-            </ion-list>
-          </form>
+                </ion-segment-button>
+                <ion-segment-button value="mobile">
+                    <ion-icon name="phone-portrait"></ion-icon> <span class="text">Mobile</span>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
+
+        <div [ngSwitch]="loginModel">
+            <div *ngSwitchCase="'email'">
+                <form (submit)="doLogin()" class="login-form">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label stacked>Email*</ion-label>
+                            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Password*</ion-label>
+                            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+                        </ion-item>
+
+                        <div padding>
+                            <button ion-button color="primary" block>Sign In</button>
+                        </div>
+                        <div padding class="forgotText">
+                            <a href="">
+                                <ion-icon name="lock"></ion-icon><i> Forgot your password?</i> </a>
+                        </div>
+                    </ion-list>
+                </form>
+            </div>
+            <div *ngSwitchCase="'mobile'">
+                <form (submit)="doLogin()" class="login-form">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label stacked>Mobile number*</ion-label>
+                            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Password*</ion-label>
+                            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+                        </ion-item>
+                        <div padding class="forgotText mobileForget">
+                            <a href="">
+                                <ion-icon name="lock"></ion-icon>
+                                <i> Forgot your password?</i>
+                            </a>
+                        </div>
+                        <div padding>
+                            <button ion-button color="primary" block>Sign In</button>
+                        </div>
+                    </ion-list>
+                </form>
+            </div>
+        </div>
     </div>
-    <div *ngSwitchCase="'mobile'">
-        <form (submit)="doLogin()" class="login-form">
-            <ion-list>        
-              <ion-item>
-                <ion-label stacked>Mobile number*</ion-label>
-                <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-              </ion-item>                
-              <ion-item>
-                <ion-label stacked>Password*</ion-label>
-                <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-              </ion-item>
-        
-              <div padding>
-                <button ion-button color="primary" block>Sign In</button>
-              </div>        
-            </ion-list>
-          </form>
+    <div class="facebookLoginContainer">
+        <h4>Or</h4>
+        <button block large ion-button icon-start class="faceBookBtn">
+        <ion-icon name='logo-facebook'></ion-icon>
+        Continue with Facebook
+      </button>
     </div>
-  </div>
-</div>
+
 </ion-content>
