@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 import { User } from '../../providers';
 import { MainPage } from '../';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+  selector: 'page-forgot-password',
+  templateUrl: 'forgot-password.html'
 })
-export class LoginPage {
-  loginModel: any = 'email';
+export class ForgotPasswordPage {  
   currentCountry:any = {
     code:'',
     number:''
@@ -85,7 +84,8 @@ export class LoginPage {
   ionViewDidLoad() {
     this.changeCountryCode();
   }
-  navigateToForgotPassword(){
-    this.navCtrl.push('ForgotPasswordPage');
+
+  navigateToOtpVerification(){
+ this.navCtrl.push('OtpVerificationPage');
   }
 }

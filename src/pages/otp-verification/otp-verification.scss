@@ -1,0 +1,34 @@
+page-otp-verification {
+    ion-header .toolbar-background,
+    .scroll-content {
+        background-color: #0b1a37;
+    }
+    .toolbar-title,
+    .bar-button-default-md {
+        color: white !important;
+    }
+    .toolbar {
+        background: #ffffff;
+    }
+    .container-log {
+        background: white;
+        margin-top: 10%;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 10px;
+    }
+    .container-log .toolbar-md {
+        padding: unset;
+        min-height: unset;
+    }
+    .container-log .login-form {
+        margin-top: 10px;
+    }
+    .container-log .login-form .item {
+        margin-bottom: 25px;
+    }
+    .detail {
+        font-weight: 400;
+        text-align: center;
+    }
+}
