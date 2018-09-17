@@ -43,13 +43,38 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div>
-      <!-- <ion-item>
-          <ion-label>Day</ion-label>
-          <ion-checkbox color="dark" checked="true"></ion-checkbox>
-          <ion-label>Hours</ion-label>
-          <ion-checkbox color="dark"></ion-checkbox>
-        </ion-item> -->
+  <div style="width:275px; margin:0 auto;">
+      <ion-grid>
+          <ion-row>
+              <ion-col col-6>
+                  <ion-item>
+                      <ion-label class="exmedium-white">Day</ion-label>
+                      <ion-checkbox color="dark" checked="true"></ion-checkbox>
+                  </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                  <ion-item>
+                      <ion-label class="exmedium-white">Hour</ion-label>
+                      <ion-checkbox color="dark"></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+          </ion-row>
+      </ion-grid>
+      <div class="checkInlable">Check In Date</div>
+      <ion-grid style="text-align:center;">
+          <ion-row>
+              <ion-col col-5 class="check-wrap">
+                  <div>CHECK IN</div>
+                  <div>1/09/2018</div>
+              </ion-col>
+              <ion-col col-2></ion-col>
+              <ion-col col-5 class="check-wrap">
+                  <div>CHECH OUT</div>
+                  <div>1/09/2018</div>
+                </ion-col>
+          </ion-row>
+      </ion-grid>
+      <button ion-button block color="light">SEARCH</button>
   </div>
   <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
     <ion-slide *ngFor="let slide of slides">

@@ -52,12 +52,22 @@ page-tutorial {
     padding: 5px;
   }
 
+  .medium-white {
+    font-size: 14px ; 
+    color: #fff;
+  }
+
+  .exmedium-white {
+    font-size: 16px ; 
+    color: #fff;
+  }
+
   .content {
     background-color: #0f4187;
   }
 
   .swiper-pagination-bullets {
-    bottom: 200px !important;
+    bottom: 100px !important;
   }
 
   .border-left {
@@ -68,5 +78,37 @@ page-tutorial {
   .border-right {
     border-bottom-right-radius: 5px; 
     border-top-right-radius: 5px;
+  }
+
+  .checkbox {
+    margin: 8px !important;
+  }
+
+  .item-checkbox {
+    background: transparent;
+  }
+
+  .item-inner {
+    border-bottom:none !important;
+  }
+
+  .checkInlable {
+    background: #204a84;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: 200;
+  }
+
+  .swiper-container {
+    height: 350px;
+  }
+
+  .check-wrap {
+    padding: 10px;
+    background: #0a3778;
+    color: #fff;
+    font-weight: 200;
   }
 }
