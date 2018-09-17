@@ -67,4 +67,8 @@ page-login {
         text-align: right !important;
         margin-top: -20px !important;
     }
+    .hideBorder .item-inner {
+        border-bottom: none !important;
+        color: #aeaeae;
+    }
 }
