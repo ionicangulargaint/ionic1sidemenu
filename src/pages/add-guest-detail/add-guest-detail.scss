@@ -1,0 +1,12 @@
+add-guest-detail {
+  .toolbar-background {
+    background: #0f4187;
+    border-color: transparent;
+  }
+  .back-button, .toolbar-title {
+    color: #fff;
+  }
+  .item-block:last-child .item-inner {
+    border-bottom: 1px solid #dedede !important;
+  }
+}
