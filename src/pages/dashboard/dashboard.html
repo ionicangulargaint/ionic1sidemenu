@@ -8,10 +8,16 @@
 </ion-header>
 
 <ion-content no-bounce class="no-scroll">
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="Around current location "></ion-searchbar>
+  <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+  <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+
   <ion-grid style="border-bottom: 2px solid #0c346d;">
     <ion-row class="center">
-      <ion-col col-3>
+      <ion-col col-3 (click)="getCurrentLatLongAndFindAddress()">
         <div class="dashboard-wrap">
           <ion-icon name="md-navigate" class="custom-icon"></ion-icon>
         </div>
@@ -35,7 +41,7 @@
           </ion-row>
         </ion-grid>
       </ion-col>
-      <ion-col col-3>
+      <ion-col col-3 (click)="navigateToGoogleMap()">
         <div class="dashboard-wrap">
           <ion-icon name="ios-pin" class="custom-icon"></ion-icon>
         </div>
@@ -75,7 +81,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div> 
+    </div>
     <div class="checkin-hour" *ngIf="selectedTypeHour">
       <div class="checkInlable">Check In Hour</div>
       <div class="check-wrap center" style="margin-top: 5px;">1/09/2018</div>

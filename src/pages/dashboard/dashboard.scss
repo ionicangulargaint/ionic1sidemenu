@@ -96,4 +96,10 @@ page-dashboard {
   .center {
     text-align: center;
   }
+  .search-list {
+    position: absolute;
+    z-index: 100;
+    width: 96%;
+    left: 2%;
+  }
 }

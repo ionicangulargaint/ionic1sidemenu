@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
-
-import { TranslateService } from '@ngx-translate/core';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 
 export interface Slide {
-  title: string;
-  description: string;
+  //title: string;
+  //description: string;
   image: string;
 }
 
@@ -15,47 +15,95 @@ export interface Slide {
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  slides: Slide[];
   showSkip = true;
-  dir: string = 'ltr';
-  selectedTypeDay:boolean = true;
-  selectedTypeHour:boolean = false;
+  selectedTypeDay: boolean = true;
+  selectedTypeHour: boolean = false;
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
-    this.dir = platform.dir();
-    translate.get(["TUTORIAL_SLIDE1_TITLE",
-      "TUTORIAL_SLIDE1_DESCRIPTION",
-      "TUTORIAL_SLIDE2_TITLE",
-      "TUTORIAL_SLIDE2_DESCRIPTION",
-      "TUTORIAL_SLIDE3_TITLE",
-      "TUTORIAL_SLIDE3_DESCRIPTION",
-    ]).subscribe(
-      (values) => {
-        console.log('Loaded values', values);
-        this.slides = [
-          {
-            title: values.TUTORIAL_SLIDE1_TITLE,
-            description: values.TUTORIAL_SLIDE1_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-1.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE2_TITLE,
-            description: values.TUTORIAL_SLIDE2_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-2.png',
-          },
-          {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-3.png',
-          }
-        ];
+  autocomplete: any;
+  GoogleAutocomplete: any;
+  GooglePlaces: any;
+  geocoder: any
+  autocompleteItems: any;
+  nearbyItems: any = new Array<any>();
+
+  slides = [
+    {
+      image: 'assets/img/ica-slidebox-img-1.png',
+    },
+    {
+      image: 'assets/img/ica-slidebox-img-2.png',
+    },
+    {
+      image: 'assets/img/ica-slidebox-img-3.png',
+    }
+  ];
+
+  constructor(public zone: NgZone,
+    public geolocation: Geolocation,
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public platform: Platform,
+    private nativeGeocoder: NativeGeocoder
+  ) {
+    this.geocoder = new google.maps.Geocoder;
+    this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+    this.autocomplete = { input: '' };
+    this.autocompleteItems = [];
+  }
+
+  updateSearchResults() {
+    if (this.autocomplete.input == '') {
+      this.autocompleteItems = [];
+      return;
+    }
+    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+      (predictions, status) => {
+        this.autocompleteItems = [];
+        this.zone.run(() => {
+          predictions.forEach((prediction) => {
+            this.autocompleteItems.push(prediction);
+          });
+        });
       });
   }
 
-  startApp() {
-    this.navCtrl.setRoot('WelcomePage', {}, {
-      animate: true,
-      direction: 'forward'
+  selectSearchResult(item) {
+    this.autocompleteItems = [];
+    this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
+      if (status === 'OK' && results[0]) {
+        console.log(results[0].formatted_address);
+        this.autocompleteItems = [];
+        this.autocomplete = { 'input': results[0].formatted_address };
+      }
+    })
+  }
+
+  navigateToGoogleMap() {
+    this.navCtrl.push('pinOnMapPage'); 
+  }
+
+  getCurrentLatLongAndFindAddress() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let latlng = {
+        lat: resp.coords.latitude,
+        lng: resp.coords.longitude
+      };
+      console.log(latlng);
+      let options: NativeGeocoderOptions = {
+        useLocale: true,
+        maxResults: 5
+      };
+      this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude, options)
+        .then((result: any) => {
+          this.autocomplete = { 'input': result[0].formatted_address };
+          console.log(JSON.stringify(result[0]));
+        }).catch((error: any) => {
+          alert('lat long is - '+resp.coords.latitude+' and '+resp.coords.longitude+ ' waiting for cordoav to get address');
+          console.log(error)
+        });
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
   }
 
@@ -64,7 +112,7 @@ export class DashboardPage {
   }
 
   change(type) {
-    if(type == 'Day'){
+    if (type == 'Day') {
       this.selectedTypeHour = !this.selectedTypeDay;
     } else {
       this.selectedTypeDay = !this.selectedTypeHour;
@@ -77,16 +125,12 @@ export class DashboardPage {
 
   ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page
-   // this.menu.enable(false);
+    // this.menu.enable(false);
   }
 
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
-  }
-
-  getItems(){
-    
   }
 
 }
