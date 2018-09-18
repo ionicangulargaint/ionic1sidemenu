@@ -74,5 +74,8 @@ export class TutorialPage {
   getItems(){
     
   }
+  navigateToList(){
+    this.navCtrl.push('SearchedHotelListPage');
+  }
 
 }

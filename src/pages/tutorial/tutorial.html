@@ -74,7 +74,7 @@
                 </ion-col>
           </ion-row>
       </ion-grid>
-      <button ion-button block color="light">SEARCH</button>
+      <button ion-button block color="light" (click)="navigateToList()">SEARCH</button>
   </div>
   <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
     <ion-slide *ngFor="let slide of slides">
