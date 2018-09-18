@@ -45,8 +45,8 @@ export class DashboardPage {
     public platform: Platform,
     private nativeGeocoder: NativeGeocoder
   ) {
-    this.geocoder = new google.maps.Geocoder;
-    this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+   // this.geocoder = new google.maps.Geocoder;
+    //this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
   }
@@ -132,5 +132,9 @@ export class DashboardPage {
     // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
   }
+
+  navigateToSearchedList(){
+    this.navCtrl.push('SearchedHotelListPage');
+     }
 
 }
