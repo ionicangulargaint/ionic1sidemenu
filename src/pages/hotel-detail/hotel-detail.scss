@@ -1,4 +1,4 @@
-page-searched-hotel-list {
+page-hotel-detail {
 .custom-toolbar .grid{
     background: #ffffffff;
 }
@@ -83,12 +83,70 @@ img{
         font-weight: 300;
         margin-top: -8px;
   }
-  .toolbar-title-md {
-    font-size: 1.5rem;
+  .roomTypeOverLay{
+    width: 91%;
+    bottom: 15px;
   }
-  .toolbar-background-md {
-    border-color: #b2b2b2;
-    background: #ffffff;
+  .roomTypeOverLay .discount {
+    left: 30%;
+  }
+  .lineHeight-text{
+    line-height: 23px;
+  }
+.forecast_container{
+  overflow-x: scroll!important;
+  overflow-y: hidden;
+  word-wrap: break-word;
+  height:20vw;
+  font-size:0.8em;
+  font-weight:300;
 }
+.forecast_container img{
+  max-width: 25px;
+  max-height: 25px;
+  margin: auto;
+}
+.forecast_container span{
+  font-weight: 400;
+}
+.forecast_container .col{
+  text-align: center;
+}
+.dateTimeSlot ion-col, .rateSlot ion-col{
+  border-radius: 3px;
+  -webkit-box-shadow: 2px 2px 8px #cdcdcd;
+  box-shadow: 2px 2px 8px #cdcdcd;
+  opacity: 0.4;
+  background: #f6f6f6;
+}
+.rateSlot ion-col{
+  opacity: 1;
+  background: transparent;
+  border: 1px solid #d9d9d9;
+}
+.dateTimeSlot ion-col p, .rateSlot ion-col p{
+  font-size: 9px;
+  font-weight: 600;
+}
+.dateTimeSlot ion-col:not(:first-child):not(:last-child){
+  margin-left: 5px;
+  margin-right: 5px;
+  opacity: 1;
+}
+
+.rateSlot ion-col:not(:first-child):not(:last-child){
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.rateSlot ion-col p:first-child {
+  float: left;
+}
+.rateSlot ion-col p:last-child {
+  float: right;
+}
+.rateSlot ion-col p small{
+  font-weight: 100;
+}
+
 
 }

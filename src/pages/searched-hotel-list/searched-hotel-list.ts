@@ -37,5 +37,11 @@ export class SearchedHotelListPage {
       item: item
     });
   }
+  
+  navigateToHotelDetail(item){
+    this.navCtrl.push('HotelDetailPage', {
+      item: item
+    });
+  }
 
 }
