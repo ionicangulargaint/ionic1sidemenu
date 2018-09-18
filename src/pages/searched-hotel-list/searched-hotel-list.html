@@ -1,0 +1,207 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+    <ion-buttons end>
+        <button (click)="myFunction()" ion-button icon-only>
+          <ion-icon name="map"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="map"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="custom-toolbar">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <p class="head">CHECK IN</p>
+          <p>13/07/2018</p>
+          <p>5:00PM</p>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">CHECK OUT</p>
+          <p>18/07/2018</p>
+          <p>1:00PM</p>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">1 Room</p>
+          <p>
+            <ion-icon name="person"></ion-icon> 1 Adult</p>
+          <p>
+            <ion-icon name="person"></ion-icon> 2 Child</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-list>
+    <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
+      <ion-avatar item-start>
+        <img [src]="item.profilePic" />
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <p>{{item.about}}</p>
+      <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+    </button>
+  </ion-list> -->
+  <div class="one-item">
+    <ion-card class="myCard">
+      <img src="assets/img/a.jpg" />
+      <div class="myOverlay">
+        <div class="card-title">$1994</div>
+        <div class="card-subtitle">$1292</div>
+        <div class="discount">50% Off</div>
+        <div class="distance">5 km</div>
+      </div>
+    </ion-card>
+    <ion-card style="margin-top:-10px;">
+      <ion-card-header>
+        <ion-row>
+          <ion-col col-7>
+            <h3 class="card-title-main">Marriof Gold INN</h3>
+          </ion-col>
+          <ion-col col-5>
+            <div class="main-rating">
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+            </div>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-card-header>
+      <ion-card-content class="address-card">
+        <ion-icon name="pin"></ion-icon> 925 Doroteo Jose Street corner Rizal Avenue, Santa Cruz, Manila, Phillippines, 1003
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="one-item">
+    <ion-card class="myCard">
+      <img src="assets/img/a.jpg" />
+      <div class="myOverlay">
+        <div class="card-title">$1994</div>
+        <div class="card-subtitle">$1292</div>
+        <div class="discount">50% Off</div>
+        <div class="distance">5 km</div>
+      </div>
+    </ion-card>
+    <ion-card style="margin-top:-10px;">
+      <ion-card-header>
+        <ion-row>
+          <ion-col col-7>
+            <h3 class="card-title-main">Marriof Gold INN</h3>
+          </ion-col>
+          <ion-col col-5>
+            <div class="main-rating">
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+            </div>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-card-header>
+      <ion-card-content class="address-card">
+        <ion-icon name="pin"></ion-icon> 925 Doroteo Jose Street corner Rizal Avenue, Santa Cruz, Manila, Phillippines, 1003
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="one-item">
+    <ion-card class="myCard">
+      <img src="assets/img/a.jpg" />
+      <div class="myOverlay">
+        <div class="card-title">$1994</div>
+        <div class="card-subtitle">$1292</div>
+        <div class="discount">50% Off</div>
+        <div class="distance">5 km</div>
+      </div>
+    </ion-card>
+    <ion-card style="margin-top:-10px;">
+      <ion-card-header>
+        <ion-row>
+          <ion-col col-7>
+            <h3 class="card-title-main">Marriof Gold INN</h3>
+          </ion-col>
+          <ion-col col-5>
+            <div class="main-rating">
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+            </div>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-card-header>
+      <ion-card-content class="address-card">
+        <ion-icon name="pin"></ion-icon> 925 Doroteo Jose Street corner Rizal Avenue, Santa Cruz, Manila, Phillippines, 1003
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="one-item">
+    <ion-card class="myCard">
+      <img src="assets/img/a.jpg" />
+      <div class="myOverlay">
+        <div class="card-title">$1994</div>
+        <div class="card-subtitle">$1292</div>
+        <div class="discount">50% Off</div>
+        <div class="distance">5 km</div>
+      </div>
+    </ion-card>
+    <ion-card style="margin-top:-10px;">
+      <ion-card-header>
+        <ion-row>
+          <ion-col col-7>
+            <h3 class="card-title-main">Marriof Gold INN</h3>
+          </ion-col>
+          <ion-col col-5>
+            <div class="main-rating">
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon>
+            </div>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-card-header>
+      <ion-card-content class="address-card">
+        <ion-icon name="pin"></ion-icon> 925 Doroteo Jose Street corner Rizal Avenue, Santa Cruz, Manila, Phillippines, 1003
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+
+  <!-- <ion-card>
+        <img src="assets/img/a.jpg"/>
+        <div class="myOverlay">
+            <div class="card-title">$1994</div>
+            <div class="card-subtitle">$1292</div>
+            <div class="discount">50% Off</div>
+            <div class="distance">5 km</div>
+         </div>
+        <ion-card-content>          
+          <p>
+            The most popular industrial group ever, and largely
+            responsible for bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+      </ion-card> -->
+</ion-content>

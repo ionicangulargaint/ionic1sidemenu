@@ -90,4 +90,7 @@ export class SignupPage {
   ionViewDidLoad() {
     this.changeCountryCode();
   }
+  navigateToForgotPassword(){
+    this.navCtrl.push('ForgotPasswordPage');
+  }
 }

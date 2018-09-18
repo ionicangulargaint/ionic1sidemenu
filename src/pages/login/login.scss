@@ -1,7 +1,9 @@
 page-login {
     ion-header .toolbar-background,
     .scroll-content {
-        background-color: #0b1a37;
+        background-image: url(/assets/img/screen.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .toolbar-title,
     .bar-button-default-md {

@@ -1,0 +1,87 @@
+page-searched-hotel-list {
+.custom-toolbar .grid{
+    background: #ffffffff;
+}
+.custom-toolbar .grid .col{
+    text-align: center;
+    border-left: 1px solid #ececec;
+}
+.custom-toolbar .grid .col:first-child{
+    border-left: none;
+}
+.custom-toolbar .grid .col p{
+    font-size: 11px;
+    color: #898989;
+ }
+.custom-toolbar .grid .col .head{
+    color: #0489bc;
+   font-weight: 500;
+}
+
+img{
+    width:100%;
+    height:100%;
+  }
+  
+  .myCard{
+    position:relative;
+  
+  }
+  
+  .myOverlay{
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      z-index: 99;
+      bottom: 0px;      
+      color: #fff;
+      background: -moz-linear-gradient(to left, #ffffff 25%, #00000099 0%, rgba(226, 226, 226, 0) 56%, #00000070 127%); /* FF3.6-15 */
+      background: linear-gradient(to right, #ffffff 25%, #00000099 0%, rgba(226, 226, 226, 0) 56%, #00000070 127%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right, #ffffff 25%, #00000099 0%, rgba(226, 226, 226, 0) 56%, #00000070 127%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2989d8', endColorstr='#cc1e5799',GradientType=1 ); /* IE6-9 */
+  
+  }
+  .discount {
+    position: absolute;
+    left: 24%;
+    bottom: 16%;
+    background: black;
+    padding: 4px;
+    color: white;
+    font-size: 11px;
+  }
+  .card-subtitle{
+    font-size: 25px;
+    margin: 0px 8px;
+    font-weight: 200;
+  }
+  .card-title{
+    font-weight: 400;
+    text-decoration: line-through;
+    margin: 5px 18px;
+    font-size: 15px;
+  }
+  .distance{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    color: white;
+    bottom: 20%;
+  }
+  .card-title-main {
+    margin: 0px 0;
+    font-size: 1.9rem;
+    font-weight: 500;
+    color: #444;
+  }
+  .main-rating ion-icon{
+    color: #d8aa04;
+    font-size: 13px;
+  }
+  .address-card {
+        font-size: 1.3rem;
+        font-weight: 300;
+        margin-top: -8px;
+  }
+
+}

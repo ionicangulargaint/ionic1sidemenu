@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { User } from '../../providers';
 import { MainPage } from '../';
+import * as $ from 'jquery';
 
 @IonicPage()
 @Component({
@@ -36,6 +37,18 @@ export class OtpVerificationPage {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+    $(function() {
+      $(".otp").keyup(function(e:any) {
+        if ((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105)) {
+          e.target.value = String.fromCharCode( e.which );
+          $(e.target).next('.otp').focus();
+          //var data = String.fromCharCode( e.which );
+        } else if (e.which == 8) {
+          e.target.value = String.fromCharCode( e.which );
+          $(e.target).prev('.otp').focus();
+        }
+      });
+    });
   }
 
   // Attempt to login in through our User service
