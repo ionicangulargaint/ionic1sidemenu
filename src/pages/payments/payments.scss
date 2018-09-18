@@ -1,0 +1,78 @@
+page-payments {
+  .center {
+    text-align: center;
+  }
+  .hotel-img {
+    border-radius: 50%;
+  }
+  .hotel-lable {
+    color: #6591E4;
+    font-weight: 500;
+  }
+  .main-rating ion-icon{
+    color: #d8aa04;
+    font-size: 13px;
+  }
+  .hotel-address {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 0px;
+  }
+  .payment-list {
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #D7D7D7;
+    padding: 5px 0px 5px 5px;;
+    border-bottom: none;
+  }
+  .payment-list:last-child {
+    border-bottom: 1px solid #D7D7D7;
+    background: #F5F5F5;
+  }
+  .tax-lable {
+    font-size: 10px;
+    color:#969696;
+  }
+  .paypal-amount {
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .paypal-discount-lable {
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    color:#969696;
+  }
+  .coupon-bon {
+    padding: 10px;
+  }
+  .coupon-box input[type=text] {
+    padding: 10px;
+    height: auto;
+    font-size: 1.6rem; 
+    font-weight: 400;
+    border: 1px solid #E5E5E5;
+    float: left;
+    width: 80%;
+    background: #F5F5F5;
+}
+.coupon-box button {
+    float: left;
+    width: 20%;
+    padding: 11px;
+    background: #3B5999;
+    color: white;
+    font-size: 1.6rem; 
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+.coupon-box::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+}
