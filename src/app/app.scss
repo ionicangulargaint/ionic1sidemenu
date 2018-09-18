@@ -14,3 +14,30 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.sideMenu-login-btn{
+    background: #0b4eac;
+    border-radius: 5px;
+    text-transform: capitalize;
+    margin-top: 10px;
+}
+.sideMenu-register-btn{
+    border-radius: 5px;
+    text-transform: capitalize;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: #0b4eac;
+    color: #0b4eac;
+    margin-top: 13px;
+}
+.sideMenu-text{
+    color: #585858;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+ion-menu ion-header{
+    // display: contents;    
+}
+ion-menu ion-header .toolbar-background-md {
+    background: white;
+}
