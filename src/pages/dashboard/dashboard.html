@@ -10,7 +10,7 @@
 <ion-content no-bounce class="no-scroll">
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Around current location "></ion-searchbar>
   <ion-grid style="border-bottom: 2px solid #0c346d;">
-    <ion-row style="text-align:center;">
+    <ion-row class="center">
       <ion-col col-3>
         <div class="dashboard-wrap">
           <ion-icon name="md-navigate" class="custom-icon"></ion-icon>
@@ -62,7 +62,7 @@
     </ion-grid>
     <div class="checkin-day" *ngIf="selectedTypeDay">
       <div class="checkInlable">Check In Date</div>
-      <ion-grid style="text-align:center;">
+      <ion-grid class="center" style="padding: 5px 0;">
         <ion-row>
           <ion-col col-5 class="check-wrap">
             <div>CHECK IN</div>
