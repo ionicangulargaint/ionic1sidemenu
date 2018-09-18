@@ -32,7 +32,7 @@ export class MyApp {
   pages: any[] = [
     // { title: 'Login', component: 'LoginPage' },
     // { title: 'Signup', component: 'SignupPage' },
-    { title: 'My Profile', component: 'TutorialPage' },
+    { title: 'My Profile', component: 'DashboardPage' },
     { title: 'My Bookings', component: 'WelcomePage' },
     { title: 'Logout', component: 'TabsPage' }
   ]
