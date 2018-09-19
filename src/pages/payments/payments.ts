@@ -8,6 +8,8 @@ import { IonicPage, MenuController, NavController, Platform } from 'ionic-angula
 })
 export class PaymentsPage {
   
-  constructor() {}
-
+  constructor(public navCtrl: NavController) {}
+  navigateToBookingConfirmed() {
+    this.navCtrl.push('BookingConfirmedPage'); 
+  }
 }
