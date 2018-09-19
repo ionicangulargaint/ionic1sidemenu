@@ -45,8 +45,8 @@ export class DashboardPage {
     public platform: Platform,
     private nativeGeocoder: NativeGeocoder
   ) {
-   // this.geocoder = new google.maps.Geocoder;
-    //this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+    this.geocoder = new google.maps.Geocoder;
+    this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
   }

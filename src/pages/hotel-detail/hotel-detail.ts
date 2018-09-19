@@ -12,6 +12,9 @@ export class HotelDetailPage {
   currentItems: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
-
+  
+  navigateToPaymentsPage() {
+    this.navCtrl.push('PaymentsPage'); 
+  }
 
 }
