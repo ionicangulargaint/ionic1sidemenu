@@ -1,0 +1,27 @@
+page-payments-details {
+  .center {
+    text-align: center;
+  }
+  .room-typelbl {
+    padding: 10px;
+    background: #FA9D00;
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .paid-amount {
+    color: #5295FA;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .payment-wrap {
+    margin-top: 50px;
+    border-top: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+  }
+  .datelbl {
+    padding:10px 15px;
+    border-bottom: 1px solid #BBBBBB; 
+    margin-bottom:30px;
+  }
+}
