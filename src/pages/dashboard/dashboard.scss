@@ -90,8 +90,11 @@ page-dashboard {
     color: #fff;
     font-weight: 200;
   }
-  .no-scroll .scroll-content{
-    overflow-y: hidden;
+  //.no-scroll .scroll-content{
+   // overflow-y: hidden;
+  //}
+  ion-slides {
+    height: auto;
   }
   .center {
     text-align: center;
@@ -101,5 +104,8 @@ page-dashboard {
     z-index: 100;
     width: 96%;
     left: 2%;
+  }
+  .scroll-content, .fixed-content {
+    margin-top:80px;
   }
 }
