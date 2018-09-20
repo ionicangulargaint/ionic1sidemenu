@@ -1,0 +1,264 @@
+<ion-header no-shadow>
+  <ion-navbar>
+    <ion-title>My RND Work</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce class="no-scroll">
+  <ion-segment [(ngModel)]="bookingOptionsModel" color="positive">
+    <ion-segment-button value="Upcoming">
+      <span class="text">Upcoming</span>
+    </ion-segment-button>
+    <ion-segment-button value="Completed">
+      <span class="text">Completed</span>
+    </ion-segment-button>
+    <ion-segment-button value="Cancelled">
+      <span class="text">Cancelled</span>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="bookingOptionsModel">
+    <div *ngSwitchCase="'Upcoming'">
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">02:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">04:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block color="dark">Booking Cancelled</button>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <!-- <div class="date-lbl">02:30 PM</div> -->
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <!-- <div class="date-lbl">04:30 PM</div> -->
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block disabled color="dark">Booking Cancelled</button>
+        </div>
+      </ion-card>
+    </div>
+
+    <div *ngSwitchCase="'Completed'">
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">02:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">04:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block color="dark">write a Comment</button>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <!-- <div class="date-lbl">02:30 PM</div> -->
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <!-- <div class="date-lbl">04:30 PM</div> -->
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block disabled color="dark">write a Comment</button>
+        </div>
+
+      </ion-card>
+    </div>
+
+    <div *ngSwitchCase="'Cancelled'">
+      <ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">02:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="date-lbl">04:30 PM</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+        <ion-grid>
+          <ion-row class="progressbar center">
+            <ion-col col-4>
+              <div class="step-strips"></div>
+              <div class="progress-step">1</div>
+              <div class="small-lable">Cancelled</div>
+            </ion-col>
+            <ion-col col-4 class="running-steps">
+              <div class="step-strips"></div>
+              <div class="progress-step">2</div>
+              <div class="small-lable">In progress</div>
+            </ion-col>
+            <ion-col col-4>
+              <div class="progress-step">3</div>
+              <div class="small-lable">Confirmed</div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block color="dark">write a Comment</button>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <img src="assets/img/books.jpg" alt="books-pic">
+            </ion-col>
+            <ion-col col-7>
+              <div class="hotel-name">Sogor Dormitory</div>
+              <div class="small-lable">Booking ID:84234243</div>
+              <ion-grid>
+                <ion-row class="center">
+                  <ion-col col-6 class="right-dotted-border">
+                    <div class="checkin-lbl">CHECK IN</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="checkin-lbl">CHECK OUT</div>
+                    <div class="date-lbl">31 Aug 2018</div>
+                    <div class="small-lable">Saturday</div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <p class="small-lable">Exicutive Room</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="btn-wrap">
+          <button (click)="navigateToBookingCancelled()" ion-button block color="dark">write a Comment</button>
+        </div>
+        <div class="main-rating">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </div>
+        <ion-item>
+          <ion-textarea [(ngModel)]="comments" placeholder="Add comments"></ion-textarea>
+        </ion-item>
+        <div class="btn-wrap right">
+          <button (click)="comments()" ion-button small color="dark">Submit</button>
+        </div>
+
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>
