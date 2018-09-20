@@ -15,7 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.sideMenu-login-btn{
+.sideMenu-login-btn {
     background: #0b4eac;
     border-radius: 5px;
     text-transform: capitalize;
@@ -30,14 +30,19 @@
     color: #0b4eac;
     margin-top: 13px;
 }
-.sideMenu-text{
-    color: #585858;
-    font-weight: 400;
-    margin-bottom: 18px;
+.sideMenu-text {
+    color: #1c1c1c;
+    font-weight: 500;
+    margin: 5px;
+    font-size: 17px;
 }
 ion-menu ion-header{
     // display: contents;    
 }
 ion-menu ion-header .toolbar-background-md {
     background: white;
+}
+.menu-item {
+    color: #0e3f7e;
+    font-weight: 500;
 }

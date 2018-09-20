@@ -2,23 +2,28 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>
-        <img src="assets/img/menu-logo.png">
+        <img src="assets/img/logo1.jpg" width="200">
       </ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content text-center padding *ngIf="withoutLogin"> 
-    <h5 class="sideMenu-text">Login to access your profile</h5>
+    <p class="sideMenu-text">Login to access your profile</p>
     <button block ion-button class="sideMenu-login-btn" (click)="navigateToLogin()">Login</button>
-
     <button block ion-button outline class="sideMenu-register-btn" (click)="navigateToRegistration()">Create an Account</button>
+    <ion-list>
+        <button class="menu-item" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          {{p.title}}
+        </button>
+      </ion-list>
   </ion-content>
-  <ion-content *ngIf="!withoutLogin"> 
+
+  <!-- <ion-content *ngIf="!withoutLogin"> 
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
-   </ion-content>
+   </ion-content> -->
 </ion-menu>
 
 <ion-nav #content [root]="rootPage"></ion-nav>
