@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../providers';
-import { MainPage } from '../';
 
 @IonicPage()
 @Component({
@@ -17,43 +16,49 @@ export class LoginPage {
     code:'',
     number:''
   };
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
+  public loginError: any = {
+    show: false,
+    msg: ''
+  }
 
-  // Our translated text strings
-  private loginErrorString: string;
-
-  constructor(public navCtrl: NavController,
+  public form: FormGroup;
+  constructor(
     public user: User,
+    private _FORMBUILDER: FormBuilder,
+    public navCtrl: NavController,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     private httpClient: HttpClient) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    this.form = this._FORMBUILDER.group({
+      'username': ['', Validators.required],
+      'password': ['', Validators.required]
+    });
   }
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+
+    let data = {
+      email: this.form.controls['username'].value,
+      password: this.form.controls['password'].value
+    }
+
+    this.user.login(data).subscribe((resp) => {
+      this.navCtrl.push('DashboardPage');
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push('DashboardPage');
       // Unable to log in
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: 'Wrong user name or password.',
         duration: 3000,
         position: 'top'
       });
       toast.present();
     });
   }
+
+
   changeCountryCode() {
     this.httpClient.get("https://ipinfo.io")
       .subscribe((currentLocationData:any) => {

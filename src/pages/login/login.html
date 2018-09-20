@@ -25,15 +25,21 @@
 
         <div [ngSwitch]="loginModel">
             <div *ngSwitchCase="'email'">
-                <form (submit)="doLogin()" class="login-form">
+                <form [formGroup]="form" (ngSubmit)="doLogin()" class="login-form">
                     <ion-list>
+                        <ion-row *ngIf="loginError.show">
+                            <ion-col text-center>
+                                <p style="color:#ec6f6a">{{ loginError.msg }}</p>
+                            </ion-col>
+                        </ion-row>
+
                         <ion-item>
                             <ion-label stacked>Email*</ion-label>
-                            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="email" formControlName="username"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Password*</ion-label>
-                            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+                            <ion-input type="password" formControlName="password"></ion-input>
                         </ion-item>
 
                         <div padding>

@@ -1,114 +1,114 @@
 <ion-header no-shadow>
-  <ion-navbar>
-    <button ion-button menuToggle style="color:#fff">
+    <ion-navbar>
+        <button ion-button menuToggle style="color:#fff">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Around current location</ion-title>
-  </ion-navbar>
+        <ion-title>Around current location</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce class="no-scroll">
-  <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
-  <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
-    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
-      {{ item.description }}
-    </ion-item>
-  </ion-list>
+    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+    <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
+        <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+            {{ item.description }}
+        </ion-item>
+    </ion-list>
 
-  <ion-grid style="border-bottom: 2px solid #0c346d;">
-    <ion-row class="center">
-      <ion-col col-3 (click)="getCurrentLatLongAndFindAddress()">
-        <div class="dashboard-wrap">
-          <ion-icon name="md-navigate" class="custom-icon"></ion-icon>
-        </div>
-        <div class="small-white">Near Me</div>
-      </ion-col>
-      <ion-col col-6>
-        <ion-grid (click)="addguestDetails()">
-          <ion-row>
-            <ion-col col-4 class="choose-wrap border-left">
-              <div class="count">1</div>
-              <div class="count-type">Room</div>
+    <ion-grid style="border-bottom: 2px solid #0c346d;">
+        <ion-row class="center">
+            <ion-col col-3 (click)="getCurrentLatLongAndFindAddress()">
+                <div class="dashboard-wrap">
+                    <ion-icon name="md-navigate" class="custom-icon"></ion-icon>
+                </div>
+                <div class="small-white">Near Me</div>
             </ion-col>
-            <ion-col col-4 class="choose-wrap">
-              <div class="count">1</div>
-              <div class="count-type">Room</div>
+            <ion-col col-6>
+                <ion-grid (click)="addguestDetails()">
+                    <ion-row>
+                        <ion-col col-4 class="choose-wrap border-left">
+                            <div class="count">1</div>
+                            <div class="count-type">Room</div>
+                        </ion-col>
+                        <ion-col col-4 class="choose-wrap">
+                            <div class="count">1</div>
+                            <div class="count-type">Room</div>
+                        </ion-col>
+                        <ion-col col-4 class="choose-wrap border-right">
+                            <div class="count">1</div>
+                            <div class="count-type">Room</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-col>
-            <ion-col col-4 class="choose-wrap border-right">
-              <div class="count">1</div>
-              <div class="count-type">Room</div>
+            <ion-col col-3 (click)="navigateToGoogleMap()">
+                <div class="dashboard-wrap">
+                    <ion-icon name="ios-pin" class="custom-icon"></ion-icon>
+                </div>
+                <div class="small-white">Map</div>
             </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
-      <ion-col col-3 (click)="navigateToGoogleMap()">
-        <div class="dashboard-wrap">
-          <ion-icon name="ios-pin" class="custom-icon"></ion-icon>
-        </div>
-        <div class="small-white">Map</div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <div style="margin: 0 30px;">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <ion-item>
-            <ion-label class="exmedium-white">Day</ion-label>
-            <ion-checkbox color="dark" [(ngModel)]="selectedTypeDay" (ionChange)="change('Day')"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item>
-            <ion-label class="exmedium-white">Hour</ion-label>
-            <ion-checkbox color="dark" [(ngModel)]="selectedTypeHour" (ionChange)="change('Hour')"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+        </ion-row>
     </ion-grid>
-    <div class="checkin-day" *ngIf="selectedTypeDay">
-      <div class="checkInlable">Check In Date</div>
-      <ion-grid class="center" style="padding: 5px 0;">
-        <ion-row>
-          <ion-col col-5 class="check-wrap">
-            <div>CHECK IN</div>
-            <div>1/09/2018</div>
-          </ion-col>
-          <ion-col col-2></ion-col>
-          <ion-col col-5 class="check-wrap">
-            <div>CHECH OUT</div>
-            <div>1/09/2018</div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <div style="margin: 0 30px;">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label class="exmedium-white">Day</ion-label>
+                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeDay" (ionChange)="change('Day')"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-6>
+                    <ion-item>
+                        <ion-label class="exmedium-white">Hour</ion-label>
+                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeHour" (ionChange)="change('Hour')"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="checkin-day" *ngIf="selectedTypeDay">
+            <div class="checkInlable">Check In Date</div>
+            <ion-grid class="center" style="padding: 5px 0;">
+                <ion-row>
+                    <ion-col col-5 class="check-wrap">
+                        <div>CHECK IN</div>
+                        <div>1/09/2018</div>
+                    </ion-col>
+                    <ion-col col-2></ion-col>
+                    <ion-col col-5 class="check-wrap">
+                        <div>CHECH OUT</div>
+                        <div>1/09/2018</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div class="checkin-hour" *ngIf="selectedTypeHour">
+            <div class="checkInlable">Check In Hour</div>
+            <div class="check-wrap center" style="margin-top: 5px;">1/09/2018</div>
+            <ion-grid class="center" style="padding: 5px 0;">
+                <ion-row>
+                    <ion-col col-5 class="check-wrap">
+                        <div>CHECK IN</div>
+                        <div>02:20 pm</div>
+                    </ion-col>
+                    <ion-col col-2></ion-col>
+                    <ion-col col-5 class="check-wrap">
+                        <div>CHECH OUT</div>
+                        <div>04:20 pm</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <button (click)="navigateToSearchedList()" ion-button block color="light">SEARCH</button>
     </div>
-    <div class="checkin-hour" *ngIf="selectedTypeHour">
-      <div class="checkInlable">Check In Hour</div>
-      <div class="check-wrap center" style="margin-top: 5px;">1/09/2018</div>
-      <ion-grid class="center" style="padding: 5px 0;">
-        <ion-row>
-          <ion-col col-5 class="check-wrap">
-            <div>CHECK IN</div>
-            <div>02:20 pm</div>
-          </ion-col>
-          <ion-col col-2></ion-col>
-          <ion-col col-5 class="check-wrap">
-            <div>CHECH OUT</div>
-            <div>04:20 pm</div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-    <button (click)="navigateToSearchedList()" ion-button block color="light">SEARCH</button>
-  </div>
-  <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide.image" class="slide-image" />
-      <!-- <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+    <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+        <ion-slide *ngFor="let slide of slides">
+            <img [src]="slide.image" class="slide-image" />
+            <!-- <h2 class="slide-title" [innerHTML]="slide.title"></h2>
       <p [innerHTML]="slide.description"></p> -->
-    </ion-slide>
-    <ion-slide>
-      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-    </ion-slide>
-  </ion-slides>
+        </ion-slide>
+        <ion-slide>
+            <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
+        </ion-slide>
+    </ion-slides>
 </ion-content>

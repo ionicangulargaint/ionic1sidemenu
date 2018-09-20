@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
-
+declare var google;
 export interface Slide {
   //title: string;
   //description: string;
