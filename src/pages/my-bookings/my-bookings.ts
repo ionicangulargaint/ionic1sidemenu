@@ -9,6 +9,9 @@ import { IonicPage, MenuController, NavController, Platform } from 'ionic-angula
 export class MyBookingsPage {
   bookingOptionsModel = 'Upcoming';
   
-  constructor() {}
-  
+  constructor(public navCtrl: NavController) {}
+
+  navigateToBookingCancelled() {
+    this.navCtrl.push('CancelBookingPage');
+  }
 }
