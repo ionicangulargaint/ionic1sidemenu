@@ -34,7 +34,7 @@ export class MyApp {
     // { title: 'Login', component: 'LoginPage' },
     // { title: 'Signup', component: 'SignupPage' },
     { title: 'Home', component: 'DashboardPage' },
-    { title: 'My Profile', component: 'MyProfilePage' },
+    { title: 'My Profile', component: 'ProfilePage' },
     { title: 'My Bookings', component: 'MyBookingsPage' },
     { title: 'Logout', component: 'TabsPage' }
   ]
@@ -78,7 +78,7 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
   navigateToLogin(){
     this.nav.push('LoginPage');

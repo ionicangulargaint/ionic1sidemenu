@@ -1,0 +1,28 @@
+page-profile {
+    .toolbar-background {
+        background: #0f4187;
+        border-color: transparent;
+      }
+      .toolbar-title {
+        color: #fff;
+      }
+      .profile-image{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 70px;
+      }
+      .label-md{
+        font-size: 2rem;
+        font-weight: 700;
+      }
+    .fab-in-list {    
+        width: 136px;
+    }
+    .fab {
+        border-radius: 8px;
+    }
+    ion-fab-list[side=top] {
+        right: 50%;
+    }
+}

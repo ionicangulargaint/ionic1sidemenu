@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Update profile</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form (ngSubmit)="updateProfile()" class="login-form">
+        <ion-list>
+            <ion-row *ngIf="false">
+                <ion-col text-center>
+                    <p style="color:#ec6f6a">validation error</p>
+                </ion-col>
+            </ion-row>
+            <ion-item>
+                <ion-label stacked>First name*</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Last name*</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Email*</ion-label>
+                <ion-input type="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Mobile*</ion-label>
+                <ion-input type="number"></ion-input>
+            </ion-item>
+
+            <div padding>
+                <button ion-button color="primary" block>Update</button>
+            </div>
+        </ion-list>
+    </form>
+
+</ion-content>

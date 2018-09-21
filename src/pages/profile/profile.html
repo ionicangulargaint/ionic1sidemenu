@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>My Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary" style="border-radius: 50%;">
+            <ion-icon name="create"></ion-icon>
+        </button>
+        <ion-fab-list side="top">
+            <button ion-fab color="primary" (click)="editProfile()">
+                Update profile
+            </button>
+            <button ion-fab color="primary" (click)="changePassword()">
+                Update password
+            </button>
+        </ion-fab-list>
+    </ion-fab>
+
+    <div align="center">
+        <img class="profile-image" src="assets/img/user1.png">
+        <br><hr>
+    </div>
+
+    <ion-list>
+        <!-- <ion-item>
+            <ion-icon name="person" color="danger" item-start></ion-icon>            
+            Sumit
+        </ion-item>-->
+        <ion-item text-center margin-bottom>
+            <ion-icon name="person" color="primary" item-start></ion-icon>            
+            Sumit kumar
+        </ion-item> 
+        <ion-item text-center margin-bottom>
+            <ion-icon name="mail" color="primary" item-start></ion-icon>
+            xyz@abc.com
+        </ion-item>
+        <ion-item text-center margin-bottom>
+            <ion-icon item-start name="call" color="primary"></ion-icon>
+            +91-9876453422
+        </ion-item>
+    </ion-list>
+</ion-content>
