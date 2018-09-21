@@ -12,31 +12,15 @@ import { Settings } from '../providers';
 })
 export class MyApp {
   rootPage = FirstRunPage;
-  withoutLogin:boolean = true;
+  userLogin: boolean = false;
 
   @ViewChild(Nav) nav: Nav;
 
-  /*pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }
-  ]*/
-
   pages: any[] = [
-    // { title: 'Login', component: 'LoginPage' },
-    // { title: 'Signup', component: 'SignupPage' },
     { title: 'Home', component: 'DashboardPage' },
     { title: 'My Profile', component: 'MyProfilePage' },
     { title: 'My Bookings', component: 'MyBookingsPage' },
-    { title: 'Logout', component: 'TabsPage' }
+    { title: 'Logout', component: 'logout' }
   ]
 
   constructor(public menuCtrl: MenuController, private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
@@ -76,18 +60,26 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.component == 'logout') {
+      this.logout();
+    } else {
+      this.nav.setRoot(page.component);
+    }
   }
-  navigateToLogin(){
+
+  navigateToLogin() {
     this.nav.push('LoginPage');
     this.menuCtrl.close();
-    
-    //this.nav.push
   }
-  navigateToRegistration(){
+
+  navigateToRegistration() {
     this.nav.push('SignupPage');
+    this.menuCtrl.close();
+  }
+
+  logout() {
+    this.userLogin = false;
+    this.nav.setRoot('DashboardPage');
     this.menuCtrl.close();
   }
 }
