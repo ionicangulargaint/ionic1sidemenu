@@ -1,7 +1,7 @@
 import { Component,Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { IonicPage, NavController, ToastController, Events } from 'ionic-angular';
+import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../providers';
 
@@ -22,38 +22,73 @@ export class LoginPage {
     show: false,
     msg: ''
   }
+  public loginErrorByMobile:any = {
+    show: false,
+    msg: ''
+  }
 
-  public form: FormGroup;
+  public loginFormByEmail: FormGroup;
+  public loginFormByMobile: FormGroup;
+
   constructor(
     public user: User,
     private _FORMBUILDER: FormBuilder,
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
+    public events: Events,
     private httpClient: HttpClient) {
 
-    this.form = this._FORMBUILDER.group({
-      'username': ['', Validators.required],
+    this.loginFormByEmail = this._FORMBUILDER.group({
+      'email': ['', Validators.required],
       'password': ['', Validators.required]
     });
+    this.loginFormByMobile = this._FORMBUILDER.group({
+      'mobile': ['', Validators.required],
+      'password': ['', Validators.required]
+    })
   }
 
   // Attempt to login in through our User service
-  doLogin() {
+  doLoginByEmail() {
     let data = {
-      email: this.form.controls['username'].value,
-      password: this.form.controls['password'].value
+      email: this.loginFormByEmail.controls['email'].value,
+      password: this.loginFormByEmail.controls['password'].value
     }
-    this.user.login(data).subscribe((resp) => {
+    this.user.login(data, 'EMAIL').subscribe((resp) => {
       //this.updateLoginStatus.emit();
-      this.navCtrl.push('DashboardPage');
+      //this.navCtrl.setRoot('DashboardPage');
+      this.events.publish('user:loggedin', resp, Date.now());      
     }, (err) => {
-      let toast = this.toastCtrl.create({
-        message: 'Wrong user name or password.',
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      // let toast = this.toastCtrl.create({
+      //   message: 'Wrong user name or password.',
+      //   duration: 3000,
+      //   position: 'top'
+      // });
+      // toast.present();
+      this.loginError.show = true;
+      this.loginError.msg = 'An server error occured.';
+    });
+  }
+
+  doLoginByMobile() {
+    let data = {
+      mobile: this.loginFormByMobile.controls['mobile'].value,
+      password: this.loginFormByMobile.controls['password'].value
+    }
+    this.user.login(data, 'MOBILE').subscribe((resp) => {
+      //this.updateLoginStatus.emit();
+      //this.navCtrl.setRoot('DashboardPage');
+      this.events.publish('user:loggedin', resp, Date.now());      
+    }, (err) => {
+      // let toast = this.toastCtrl.create({
+      //   message: 'Wrong user name or password.',
+      //   duration: 3000,
+      //   position: 'top'
+      // });
+      // toast.present();
+      this.loginError.show = true;
+      this.loginError.msg = 'An server error occured.';
     });
   }
 

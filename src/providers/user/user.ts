@@ -33,15 +33,24 @@ export class User {
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
-  login(accountInfo: any) {
-    let seq = this.api.post('login.php?loginByEmail=AREMAIL12345', accountInfo).share();
+  login(accountInfo: any, loginBy: string) {
+    let urlOnBY = '';
+    if (loginBy == 'EMAIL') {
+      urlOnBY = 'login.php?loginByEmail=AREMAIL12345';
+    } else {
+      urlOnBY = 'login.php?loginByMobile=AREMAIL12345';
+    }
+    let seq = this.api.post(urlOnBY, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
+      if (res != null) {
+        if (res.status == 'success') {
+          this._loggedIn(res);
+        } else {
+        }
       }
+
     }, err => {
       console.error('ERROR', err);
     });
@@ -53,13 +62,25 @@ export class User {
    * Send a POST request to our signup endpoint with the data
    * the user entered on the form.
    */
-  signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
+  signup(accountInfo: any, signUpBy) {
+
+    let urlOnBY = '';
+    if (signUpBy == 'EMAIL') {
+      urlOnBY = 'login.php?loginByEmail=AREMAIL12345';
+    } else {
+      urlOnBY = 'login.php?loginByMobile=AREMAIL12345';
+    }
+
+    let seq = this.api.post(urlOnBY, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
+      if (res != null) {
+        if (res.status == 'success') {
+          this._loggedIn(res);
+        } else {
+
+        }
       }
     }, err => {
       console.error('ERROR', err);

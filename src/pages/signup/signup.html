@@ -14,11 +14,13 @@
         <ion-toolbar no-border-top>
             <ion-segment [(ngModel)]="loginModel">
                 <ion-segment-button value="email">
-                    <ion-icon name="mail"></ion-icon> <span class="text">Email</span>
+                    <ion-icon name="mail"></ion-icon>
+                    <span class="text">Email</span>
 
                 </ion-segment-button>
                 <ion-segment-button value="mobile">
-                    <ion-icon name="phone-portrait"></ion-icon> <span class="text">Mobile</span>
+                    <ion-icon name="phone-portrait"></ion-icon>
+                    <span class="text">Mobile</span>
                 </ion-segment-button>
             </ion-segment>
         </ion-toolbar>
@@ -50,7 +52,9 @@
                         </div>
                         <div padding class="forgotText">
                             <a (click)="navigateToForgotPassword()">
-                                <ion-icon name="lock"></ion-icon><i> Forgot your password?</i> </a>
+                                <ion-icon name="lock"></ion-icon>
+                                <i> Forgot your password?</i>
+                            </a>
                         </div>
                     </ion-list>
                 </form>
@@ -58,11 +62,20 @@
             <div *ngSwitchCase="'mobile'">
                 <form (submit)="doLogin()" class="login-form">
                     <ion-list>
+                        <ion-item>
+                            <ion-label stacked>First Name*</ion-label>
+                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Last Name*</ion-label>
+                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                        </ion-item>
                         <ion-item class="hideBorder">
                             <ion-label stacked>Mobile number*</ion-label>
                         </ion-item>
                         <ion-item margin-bottom>
-                            <ion-label fixed><img [src]="currentCountry.code"> {{currentCountry.number}}</ion-label>
+                            <ion-label fixed>
+                                <img [src]="currentCountry.code"> {{currentCountry.number}}</ion-label>
                             <ion-input type="tel"></ion-input>
                         </ion-item>
                         <ion-item>
@@ -86,9 +99,9 @@
     <div class="facebookLoginContainer">
         <h4>Or</h4>
         <button block large ion-button icon-start class="faceBookBtn">
-      <ion-icon name='logo-facebook'></ion-icon>
-      Continue with Facebook
-    </button>
+            <ion-icon name='logo-facebook'></ion-icon>
+            Continue with Facebook
+        </button>
     </div>
 
 </ion-content>
