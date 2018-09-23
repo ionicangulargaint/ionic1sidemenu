@@ -58,8 +58,32 @@ export class SignupPage {
   }
 
   doSignupByEmail() {
+    let data = {
+      userName: this.signUpFormByEmail.controls['firstName'].value,
+      lastName: this.signUpFormByEmail.controls['lastName'].value,
+      userEmail: this.signUpFormByEmail.controls['email'].value,
+      password: this.signUpFormByEmail.controls['password'].value,
+      //{"userName": "Taru","lastName": "Kumar","userEmail": "taru@netmaxims.com","password": "nitish","signupbyemail": "ARQP12345","checkbox": 0}
+    }
+    this.user.signup(data, 'EMAIL').subscribe((resp) => {
+      //this.updateLoginStatus.emit();
+      //this.navCtrl.setRoot('DashboardPage');
+      //this.events.publish('user:loggedin', resp, Date.now());      
+    }, (err) => {
+      // let toast = this.toastCtrl.create({
+      //   message: 'Wrong user name or password.',
+      //   duration: 3000,
+      //   position: 'top'
+      // });
+      // toast.present();
+      this.signUpError.show = true;
+      this.signUpError.msg = 'An server error occured.';
+    });
+  }
+
+  doSignupByMobile() {
     // Attempt to login in through our User service
-    this.user.signup('', 'EMAIL').subscribe((resp) => {
+    this.user.signup('', 'MOBILE').subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
       this.navCtrl.push(MainPage);

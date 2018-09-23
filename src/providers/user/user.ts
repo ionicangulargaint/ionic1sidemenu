@@ -51,7 +51,7 @@ export class User {
         }
       }
 
-    }, err => {
+    }, (err:any) => {
       console.error('ERROR', err);
     });
 
@@ -66,9 +66,9 @@ export class User {
 
     let urlOnBY = '';
     if (signUpBy == 'EMAIL') {
-      urlOnBY = 'login.php?loginByEmail=AREMAIL12345';
+      urlOnBY = 'sign_up.php?SignupByEmail=ARQP12345';
     } else {
-      urlOnBY = 'login.php?loginByMobile=AREMAIL12345';
+      urlOnBY = 'sign_up.php?SignupByMobile=ARQP12345';
     }
 
     let seq = this.api.post(urlOnBY, accountInfo).share();

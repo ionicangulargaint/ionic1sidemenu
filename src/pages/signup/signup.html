@@ -27,28 +27,28 @@
 
         <div [ngSwitch]="loginModel">
             <div *ngSwitchCase="'email'">
-                <form (submit)="doLogin()" class="login-form">
+                <form (submit)="doSignupByEmail()" class="login-form" [formGroup]="signUpFormByEmail">
                     <ion-list>
                         <ion-item>
                             <ion-label stacked>First Name*</ion-label>
-                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="text" formControlName="firstName" name="email"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Last Name*</ion-label>
-                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="text" formControlName="lastName" name="email"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Email*</ion-label>
-                            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="email" formControlName="email" name="email"></ion-input>
                         </ion-item>
 
                         <ion-item>
                             <ion-label stacked>Password*</ion-label>
-                            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+                            <ion-input type="password" formControlName="password" name="password"></ion-input>
                         </ion-item>
 
                         <div padding>
-                            <button ion-button color="primary" block>Sign In</button>
+                            <button ion-button color="primary" block [disabled]="!signUpFormByEmail.valid">Sign Up</button>
                         </div>
                         <div padding class="forgotText">
                             <a (click)="navigateToForgotPassword()">
@@ -60,15 +60,15 @@
                 </form>
             </div>
             <div *ngSwitchCase="'mobile'">
-                <form (submit)="doLogin()" class="login-form">
+                <form (submit)="doSignupByMobile()" [formGroup]="signUpFormByMobile" class="login-form">
                     <ion-list>
                         <ion-item>
                             <ion-label stacked>First Name*</ion-label>
-                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="text" formControlName="firstName" name="firstName"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Last Name*</ion-label>
-                            <ion-input type="text" [(ngModel)]="account.email" name="email"></ion-input>
+                            <ion-input type="text" formControlName="lastName" name="lastName"></ion-input>
                         </ion-item>
                         <ion-item class="hideBorder">
                             <ion-label stacked>Mobile number*</ion-label>
@@ -76,11 +76,11 @@
                         <ion-item margin-bottom>
                             <ion-label fixed>
                                 <img [src]="currentCountry.code"> {{currentCountry.number}}</ion-label>
-                            <ion-input type="tel"></ion-input>
+                            <ion-input type="tel" formControlName="mobile"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label stacked>Password*</ion-label>
-                            <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+                            <ion-input type="password" formControlName="password" name="password"></ion-input>
                         </ion-item>
                         <div padding class="forgotText mobileForget">
                             <a (click)="navigateToForgotPassword()">

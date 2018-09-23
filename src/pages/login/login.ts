@@ -55,10 +55,17 @@ export class LoginPage {
       email: this.loginFormByEmail.controls['email'].value,
       password: this.loginFormByEmail.controls['password'].value
     }
-    this.user.login(data, 'EMAIL').subscribe((resp) => {
+    this.user.login(data, 'EMAIL').subscribe((resp:any) => {
+      if(resp.login == 'failed' && resp.result == 'Username or pass does not match'){
+        this.loginError.show = true;
+        this.loginError.msg = 'Wrong email or password.';
+      }else {
+        this.events.publish('user:loggedin', resp, Date.now());
+        this.navCtrl.pop();
+      }
       //this.updateLoginStatus.emit();
       //this.navCtrl.setRoot('DashboardPage');
-      this.events.publish('user:loggedin', resp, Date.now());      
+            
     }, (err) => {
       // let toast = this.toastCtrl.create({
       //   message: 'Wrong user name or password.',
