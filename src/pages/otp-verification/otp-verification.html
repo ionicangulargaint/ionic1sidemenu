@@ -13,10 +13,10 @@
     <div class="container-log">
         <div class="login-form">
             <ion-list>
-                <p class="detail">We have sent a verification code to +60-xxxxxxxxx.
-                    <br> This code will expire in 10 minutes.
-                    <a>Resend Code</a>
-                </p>
+                <p class="detail">We have sent a verification code to {{paramData.userEmail}}.
+                        <br> This code will expire in 10 minutes.
+                        <a>Resend Code</a>
+                    </p>
 
                 <!-- <ion-item class="hideBorder" style="margin-bottom: -9px;">
                     <ion-label stacked>Mobile number*</ion-label>
@@ -34,14 +34,13 @@
                             <input class="otp" maxlength="1" type="number" minlength="1">
                             <input class="otp" maxlength="1" type="number" minlength="1">
                             <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            
+                            <input class="otp" maxlength="1" type="number" minlength="1">                            
                         </ion-col>
                     </ion-row>
                 </ion-grid>
 
-                <p class="detail">Haven't received a verification code on your mobile yet?
-                    <a>Use another mobile number</a>
+                <p class="detail">Haven't received a verification code yet?
+                    <a (click)="backToPage()">Use another option</a>
                 </p>
                 <!-- <ion-item>
                     <ion-label stacked>Password*</ion-label>
@@ -54,7 +53,7 @@
                     </a>
                 </div> -->
                 <div padding>
-                    <button ion-button color="primary" block>Verify</button>
+                    <button ion-button color="primary" [disabled]="!enableSubmitBtn" block>Verify</button>
                 </div>
             </ion-list>
         </div>

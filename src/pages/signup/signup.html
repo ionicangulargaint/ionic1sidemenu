@@ -28,6 +28,11 @@
         <div [ngSwitch]="loginModel">
             <div *ngSwitchCase="'email'">
                 <form (submit)="doSignupByEmail()" class="login-form" [formGroup]="signUpFormByEmail">
+                        <ion-row *ngIf="signUpError.show">
+                                <ion-col text-center>
+                                    <p style="color:#ec6f6a">{{ signUpError.msg }}</p>
+                                </ion-col>
+                            </ion-row>
                     <ion-list>
                         <ion-item>
                             <ion-label stacked>First Name*</ion-label>

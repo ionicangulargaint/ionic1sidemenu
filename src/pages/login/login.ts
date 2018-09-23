@@ -56,7 +56,7 @@ export class LoginPage {
       password: this.loginFormByEmail.controls['password'].value
     }
     this.user.login(data, 'EMAIL').subscribe((resp:any) => {
-      if(resp.login == 'failed' && resp.result == 'Username or pass does not match'){
+      if(resp.login == 'failed'){
         this.loginError.show = true;
         this.loginError.msg = 'Wrong email or password.';
       }else {

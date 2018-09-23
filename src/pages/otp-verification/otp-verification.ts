@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
-import { HttpClient } from "@angular/common/http";
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers';
+import { User, Api } from '../../providers';
 import { MainPage } from '../';
 import * as $ from 'jquery';
 
@@ -12,89 +11,69 @@ import * as $ from 'jquery';
   selector: 'page-otp-verification',
   templateUrl: 'otp-verification.html'
 })
-export class OtpVerificationPage {  
-  currentCountry:any = {
-    code:'',
-    number:''
-  };
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
-  };
+export class OtpVerificationPage {
 
-  // Our translated text strings
-  private loginErrorString: string;
+  private paramData: any;
+  public inputOtp: any = '';
+  public enableSubmitBtn: boolean = false;
+  public isREquestFromEmail: boolean = false;
 
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
-    public translateService: TranslateService,
-    private httpClient: HttpClient) {
+    public api:Api,
+    public navParams: NavParams) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
-    $(function() {
-      $(".otp").keyup(function(e:any) {
+    this.paramData = navParams.get('data');
+    if (this.paramData.requestFrom == 'EMAILSIGNUP') {
+      this.isREquestFromEmail = true;
+    } else {
+      this.isREquestFromEmail = false;
+    }
+    $(function () {
+      $(".otp").keyup(function (e: any) {
         if ((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105)) {
-          e.target.value = String.fromCharCode( e.which );
+          e.target.value = String.fromCharCode(e.which);
+          eventCaller(e.target.value);
           $(e.target).next('.otp').focus();
           //var data = String.fromCharCode( e.which );
         } else if (e.which == 8) {
-          e.target.value = String.fromCharCode( e.which );
+          e.target.value = String.fromCharCode(e.which);
           $(e.target).prev('.otp').focus();
         }
       });
     });
+    var temp = this;
+    function eventCaller(data) {
+      temp.inputOtp = temp.inputOtp + data;
+      if (temp.inputOtp.length == 6) {
+        temp.enableSubmitBtn = true;
+      }
+    }
   }
 
-  // Attempt to login in through our User service
-  doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+  verifyEmailOtp(){
+    let seq = this.api.get('varifyOTP.php?checkByByEmail=AREMAIL12345', { "email": this.paramData.email, 'otp': this.paramData.otp }).share();
+    seq.subscribe((res: any) => {
+      if (res.result == 'success') {
+        this.navCtrl.setRoot('DashboardPage');
+      } else {
+         let toast = this.toastCtrl.create({
+        message: 'An server error occured,',
         duration: 3000,
         position: 'top'
       });
-      toast.present();
+      toast.present();       
+      }
+    }, err => {
+      console.error('ERROR', err);
     });
-  }
-  changeCountryCode() {
-    this.httpClient.get("https://ipinfo.io")
-      .subscribe((currentLocationData:any) => {
-        this.httpClient.get("assets/staticData/countryCode.json")
-          .subscribe((countryList:any) => {
-            
-            countryList.forEach(element => {
-              if(element.code == currentLocationData.country){
-                  this.currentCountry.number = element.dial_code;
-                  this.currentCountry.code = 'assets/country-flag/' + element.code.toLowerCase() + '.png';             
-              }else{
-
-              }
-            });
-          },
-            error => {
-              console.log("Error", error);
-            }
-          );
-      },
-        error => {
-          console.log("Error", error);
-        }
-      );
-
-
   }
 
   ionViewDidLoad() {
-    this.changeCountryCode();
+
+  }
+  backToPage(){
+    this.navCtrl.pop();
   }
 }

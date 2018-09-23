@@ -40,7 +40,7 @@ export class User {
     } else {
       urlOnBY = 'login.php?loginByMobile=AREMAIL12345';
     }
-    let seq = this.api.post(urlOnBY, accountInfo).share();
+    let seq = this.api.get(urlOnBY, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
@@ -71,7 +71,7 @@ export class User {
       urlOnBY = 'sign_up.php?SignupByMobile=ARQP12345';
     }
 
-    let seq = this.api.post(urlOnBY, accountInfo).share();
+    let seq = this.api.get(urlOnBY, accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
