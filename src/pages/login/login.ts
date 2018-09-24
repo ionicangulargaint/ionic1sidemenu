@@ -1,6 +1,6 @@
 import { Component,Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, Events } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, Events, LoadingController, Loading } from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../providers';
@@ -37,10 +37,11 @@ export class LoginPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     public events: Events,
-    private httpClient: HttpClient) {
+    private httpClient: HttpClient,
+    public loadingCtrl: LoadingController) {
 
     this.loginFormByEmail = this._FORMBUILDER.group({
-      'email': ['', Validators.required],
+      'email': ['', [Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")]],
       'password': ['', Validators.required]
     });
     this.loginFormByMobile = this._FORMBUILDER.group({
@@ -50,32 +51,47 @@ export class LoginPage {
   }
 
   // Attempt to login in through our User service
-  doLoginByEmail() {
-    let data = {
-      email: this.loginFormByEmail.controls['email'].value,
-      password: this.loginFormByEmail.controls['password'].value
-    }
-    this.user.login(data, 'EMAIL').subscribe((resp:any) => {
-      if(resp.login == 'failed'){
-        this.loginError.show = true;
-        this.loginError.msg = 'Wrong email or password.';
-      }else {
-        this.events.publish('user:loggedin', resp, Date.now());
-        this.navCtrl.pop();
-      }
-      //this.updateLoginStatus.emit();
-      //this.navCtrl.setRoot('DashboardPage');
-            
-    }, (err) => {
-      // let toast = this.toastCtrl.create({
-      //   message: 'Wrong user name or password.',
-      //   duration: 3000,
-      //   position: 'top'
-      // });
-      // toast.present();
-      this.loginError.show = true;
-      this.loginError.msg = 'An server error occured.';
+  loading: Loading;
+  loadingConfig: any;
+  createLoader(message: string = "Please wait...") { 
+    this.loading = this.loadingCtrl.create({
+      content: message
     });
+  }
+  doLoginByEmail() {
+    this.createLoader();
+    this.loading.present().then(() => {
+      let data = {
+        email: this.loginFormByEmail.controls['email'].value,
+        password: this.loginFormByEmail.controls['password'].value
+      }
+      this.user.login(data, 'EMAIL').subscribe((resp:any) => {
+        this.loading.dismiss();
+        if(resp.login == 'failed'){
+          this.loginError.show = true;
+          this.loginError.msg = 'Wrong email or password.';
+        }else {
+          this.events.publish('user:loggedin', resp, Date.now());
+          this.navCtrl.setRoot('DashboardPage');
+        }
+        
+        //this.updateLoginStatus.emit();
+        //this.navCtrl.setRoot('DashboardPage');
+              
+      }, (err) => {
+        // let toast = this.toastCtrl.create({
+        //   message: 'Wrong user name or password.',
+        //   duration: 3000,
+        //   position: 'top'
+        // });
+        // toast.present();
+        this.loginError.show = true;
+        this.loginError.msg = 'An server error occured.';
+        this.loading.dismiss();
+      });
+    })
+
+    
   }
 
   doLoginByMobile() {

@@ -28,13 +28,13 @@ export class DashboardPage {
 
   slides = [
     {
-      image: 'assets/img/ica-slidebox-img-1.png',
+      image: 'assets/img/a.jpg',
     },
     {
-      image: 'assets/img/ica-slidebox-img-2.png',
+      image: 'assets/img/b.jpg',
     },
     {
-      image: 'assets/img/ica-slidebox-img-3.png',
+      image: 'assets/img/hotel-pic.jpeg',
     }
   ];
 

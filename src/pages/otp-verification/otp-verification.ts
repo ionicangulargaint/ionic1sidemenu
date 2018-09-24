@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams, LoadingController, Loading } from 'ionic-angular';
 
 import { User, Api } from '../../providers';
 import { MainPage } from '../';
@@ -22,7 +22,8 @@ export class OtpVerificationPage {
     public user: User,
     public toastCtrl: ToastController,
     public api:Api,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController) {
 
     this.paramData = navParams.get('data');
     if (this.paramData.requestFrom == 'EMAILSIGNUP') {
@@ -51,10 +52,19 @@ export class OtpVerificationPage {
       }
     }
   }
-
+  loading: Loading;
+  loadingConfig: any;
+  createLoader(message: string = "Please wait...") { 
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
+  }
   verifyEmailOtp(){
+    this.createLoader();
+    this.loading.present().then(() => {
     let seq = this.api.get('varifyOTP.php?checkByByEmail=AREMAIL12345', { "email": this.paramData.email, 'otp': this.paramData.otp }).share();
     seq.subscribe((res: any) => {
+      this.loading.dismiss();
       if (res.result == 'success') {
         this.navCtrl.setRoot('DashboardPage');
       } else {
@@ -66,8 +76,10 @@ export class OtpVerificationPage {
       toast.present();       
       }
     }, err => {
+      this.loading.dismiss();
       console.error('ERROR', err);
     });
+  })
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController, Loading } from 'ionic-angular';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -36,7 +36,8 @@ export class SignupPage {
     public api: Api,
     public toastCtrl: ToastController,
     public translateService: TranslateService,
-    private httpClient: HttpClient) {
+    private httpClient: HttpClient,
+    public loadingCtrl: LoadingController) {
     this.signUpFormByEmail = this._FORMBUILDER.group({
       'email': ['', Validators.required],
       'password': ['', Validators.required],
@@ -52,9 +53,21 @@ export class SignupPage {
     this.changeCountryCode();
   }
 
+  loading: Loading;
+  loadingConfig: any;
+  createLoader(message: string = "Please wait...") { 
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
+  }
+
+
   doSignupByEmail() {
+    this.createLoader();
+    this.loading.present().then(() => {
     let seq = this.api.get('checkUser.php?checkByEmail=ARQP12345', { "email": this.signUpFormByEmail.controls['email'].value }).share();
     seq.subscribe((res: any) => {
+      this.loading.dismiss();
       if (res != this.signUpFormByEmail.controls['email'].value) {
         this.proceedForEmailSignUp();
       } else {
@@ -63,10 +76,14 @@ export class SignupPage {
       }
     }, err => {
       console.error('ERROR', err);
+      this.loading.dismiss();
     });
+  })
   }
 
   proceedForEmailSignUp(){
+    this.createLoader();
+    this.loading.present().then(() => {
     let data = {
       userName: this.signUpFormByEmail.controls['firstName'].value,
       lastName: this.signUpFormByEmail.controls['lastName'].value,
@@ -74,6 +91,7 @@ export class SignupPage {
       password: this.signUpFormByEmail.controls['password'].value,
     }
     this.user.signup(data, 'EMAIL').subscribe((resp: any) => {
+      this.loading.dismiss();
       if (resp.result == 'success') {
       //  if ('true' == 'true') {  
       let paramData: any = data;
@@ -89,7 +107,9 @@ export class SignupPage {
       //this.events.publish('user:loggedin', resp, Date.now());      
     }, (err) => {
       this.showError(true, 'An server error occured.');
+      this.loading.dismiss();
     });
+  })
   }
 
   doSignupByMobile() {
