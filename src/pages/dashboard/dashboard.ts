@@ -1,8 +1,9 @@
 import { Component, NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, NavParams } from 'ionic-angular';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 declare var google;
+
 export interface Slide {
   //title: string;
   //description: string;
@@ -42,7 +43,7 @@ export class DashboardPage {
     public geolocation: Geolocation,
     public navCtrl: NavController,
     public menu: MenuController,
-    public platform: Platform,
+    public navParams: NavParams,
     private nativeGeocoder: NativeGeocoder
   ) {
     this.geocoder = new google.maps.Geocoder;
