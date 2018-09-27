@@ -4,7 +4,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <form (ngSubmit)="updateProfile()" class="login-form">
+    <form (ngSubmit)="updateProfile()" class="login-form" [formGroup]="editProfileForm">
         <ion-list>
             <ion-row *ngIf="false">
                 <ion-col text-center>
@@ -13,23 +13,23 @@
             </ion-row>
             <ion-item>
                 <ion-label stacked>First name*</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input formControlName="fname" type="text"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Last name*</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input formControlName="lname" type="text"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Email*</ion-label>
-                <ion-input type="email"></ion-input>
+                <ion-input formControlName="email" type="email"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Mobile*</ion-label>
-                <ion-input type="number"></ion-input>
+                <ion-input formControlName="mobile" type="number"></ion-input>
             </ion-item>
 
             <div padding>
-                <button ion-button color="primary" block>Update</button>
+                <button [disabled]="!editProfileForm.valid" ion-button color="primary" block>Update</button>
             </div>
         </ion-list>
     </form>

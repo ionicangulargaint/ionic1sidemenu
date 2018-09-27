@@ -1,7 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+import { User, Api } from '../../providers';
 declare var google;
 export interface Slide {
   //title: string;
@@ -26,24 +27,23 @@ export class DashboardPage {
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
 
-  slides = [
-    {
-      image: 'assets/img/a.jpg',
-    },
-    {
-      image: 'assets/img/b.jpg',
-    },
-    {
-      image: 'assets/img/hotel-pic.jpeg',
-    }
-  ];
+  slides: any = [];
 
+  loading: Loading;
+  loadingConfig: any;
+  createLoader(message: string = "Please wait...") {
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
+  }
   constructor(public zone: NgZone,
+    public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
     public navCtrl: NavController,
     public menu: MenuController,
     public platform: Platform,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    public api: Api
   ) {
     this.geocoder = new google.maps.Geocoder;
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
@@ -79,7 +79,7 @@ export class DashboardPage {
   }
 
   navigateToGoogleMap() {
-    this.navCtrl.push('pinOnMapPage'); 
+    this.navCtrl.push('pinOnMapPage');
   }
 
   getCurrentLatLongAndFindAddress() {
@@ -98,7 +98,7 @@ export class DashboardPage {
           this.autocomplete = { 'input': result[0].formatted_address };
           console.log(JSON.stringify(result[0]));
         }).catch((error: any) => {
-          alert('lat long is - '+resp.coords.latitude+' and '+resp.coords.longitude+ ' waiting for cordoav to get address');
+          alert('lat long is - ' + resp.coords.latitude + ' and ' + resp.coords.longitude + ' waiting for cordoav to get address');
           console.log(error)
         });
 
@@ -133,8 +133,30 @@ export class DashboardPage {
     this.menu.enable(true);
   }
 
-  navigateToSearchedList(){
+  navigateToSearchedList() {
     this.navCtrl.push('SearchedHotelListPage');
-     }
+  }
+
+  ionViewDidLoad() {
+    this.getFeaturedAds();
+  }
+
+  getFeaturedAds() {
+    this.createLoader();
+    this.loading.present().then(() => {
+      let seq = this.api.get('featuredAd.php?featuredAd=Ad12345').share();
+      seq.subscribe((res: any) => {
+        this.loading.dismiss();
+        if (res.result == "success") {
+          this.slides = res.feature_ad;
+        } else {
+
+        }
+      }, err => {
+        this.loading.dismiss();
+        console.error('ERROR', err);
+      });
+    })
+  }
 
 }
