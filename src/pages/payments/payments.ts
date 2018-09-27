@@ -7,9 +7,14 @@ import { IonicPage, MenuController, NavController, Platform } from 'ionic-angula
   templateUrl: 'payments.html'
 })
 export class PaymentsPage {
-  
-  constructor(public navCtrl: NavController) {}
+
+  constructor(public navCtrl: NavController) { }
+
   navigateToBookingConfirmed() {
-    this.navCtrl.push('BookingConfirmedPage'); 
+    this.navCtrl.push('BookingConfirmedPage');
   }
+  
+  navigateToPymentsDetails() {
+    this.navCtrl.push('PymentsDetailsPage');
+  } 
 }

@@ -1,11 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>MAP</ion-title>
+    <ion-title>Drag and pic location</ion-title>
+    <ion-buttons end>
+        <button ion-button outline color="light" (click)="navigateToDashboard()">
+          Choose  
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div id="map_canvas">
-    <!-- <button ion-button (click)="onButtonclick($event)">Start Demo</button> -->
-  </div>
+    <div #map id="map_draggable"></div>
 </ion-content>

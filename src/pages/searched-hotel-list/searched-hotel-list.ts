@@ -44,4 +44,8 @@ export class SearchedHotelListPage {
     });
   }
 
+  navigateToSearchedHotelOnmapPage() {
+    this.navCtrl.push('SearchedHotelOnmapPage');
+  }
+
 }
