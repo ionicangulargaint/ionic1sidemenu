@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { pinOnMapPage } from './pin-on-map';
+import { getDirectionsPage } from './get-directions';
 
 @NgModule({
   declarations: [
-    pinOnMapPage,
+    getDirectionsPage,
   ],
   imports: [
-    IonicPageModule.forChild(pinOnMapPage),
+    IonicPageModule.forChild(getDirectionsPage),
     TranslateModule.forChild()
   ],
   exports: [
-    pinOnMapPage
+    getDirectionsPage
   ]
 })
-export class pinOnMapPageModule { }
+export class getDirectionsPageModule { }
