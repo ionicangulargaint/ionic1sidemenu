@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,6 +8,10 @@ import { IonicPage, MenuController, NavController, Platform } from 'ionic-angula
 })
 export class BookingConfirmedPage {
   
-  constructor() {}
+  constructor(public navCtrl:NavController) {}
+
+  getDirections(){
+    this.navCtrl.push('GetDirectionsPage');
+  }
 
 }

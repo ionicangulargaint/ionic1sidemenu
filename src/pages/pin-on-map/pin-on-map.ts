@@ -1,11 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Items } from '../../providers';
 
 declare var google;
 let map: any;
 let infowindow: any;
 let geocoder: any;
+let formattedAddress:any;
 let options = {
   enableHighAccuracy: true,
   timeout: 5000,
@@ -20,17 +22,16 @@ let options = {
 export class pinOnMapPage {
   @ViewChild('map') mapElement: ElementRef;
   latlng:any;
-  formattedAddress:any;
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,public geolocation: Geolocation) { }
 
   ionViewDidLoad() {
     this.loadMap();
   }
 
   loadMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      var myLatlng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+    this.geolocation.getCurrentPosition().then((res) => {
+      var myLatlng = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: myLatlng,
         zoom: 15
@@ -58,7 +59,7 @@ export class pinOnMapPage {
           if (status === 'OK') {
             if (results[0]) {
               infowindow.setContent(results[0].formatted_address);
-              this.formattedAddress = results[0].formatted_address;
+              formattedAddress = results[0].formatted_address;
               infowindow.open(map, marker);
             } else {
               window.alert('No results found');
@@ -68,14 +69,15 @@ export class pinOnMapPage {
           }
         });
       }
-    }, (error) => {
-        console.log(error);
-    }, options);
+    }).catch((error) => {
+      window.alert('Error getting location '+ error);
+    });
   }
 
   navigateToDashboard(){
-    //alert(this.formattedAddress);
-    this.navCtrl.setRoot('DashboardPage');
+    this.navCtrl.setRoot('DashboardPage', {
+      param1: formattedAddress
+  });
   }
 
 }

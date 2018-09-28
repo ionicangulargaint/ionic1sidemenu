@@ -3,7 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { DashboardPage } from './dashboard';
 import { TranslateModule } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { CommonService } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
     IonicPageModule.forChild(DashboardPage),
     TranslateModule.forChild()
   ],
-  providers: [Geolocation,NativeGeocoder],
+  providers: [Geolocation,CommonService],
   exports: [
     DashboardPage
   ]

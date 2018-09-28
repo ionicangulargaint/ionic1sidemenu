@@ -1,15 +1,10 @@
 import { Component, NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicPage, MenuController, NavController, Platform, LoadingController, Loading, NavParams } from 'ionic-angular';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
-import { User, Api } from '../../providers';
-declare var google;
+import { Api, CommonService } from '../../providers';
 
-export interface Slide {
-  //title: string;
-  //description: string;
-  image: string;
-}
+declare var google;
+let geocoder: any;
 
 @IonicPage()
 @Component({
@@ -20,15 +15,14 @@ export class DashboardPage {
   showSkip = true;
   selectedTypeDay: boolean = true;
   selectedTypeHour: boolean = false;
-
-  autocomplete: any;
+  autocompleteInput: any;
   GoogleAutocomplete: any;
   GooglePlaces: any;
   geocoder: any
   autocompleteItems: any;
   nearbyItems: any = new Array<any>();
-
   slides: any = [];
+  guestDetails:any;
 
   loading: Loading;
   loadingConfig: any;
@@ -42,23 +36,29 @@ export class DashboardPage {
     public geolocation: Geolocation,
     public navCtrl: NavController,
     public menu: MenuController,
-    public platform: Platform,    
+    public platform: Platform,
     public api: Api,
     public navParams: NavParams,
-    private nativeGeocoder: NativeGeocoder
+    public commonService:CommonService
   ) {
+    this.autocompleteInput = navParams.get('param1'); 
+    this.guestDetails = this.commonService.getGuestDetails();
+    console.log(this.guestDetails);
+    
+    this.platform.ready().then((readySource) => {
+      this.getCurrentLocation();
+    });
     this.geocoder = new google.maps.Geocoder;
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
-    this.autocomplete = { input: '' };
     this.autocompleteItems = [];
   }
 
   updateSearchResults() {
-    if (this.autocomplete.input == '') {
+    if (this.autocompleteInput == '') {
       this.autocompleteItems = [];
       return;
     }
-    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+    this.GoogleAutocomplete.getPlacePredictions({ input: this.autocompleteInput },
       (predictions, status) => {
         this.autocompleteItems = [];
         this.zone.run(() => {
@@ -75,7 +75,7 @@ export class DashboardPage {
       if (status === 'OK' && results[0]) {
         console.log(results[0].formatted_address);
         this.autocompleteItems = [];
-        this.autocomplete = { 'input': results[0].formatted_address };
+        this.autocompleteInput =  results[0].formatted_address;
       }
     })
   }
@@ -85,27 +85,26 @@ export class DashboardPage {
   }
 
   getCurrentLatLongAndFindAddress() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition().then((res) => {
       let latlng = {
-        lat: resp.coords.latitude,
-        lng: resp.coords.longitude
+        lat: res.coords.latitude,
+        lng: res.coords.longitude
       };
       console.log(latlng);
-      let options: NativeGeocoderOptions = {
-        useLocale: true,
-        maxResults: 5
-      };
-      this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude, options)
-        .then((result: any) => {
-          this.autocomplete = { 'input': result[0].formatted_address };
-          console.log(JSON.stringify(result[0]));
-        }).catch((error: any) => {
-          alert('lat long is - ' + resp.coords.latitude + ' and ' + resp.coords.longitude + ' waiting for cordoav to get address');
-          console.log(error)
-        });
-
+      geocoder = new google.maps.Geocoder;
+      geocoder.geocode({ 'location': latlng }, function (results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            this.autocompleteInput = results[0].formatted_address;
+          } else {
+            window.alert('No results found');
+          }
+        } else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+      });
     }).catch((error) => {
-      console.log('Error getting location', error);
+      window.alert('Error getting location '+ error);
     });
   }
 
@@ -159,6 +158,18 @@ export class DashboardPage {
         console.error('ERROR', err);
       });
     })
+  }
+
+  getCurrentLocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let latlng = {
+        lat: resp.coords.latitude,
+        lng: resp.coords.longitude
+      };
+      console.log('CurrentLocation.. '+latlng);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
 }

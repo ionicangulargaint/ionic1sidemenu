@@ -1,33 +1,28 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { Items } from '../../providers';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
-let options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
 
 @IonicPage()
 @Component({
   selector: 'get-directions',
   templateUrl: 'get-directions.html'
 })
-export class getDirectionsPage {
+export class GetDirectionsPage {
   @ViewChild('map') mapElement: ElementRef;
   latlng:any;
   formattedAddress:any;
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController,public geolocation: Geolocation) { }
 
   ionViewDidLoad() {
     this.loadMap();
   }
 
   loadMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      var myOriginLatlng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+    this.geolocation.getCurrentPosition().then((res) => {
+      var myOriginLatlng = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
       var myDestinationLatlng = new google.maps.LatLng(28.7041, 77.1025);
 
       var directionsService = new google.maps.DirectionsService();
@@ -50,9 +45,9 @@ export class getDirectionsPage {
         }
       });
 
-    }, (error) => {
-        console.log(error);
-    }, options);
+    }).catch((error) => {
+      window.alert('Error getting location '+ error);
+    });
   }
 
 }
