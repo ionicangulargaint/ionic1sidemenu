@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content no-bounce class="no-scroll">
-    <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="autocompleteInput" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
     <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
             {{ item.description }}
@@ -29,15 +29,15 @@
                 <ion-grid (click)="addguestDetails()">
                     <ion-row>
                         <ion-col col-4 class="choose-wrap border-left">
-                            <div class="count">1</div>
+                            <div class="count">{{guestDetails.rooms}}</div>
                             <div class="count-type">Room</div>
                         </ion-col>
                         <ion-col col-4 class="choose-wrap">
-                            <div class="count">1</div>
+                            <div class="count">{{guestDetails.adult}}</div>
                             <div class="count-type">Adult</div>
                         </ion-col>
                         <ion-col col-4 class="choose-wrap border-right">
-                            <div class="count">1</div>
+                            <div class="count">{{guestDetails.children}}</div>
                             <div class="count-type">Child</div>
                         </ion-col>
                     </ion-row>

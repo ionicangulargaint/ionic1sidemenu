@@ -1,5 +1,6 @@
 import { Component,ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 import { Items } from '../../providers';
 
 declare var google;
@@ -20,24 +21,29 @@ let options = {
 export class SearchedHotelOnmapPage {
   @ViewChild('map') mapElement: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public items: Items,
+    public geolocation: Geolocation
+  ) { }
 
   ngOnInit() {
     this.initMap();
   }
 
   initMap() {
-    navigator.geolocation.getCurrentPosition((location) => {
-      console.log(location);
+    this.geolocation.getCurrentPosition().then((res) => {
+      console.log(res);
       map = new google.maps.Map(this.mapElement.nativeElement, {
-        center: {lat: location.coords.latitude, lng: location.coords.longitude},
+        center: {lat: res.coords.latitude, lng: res.coords.longitude},
         zoom: 15
       });
   
       infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
       service.nearbySearch({
-        location: {lat: location.coords.latitude, lng: location.coords.longitude},
+        location: {lat: res.coords.latitude, lng: res.coords.longitude},
         radius: 1000,
         type: ['store']
       }, (results,status) => {
@@ -47,10 +53,9 @@ export class SearchedHotelOnmapPage {
           }
         }
       });
-    }, (error) => {
-      console.log(error);
-    }, options);
-    var myplace = {lat: -33.8665, lng: 151.1956};
+    }).catch((error) => {
+      window.alert('Error getting location '+ error);
+    });
   }
 
   createMarker(place) {

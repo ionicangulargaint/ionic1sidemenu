@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
-
+import {CommonService } from '../../providers';
 import { AddGuestDetailPage } from './add-guest-detail';
 
 @NgModule({
@@ -12,6 +12,7 @@ import { AddGuestDetailPage } from './add-guest-detail';
     IonicPageModule.forChild(AddGuestDetailPage),
     TranslateModule.forChild()
   ],
+  providers: [CommonService],
   exports: [
     AddGuestDetailPage
   ]
