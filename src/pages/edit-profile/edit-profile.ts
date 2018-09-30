@@ -71,9 +71,9 @@ export class EditProfilePage {
     let userId = localStorage.getItem('user');
     this.createLoader();
     let data = {
-      "userId": userId,
-      "email": this.editProfileForm.controls['mobile'].value,
-      "mobile": this.editProfileForm.controls['email'].value,
+      "user_id": userId,
+      "mob_no": this.editProfileForm.controls['mobile'].value,
+      "email": this.editProfileForm.controls['email'].value,
       "lname": this.editProfileForm.controls['lname'].value,
       "fname": this.editProfileForm.controls['fname'].value
     }

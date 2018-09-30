@@ -4,7 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-                <img class="hotel-img" src="assets/img/logo1.png" alt="hotel pic" height="65">
+            <img class="hotel-img" src="assets/img/logo1.png" alt="hotel pic" height="65">
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -72,45 +72,105 @@
             <div class="checkInlable">Check In Date</div>
             <ion-grid class="center" style="padding: 5px 0;">
                 <ion-row>
-                    <ion-col col-5 class="check-wrap">
+                    <ion-col col-5 class="check-wrap" (click)="openDatePicker('CHECKIN')">
+                        <!-- <input name="somedate" type="date" style="background: transparent; border: unset; color: transparent; position: absolute;
+                        width: 99%;
+                        left: 1%;
+                        top: 1%;
+                        height: 98%;"> -->
                         <div>CHECK IN</div>
-                        <div>1/09/2018</div>
+                        <div>{{selectedDates.checkInDate}}</div>
                     </ion-col>
                     <ion-col col-2></ion-col>
-                    <ion-col col-5 class="check-wrap">
+                    <ion-col col-5 class="check-wrap" (click)="openDatePicker('CHECKOUT')">
                         <div>CHECH OUT</div>
-                        <div>1/09/2018</div>
+                        <div>{{selectedDates.checkoutDate}}</div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </div>
         <div class="checkin-hour" *ngIf="selectedTypeHour">
             <div class="checkInlable">Check In Hour</div>
-            <div class="check-wrap center" style="margin-top: 5px;">1/09/2018</div>
+            <div class="check-wrap center" style="margin-top: 5px;" (click)="openDatePicker('CHECKIN')">{{selectedDates.checkInDate}}</div>
             <ion-grid class="center" style="padding: 5px 0;">
                 <ion-row>
-                    <ion-col col-5 class="check-wrap">
+                    <ion-col col-5 class="check-wrap" (click)="openTimePicker('CHECKIN')">
                         <div>CHECK IN</div>
-                        <div>02:20 pm</div>
+                        <div>{{selectedTime.checkInTime}}</div>
                     </ion-col>
                     <ion-col col-2></ion-col>
-                    <ion-col col-5 class="check-wrap">
+                    <ion-col col-5 class="check-wrap" (click)="openTimePicker('CHECKOUT')">
                         <div>CHECH OUT</div>
-                        <div>04:20 pm</div>
+                        <div>{{selectedTime.checkoutTime}}</div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </div>
         <button (click)="navigateToSearchedList()" ion-button block color="light">SEARCH</button>
     </div>
-    <ion-slides pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+    <ion-slides padding pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
         <ion-slide *ngFor="let slide of slides">
             <img [src]="slide.banner" class="slide-image" />
-            <!-- <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-      <p [innerHTML]="slide.description"></p> -->
         </ion-slide>
-        <!-- <ion-slide>
-            <img src="assets/img/oyo-image.png" class="slide-image" />
-        </ion-slide> -->
     </ion-slides>
+    <ion-row style="margin-top: -35%;">
+        <ion-col text-center>
+            <h2 class="toolbar-title">Our Hotels</h2>
+            <p class="toolbar-title">The Best Oriental Hotel</p>
+            <h4></h4>
+        </ion-col>
+    </ion-row>
+
+    <ion-card *ngFor="let slide of topHotelsLIst" padding>
+
+        <ion-item>
+            <h2>{{slide.hotel_name}}</h2>
+            <p>{{slide.hotel_address + ', ' + slide.hotel_city}}</p>
+        </ion-item>
+
+        <img src="http://netmaxims.in/projects/anytimecheckin/image/hotel-1.jpg">
+
+        <ion-card-content>
+            <p>{{slide.hotel_description}}</p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-start clear small class="main-rating">
+                    <h5>Ratings :- <ion-icon *appTimes="slide.hotel_star_category" name="star"> </ion-icon>
+                    </h5>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-start clear small class="main-rating">
+                    <h5>Price Per ay :- {{slide.price_per_day}}</h5>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-start clear small class="main-rating">
+                    <h5>Price Per Hour :- {{slide.price_per_hour}}</h5>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button color="primary" block>Book Now</button>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
+    <!-- <ion-slide *ngFor="let slide of topHotelsLIst">
+            <ion-card>
+                <img style="width: 100%;" src="http://netmaxims.in/projects/anytimecheckin/image/hotel-1.jpg" />
+                <div class="card-title">{{slide.hotel_name}}</div>
+                <div *ngFor="let x of ' '.repeat(slide.hotel_star_category).split(''), let x = index" class="card-subtitle">72 Listings</div>
+            </ion-card>
+
+        </ion-slide> -->
+
+
 </ion-content>

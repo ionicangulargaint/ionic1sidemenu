@@ -4,16 +4,19 @@ import { DashboardPage } from './dashboard';
 import { TranslateModule } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CommonService } from '../../providers';
+import { DatePicker } from '@ionic-native/date-picker';
+import { SharedModule } from './../../directives/shared.module';
 
 @NgModule({
   declarations: [
-    DashboardPage,
+    DashboardPage
   ],
   imports: [
     IonicPageModule.forChild(DashboardPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    SharedModule
   ],
-  providers: [Geolocation,CommonService],
+  providers: [Geolocation,CommonService, DatePicker],
   exports: [
     DashboardPage
   ]

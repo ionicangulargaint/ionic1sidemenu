@@ -1,4 +1,32 @@
 page-dashboard {
+  // .adsSlide .swiper-container .swiper-pagination {
+  //   left: 0;
+  //   bottom: 30%;
+  // }
+  // .adsSlide {
+  //   margin-top: -40%;
+  // }
+  // .topHotelSlide{
+  //   margin-top: -40%;
+  // }
+  // .topHotelSlide .swiper-container .swiper-pagination {
+  //   left: 0;
+  //   bottom: 30%;
+  // }
+
+  .main-rating h5{
+    color: #6e6e6e;
+    font-weight: 500;
+  }
+  .main-rating ion-icon{
+    color: #d8aa04;    
+  }
+  .item-md h2 {
+      margin: 2px 0;
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+  }
   .toolbar-background {
     background: #0f4187;
     border-color: transparent;
@@ -11,7 +39,7 @@ page-dashboard {
   }
   .slide-image {
     max-height: 40%;
-    max-width: 60%;
+    max-width: 89%;
     margin: 36px 0;
   }
   b {

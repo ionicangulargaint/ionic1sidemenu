@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Marriof Gold INN</ion-title>
+    <ion-title>{{hotelDetails.hotel_name}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only></button>
     </ion-buttons>
@@ -45,13 +45,13 @@
       <ion-card-header>
         <ion-row>
           <ion-col col-7>
-            <h3 class="card-title-main">Marriof Gold INN</h3>
+            <h3 class="card-title-main">{{hotelDetails.hotel_name}}</h3>
           </ion-col>
           <ion-col col-5>
             <div class="main-rating">
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon>
+              <ion-icon *appTimes="hotelDetails.hotel_star_category" name="star"></ion-icon>
+              <!-- <ion-icon name="star"></ion-icon>
+              <ion-icon name="star"></ion-icon> -->
             </div>
 
           </ion-col>
@@ -59,7 +59,7 @@
 
       </ion-card-header>
       <ion-card-content class="address-card">
-        <ion-icon name="pin"></ion-icon> 925 Doroteo Jose Street corner Rizal Avenue, Santa Cruz, Manila, Phillippines, 1003
+        <ion-icon name="pin"></ion-icon> {{hotelDetails.hotel_address + ', ' + hotelDetails.hotel_city + ', ' + hotelDetails.hotel_country + ', ' + hotelDetails.hotel_pin_code}}
       </ion-card-content>
     </ion-card>
   </div>
