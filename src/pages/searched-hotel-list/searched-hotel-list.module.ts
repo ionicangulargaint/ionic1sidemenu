@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SharedModule } from './../../directives/shared.module';
-
+import { CommonService } from '../../providers';
 import { SearchedHotelListPage } from './searched-hotel-list';
 
 @NgModule({
@@ -14,6 +14,7 @@ import { SearchedHotelListPage } from './searched-hotel-list';
     TranslateModule.forChild(),
     SharedModule
   ],
+  providers:[CommonService],
   exports: [
     SearchedHotelListPage
   ]

@@ -16,9 +16,6 @@ export class AddGuestDetailPage {
 
   constructor(public events: Events,public navCtrl: NavController, navParams: NavParams, public commonService: CommonService) {
     this.guestDetails = navParams.get('guestDetails');
-    //this.guestDetails = 
-    //this.guestDetails = this.commonService.getGuestDetails();
-    //console.log(this.guestDetails);
   }
 
   updateRooms(type) {
@@ -27,7 +24,6 @@ export class AddGuestDetailPage {
     } else if(this.guestDetails.rooms > 1) {
       this.guestDetails.rooms = this.guestDetails.rooms - 1;
     }
-    //this.updateDetails();
   }
 
   updateAdult(type) {
@@ -36,7 +32,6 @@ export class AddGuestDetailPage {
     } else if(this.guestDetails.adult > 1) {
       this.guestDetails.adult = this.guestDetails.adult - 1;
     }
-    //this.updateDetails();
   }
 
   updateChildren(type) {
@@ -45,19 +40,12 @@ export class AddGuestDetailPage {
     } else if(this.guestDetails.children) {
       this.guestDetails.children = this.guestDetails.children - 1;
     }
-    //this.updateDetails();
-    //this.guestDetails = this.commonService.getGuestDetails();
-    console.log(this.guestDetails);
   }
-
-  updateDetails() {
-    //this.events.publish('guest:updateDetail', this.guestDetails, Date.now());
-    //this.commonService.setGuestDetails(this.guestDetails.rooms, this.guestDetails.adult, this.guestDetails.children);
-  }
-
+  
   goToDashboard(){
     this.navCtrl.setRoot('DashboardPage');
   }
+  
   ionViewDidLeave(){
     this.events.publish('guest:updateDetail', this.guestDetails, Date.now());
   }

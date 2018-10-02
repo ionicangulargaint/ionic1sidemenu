@@ -1,30 +1,20 @@
 import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 
 @Injectable()
 export class CommonService {
-  rooms: any;
-  adult: any;
-  children: any;
+  
+  constructor(
+    private alertCtrl: AlertController
+  ) { }
 
-  constructor() {
-    this.rooms = 1;
-    this.adult = 1;
-    this.children = 0;
-  }
-
-  setGuestDetails(rooms, adult,children) {
-    this.rooms = rooms;
-    this.adult = adult;
-    this.children = children;
-  }
-
-  getGuestDetails() {
-    var obj = {
-      rooms:this.rooms,
-      adult:this.adult,
-      children:this.children
-    };
-    return obj;
+  showAlert(msg) {
+    let alert = this.alertCtrl.create({
+      title: 'AnyTime CheckIn',
+      subTitle: msg,
+      buttons: ['Dismiss']
+    });
+    alert.present();
   }
 
 }

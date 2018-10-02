@@ -23,6 +23,8 @@ export class DashboardPage {
   nearbyItems: any = new Array<any>();
   slides: any = [];
   topHotelsLIst: any = [];
+  allTopHotelsList:any = [];
+  showMore : boolean = false;
   guestDetails: any = {
     rooms: 1,
     adult: 1,
@@ -37,7 +39,7 @@ export class DashboardPage {
     checkoutTime: this.getFormatedTime(new Date())
   }
 
-  selectedLocation:any = {
+  selectedLocation: any = {
     lat: '',
     lng: ''
   }
@@ -62,9 +64,6 @@ export class DashboardPage {
     private datePicker: DatePicker
   ) {
     this.autocompleteInput = navParams.get('param1');
-    //this.guestDetails = this.commonService.getGuestDetails();
-    console.log(this.guestDetails);
-
     this.platform.ready().then((readySource) => {
       this.getCurrentLocation();
     });
@@ -73,10 +72,9 @@ export class DashboardPage {
     this.autocompleteItems = [];
 
     // update guest details using change event
-
     events.subscribe('guest:updateDetail', (guest, time) => {
       this.guestDetails = guest;
-      //this.guestDetails.
+      console.log(this.guestDetails);
     });
   }
 
@@ -209,13 +207,13 @@ export class DashboardPage {
 
   getFormatedTime(date) {
     var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ' ' + ampm;
-  return strTime;
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
   }
 
   onSlideChangeStart(slider) {
@@ -243,7 +241,7 @@ export class DashboardPage {
       no_of_childs: this.guestDetails.children,
       lat: this.selectedLocation.lat,
       lng: this.selectedLocation.lng
-    }    
+    }
     this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data });
   }
 
@@ -253,7 +251,6 @@ export class DashboardPage {
   }
 
   getFeaturedAds() {
-   // this.getTopHotels();
     this.createLoader();
     this.loading.present().then(() => {
       let seq = this.api.get('featuredAd.php?featuredAd=Ad12345').share();
@@ -270,28 +267,38 @@ export class DashboardPage {
       });
     })
   }
+  
   getTopHotels() {
-      let seq = this.api.get('topHotels.php?tophotels=topHotels12345').share();
-      seq.subscribe((res: any) => {        
-        if (res.result == "success") {
-          this.topHotelsLIst = res.topHotelsDetails;
+    let seq = this.api.get('topHotels.php?tophotels=topHotels12345').share();
+    seq.subscribe((res: any) => {
+      if (res.result == "success") {
+        if (res.topHotelsDetails.length > 4) {
+          for (var i = 0; i < 4; i++) {
+            this.topHotelsLIst.push(res.topHotelsDetails[i])
+          }
+          this.allTopHotelsList = res.topHotelsDetails;
         } else {
-
+          this.topHotelsLIst = res.topHotelsDetails;
         }
-      }, err => {        
-        console.error('ERROR', err);
-      });
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+  }
+
+  showMoreHotel(){
+    this.showMore = true;
+    this.topHotelsLIst = this.allTopHotelsList;
+  }
+
+  navigateToHotelDetail(item){
+    this.navCtrl.push('HotelDetailPage', {'item': item.hotel_id });
   }
 
   getCurrentLocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.selectedLocation.lat = resp.coords.latitude;
       this.selectedLocation.lng = resp.coords.longitude;
-      // let latlng = {
-      //   lat: resp.coords.latitude,
-      //   lng: resp.coords.longitude
-      // };
-      // console.log('CurrentLocation.. ' + latlng);
     }).catch((error) => {
       console.log('Error getting location', error);
     });

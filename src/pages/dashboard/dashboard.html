@@ -121,8 +121,7 @@
         </ion-col>
     </ion-row>
 
-    <ion-card *ngFor="let slide of topHotelsLIst" padding>
-
+    <!-- <ion-card *ngFor="let slide of topHotelsLIst" padding>
         <ion-item>
             <h2>{{slide.hotel_name}}</h2>
             <p>{{slide.hotel_address + ', ' + slide.hotel_city}}</p>
@@ -161,16 +160,42 @@
                 <button ion-button color="primary" block>Book Now</button>
             </ion-col>
         </ion-row>
+    </ion-card> -->
 
-    </ion-card>
-    <!-- <ion-slide *ngFor="let slide of topHotelsLIst">
-            <ion-card>
-                <img style="width: 100%;" src="http://netmaxims.in/projects/anytimecheckin/image/hotel-1.jpg" />
-                <div class="card-title">{{slide.hotel_name}}</div>
-                <div *ngFor="let x of ' '.repeat(slide.hotel_star_category).split(''), let x = index" class="card-subtitle">72 Listings</div>
-            </ion-card>
-
-        </ion-slide> -->
-
+    <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
+        <ion-card class="myCard">
+            <img class="holtel-img" src="assets/img/a.jpg" />
+            <div class="myOverlay">
+                <div class="card-title">$1994</div>
+                <div class="card-subtitle">${{slide.price_per_day}}</div>
+                <div class="discount">50% Off</div>
+                <div class="distance">5 km</div>
+            </div>
+        </ion-card>
+        <ion-card style="margin-top:-10px;">
+            <ion-card-header>
+                <ion-row>
+                    <ion-col col-7>
+                        <h3 class="card-title-main">{{slide.hotel_name}}</h3>
+                    </ion-col>
+                    <ion-col col-5>
+                        <div class="main-rating">
+                            <ion-icon name="star" *appTimes="slide.hotel_star_category"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-card-header>
+            <ion-card-content class="address-card">
+                <ion-icon name="pin"></ion-icon> {{slide.hotel_address + ', ' + slide.hotel_city + ', ' +
+                slide.hotel_country}}
+            </ion-card-content>
+        </ion-card>
+        <p *ngIf="topHotelsLIst.length==0">No result found</p>
+    </div>
+    <div class="text-center">
+        <button (click)="showMoreHotel()" *ngIf="(allTopHotelsList.length > 4) && !showMore" ion-button color="light">
+            View More
+        </button>
+    </div>
 
 </ion-content>
