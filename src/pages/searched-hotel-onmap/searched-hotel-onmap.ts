@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Items } from '../../providers';
+import { Items,CommonService } from '../../providers';
 
 declare var google;
 let map: any;
@@ -28,9 +28,11 @@ export class SearchedHotelOnmapPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public items: Items,
-    public geolocation: Geolocation
+    public geolocation: Geolocation,
+    public commonService:CommonService
   ) {
     this.hotelList = navParams.get('hotelList');
+    console.log(this.hotelList);
   }
 
   ngOnInit() {
@@ -60,12 +62,11 @@ export class SearchedHotelOnmapPage {
     });
     infowindow.setContent('<b>' + item.hotel_name + '</b>');
     infowindow.open(map, marker);
-
-    google.maps.event.addListener(marker, 'click', function () {
-      console.log(item.hotel_id);
+    google.maps.event.addListener(marker, 'click', (e) => {
+      this.navigateToHotelDetail(item.hotel_id);
     });
   }
-
+  
   navigateToHotelDetail(hotel_id) {
     this.navCtrl.push('HotelDetailPage', { 'item': hotel_id });
   }

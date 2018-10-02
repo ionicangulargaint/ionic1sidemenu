@@ -8,12 +8,10 @@ import { Api,CommonService } from '../../providers';
   templateUrl: 'searched-hotel-list.html'
 })
 export class SearchedHotelListPage {
-
   hotelList: any = [];
   searchParam: any = {};
   bookingType:boolean = false;
   
-
   constructor(
     public api: Api, 
     public navCtrl: NavController, 

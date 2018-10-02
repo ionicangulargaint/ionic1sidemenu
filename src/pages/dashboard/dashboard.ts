@@ -273,9 +273,7 @@ export class DashboardPage {
     seq.subscribe((res: any) => {
       if (res.result == "success") {
         if (res.topHotelsDetails.length > 4) {
-          for (var i = 0; i < 4; i++) {
-            this.topHotelsLIst.push(res.topHotelsDetails[i])
-          }
+          this.topHotelsLIst = res.topHotelsDetails.slice(0, 4);
           this.allTopHotelsList = res.topHotelsDetails;
         } else {
           this.topHotelsLIst = res.topHotelsDetails;

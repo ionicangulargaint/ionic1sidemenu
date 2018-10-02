@@ -39,7 +39,7 @@ img{
       background: linear-gradient(to right, #ffffff 25%, #00000099 0%, rgba(226, 226, 226, 0) 56%, #00000070 127%); /* Chrome10-25,Safari5.1-6 */
       background: linear-gradient(to right, #ffffff 25%, #00000099 0%, rgba(226, 226, 226, 0) 56%, #00000070 127%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2989d8', endColorstr='#cc1e5799',GradientType=1 ); /* IE6-9 */
-  
+      background-image: linear-gradient(to right, black ,transparent,transparent, black);
   }
   .discount {
     position: absolute;
