@@ -39,7 +39,7 @@ export class SignupPage {
     private httpClient: HttpClient,
     public loadingCtrl: LoadingController) {
     this.signUpFormByEmail = this._FORMBUILDER.group({
-      'email': ['', Validators.required],
+      'email':  ['', [Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")]],
       'password': ['', Validators.required],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required]
