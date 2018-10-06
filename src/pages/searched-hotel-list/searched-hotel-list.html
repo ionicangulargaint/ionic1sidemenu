@@ -36,7 +36,7 @@
 <ion-content>
   <div class="one-item" (click)="navigateToHotelDetail(hotel)" *ngFor="let hotel of hotelList">
     <ion-card class="myCard">
-      <img src="assets/img/a.jpg" />
+        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
       <div class="myOverlay">
         <div class="card-title">$1994</div>
         <div class="card-subtitle">${{hotel.price_per_day}}</div>

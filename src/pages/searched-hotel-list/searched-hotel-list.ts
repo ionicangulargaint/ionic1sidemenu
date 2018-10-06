@@ -8,6 +8,7 @@ import { Api,CommonService } from '../../providers';
   templateUrl: 'searched-hotel-list.html'
 })
 export class SearchedHotelListPage {
+  imgagePath = "https://epimoniapp.com/anytimecheckin/image/";
   hotelList: any = [];
   searchParam: any = {};
   bookingType:boolean = false;

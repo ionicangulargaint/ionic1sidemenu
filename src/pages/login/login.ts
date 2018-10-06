@@ -148,6 +148,8 @@ export class LoginPage {
   }
 
   navigateToForgotPassword(){
-    this.navCtrl.push('ForgotPasswordPage');
+    this.navCtrl.push('ForgotPasswordPage', {
+      'forgotPassword':this.loginModel
+    });
   }
 }

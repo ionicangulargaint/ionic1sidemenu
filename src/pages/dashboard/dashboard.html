@@ -121,50 +121,9 @@
         </ion-col>
     </ion-row>
 
-    <!-- <ion-card *ngFor="let slide of topHotelsLIst" padding>
-        <ion-item>
-            <h2>{{slide.hotel_name}}</h2>
-            <p>{{slide.hotel_address + ', ' + slide.hotel_city}}</p>
-        </ion-item>
-
-        <img src="http://netmaxims.in/projects/anytimecheckin/image/hotel-1.jpg">
-
-        <ion-card-content>
-            <p>{{slide.hotel_description}}</p>
-        </ion-card-content>
-
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-start clear small class="main-rating">
-                    <h5>Ratings :- <ion-icon *appTimes="slide.hotel_star_category" name="star"> </ion-icon>
-                    </h5>
-                </button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-start clear small class="main-rating">
-                    <h5>Price Per ay :- {{slide.price_per_day}}</h5>
-                </button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-start clear small class="main-rating">
-                    <h5>Price Per Hour :- {{slide.price_per_hour}}</h5>
-                </button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <button ion-button color="primary" block>Book Now</button>
-            </ion-col>
-        </ion-row>
-    </ion-card> -->
-
     <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
         <ion-card class="myCard">
-            <img class="holtel-img" src="assets/img/a.jpg" />
+            <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.main_image}}" />
             <div class="myOverlay">
                 <div class="card-title">$1994</div>
                 <div class="card-subtitle">${{slide.price_per_day}}</div>

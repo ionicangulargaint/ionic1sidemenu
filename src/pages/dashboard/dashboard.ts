@@ -12,6 +12,7 @@ let geocoder: any;
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+  imgagePath = "https://epimoniapp.com/anytimecheckin/image/";
   showSkip = true;
   selectedTypeDay: boolean = true;
   selectedTypeHour: boolean = false;
