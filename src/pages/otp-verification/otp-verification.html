@@ -29,12 +29,12 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col>
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">
-                            <input class="otp" maxlength="1" type="number" minlength="1">                            
+                            <input id="0" class="otp" maxlength="1" type="number" minlength="1">
+                            <input id="1" class="otp" maxlength="1" type="number" minlength="1">
+                            <input id="2" class="otp" maxlength="1" type="number" minlength="1">
+                            <input id="3" class="otp" maxlength="1" type="number" minlength="1">
+                            <input id="4" class="otp" maxlength="1" type="number" minlength="1">
+                            <input id="5" class="otp" maxlength="1" type="number" minlength="1">                            
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -53,7 +53,7 @@
                     </a>
                 </div> -->
                 <div padding>
-                    <button ion-button color="primary" [disabled]="!enableSubmitBtn" block>Verify</button>
+                    <button (click)="verifyEmailOtp()" ion-button color="primary" [disabled]="!enableSubmitBtn" block>Verify</button>
                 </div>
             </ion-list>
         </div>
