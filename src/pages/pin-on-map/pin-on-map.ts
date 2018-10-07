@@ -7,7 +7,9 @@ declare var google;
 let map: any;
 let infowindow: any;
 let geocoder: any;
-let formattedAddress:any;
+let formattedAddress: any;
+let selectedlatitude: any;
+let selectedlongitude: any;
 let options = {
   enableHighAccuracy: true,
   timeout: 5000,
@@ -21,9 +23,9 @@ let options = {
 })
 export class pinOnMapPage {
   @ViewChild('map') mapElement: ElementRef;
-  latlng:any;
+  latlng: any;
 
-  constructor(public navCtrl: NavController,public geolocation: Geolocation) { }
+  constructor(public navCtrl: NavController, public geolocation: Geolocation) { }
 
   ionViewDidLoad() {
     this.loadMap();
@@ -31,6 +33,8 @@ export class pinOnMapPage {
 
   loadMap() {
     this.geolocation.getCurrentPosition().then((res) => {
+      selectedlatitude = res.coords.latitude;
+      selectedlongitude = res.coords.longitude;
       var myLatlng = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: myLatlng,
@@ -50,11 +54,13 @@ export class pinOnMapPage {
       reverseGeoCoding(myLatlng);
 
       google.maps.event.addListener(marker, 'dragend', function (event) {
+        selectedlatitude = event.latLng.lat();
+        selectedlongitude = event.latLng.lng();
         var latlng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
         reverseGeoCoding(latlng);
       });
 
-      function reverseGeoCoding(latlng){
+      function reverseGeoCoding(latlng) {
         geocoder.geocode({ 'location': latlng }, function (results, status) {
           if (status === 'OK') {
             if (results[0]) {
@@ -70,14 +76,18 @@ export class pinOnMapPage {
         });
       }
     }).catch((error) => {
-      window.alert('Error getting location '+ error);
+      window.alert('Error getting location ' + error);
     });
   }
 
-  navigateToDashboard(){
-    this.navCtrl.setRoot('DashboardPage', {
-      param1: formattedAddress
-  });
+  navigateToDashboard() {
+    var obj = {
+      address: formattedAddress,
+      latitude: selectedlatitude,
+      longitude: selectedlongitude
+    }
+    console.log(obj)
+    this.navCtrl.setRoot('DashboardPage',{ 'mapSearchObj': obj });
   }
 
 }

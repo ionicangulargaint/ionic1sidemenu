@@ -11,12 +11,13 @@
 
 <ion-content no-bounce class="no-scroll">
     <ion-searchbar [(ngModel)]="autocompleteInput" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+    
     <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
             {{ item.description }}
         </ion-item>
     </ion-list>
-
+    <ion-input type="text" [(ngModel)]="autocompleteInput1"></ion-input>
     <ion-grid style="border-bottom: 2px solid #0c346d;">
         <ion-row class="center">
             <ion-col col-3 (click)="getCurrentLatLongAndFindAddress()">

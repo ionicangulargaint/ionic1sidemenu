@@ -1,10 +1,9 @@
 import { Component, NgZone } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Events, IonicPage, MenuController, NavController, Platform, LoadingController, Loading, NavParams } from 'ionic-angular';
+import { Events, IonicPage, MenuController, NavController, Platform, NavParams } from 'ionic-angular';
 import { Api, CommonService } from '../../providers';
 import { DatePicker } from '@ionic-native/date-picker';
 declare var google;
-let geocoder: any;
 
 @IonicPage()
 @Component({
@@ -24,8 +23,8 @@ export class DashboardPage {
   nearbyItems: any = new Array<any>();
   slides: any = [];
   topHotelsLIst: any = [];
-  allTopHotelsList:any = [];
-  showMore : boolean = false;
+  allTopHotelsList: any = [];
+  showMore: boolean = false;
   guestDetails: any = {
     rooms: 1,
     adult: 1,
@@ -33,28 +32,19 @@ export class DashboardPage {
   };
   selectedDates: any = {
     checkInDate: this.getFormatedDate(new Date()),
-    checkoutDate: this.getFormatedDate(new Date())
+    checkoutDate: this.getFormatedDate(new Date().setDate(new Date().getDate() + 1))
   }
   selectedTime: any = {
     checkInTime: this.getFormatedTime(new Date()),
     checkoutTime: this.getFormatedTime(new Date())
   }
-
   selectedLocation: any = {
     lat: '',
     lng: ''
   }
 
-  loading: Loading;
-  loadingConfig: any;
-  createLoader(message: string = "Please wait...") {
-    this.loading = this.loadingCtrl.create({
-      content: message
-    });
-  }
   constructor(public events: Events,
     public zone: NgZone,
-    public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
     public navCtrl: NavController,
     public menu: MenuController,
@@ -64,7 +54,13 @@ export class DashboardPage {
     public commonService: CommonService,
     private datePicker: DatePicker
   ) {
-    this.autocompleteInput = navParams.get('param1');
+    var mapSearchObj = navParams.get('mapSearchObj');
+    if (mapSearchObj) {
+      this.autocompleteInput = mapSearchObj.address;
+      this.selectedLocation.lat = mapSearchObj.latitude;
+      this.selectedLocation.lng = mapSearchObj.longitude;
+    }
+
     this.platform.ready().then((readySource) => {
       this.getCurrentLocation();
     });
@@ -97,12 +93,15 @@ export class DashboardPage {
 
   selectSearchResult(item) {
     this.autocompleteItems = [];
-    this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
-      if (status === 'OK' && results[0]) {
-        console.log(results[0].formatted_address);
-        this.autocompleteItems = [];
-        this.autocompleteInput = results[0].formatted_address;
-      }
+    this.commonService.createLoader();
+    this.commonService.loading.present().then(() => {
+      this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
+        this.commonService.loading.dismiss();
+        if (status === 'OK' && results[0]) {
+          this.autocompleteItems = [];
+          this.autocompleteInput = results[0].formatted_address;
+        }
+      })
     })
   }
 
@@ -116,22 +115,26 @@ export class DashboardPage {
         lat: res.coords.latitude,
         lng: res.coords.longitude
       };
-      console.log(latlng);
-      geocoder = new google.maps.Geocoder;
-      geocoder.geocode({ 'location': latlng }, function (results, status) {
-        if (status === 'OK') {
-          if (results[0]) {
-            this.autocompleteInput = results[0].formatted_address;
+      this.selectedLocation.lat = res.coords.latitude;
+      this.selectedLocation.lng = res.coords.longitude;
+      this.commonService.createLoader();
+      this.commonService.loading.present().then(() => {
+        this.geocoder.geocode({ 'location': latlng }, (results, status) => {
+          this.commonService.loading.dismiss();
+          if (status === 'OK') {
+            if (results[0]) {
+              this.autocompleteInput = results[0].formatted_address;
+            } else {
+              this.commonService.showAlert('No results found');
+            }
           } else {
-            window.alert('No results found');
+            this.commonService.showAlert('Geocoder failed due to: ' + status);
           }
-        } else {
-          window.alert('Geocoder failed due to: ' + status);
-        }
+        });
+      }).catch((error) => {
+        this.commonService.showAlert('Error getting location ' + error);
       });
-    }).catch((error) => {
-      window.alert('Error getting location ' + error);
-    });
+    })
   }
 
   addguestDetails() {
@@ -151,20 +154,20 @@ export class DashboardPage {
     dateString = dateString.split(' ').join('T');
     let date: any = new Date(dateString);
     date = date.getTime();
-    let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
+    //let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
+    var maxDate = this.selectedTypeDay ? (new Date()).setMonth((new Date()).getMonth() + 3) : (new Date()).setDate((new Date()).getDate() + 3);
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      minDate: minDate,
-      maxDate: minDate,
+      minDate: (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 1),
+      maxDate: (pickerIs == 'CHECKIN') ? (maxDate) : (new Date(maxDate)).setDate((new Date(maxDate)).getDate() + 1),
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
-
       date => {
         if (pickerIs == 'CHECKIN') {
           this.selectedDates.checkInDate = this.getFormatedDate(date);
         } else {
-          this.selectedDates.checkoutDate = this.getFormatedDate(date);;
+          this.selectedDates.checkoutDate = this.getFormatedDate(date);
         }
       },
       err => console.log('Error occurred while getting date: ', err)
@@ -176,15 +179,14 @@ export class DashboardPage {
     dateString = dateString.split(' ').join('T');
     let date: any = new Date(dateString);
     date = date.getTime();
-    let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
+    //let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
     this.datePicker.show({
       date: new Date(),
       mode: 'time',
-      minDate: minDate,
-      maxDate: minDate,
+      minDate: date,
+      maxDate: date,
       androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
     }).then(
-
       time => {
         if (pickerIs == 'CHECKIN') {
           this.selectedTime.checkInTime = this.getFormatedTime(time);
@@ -234,9 +236,13 @@ export class DashboardPage {
   navigateToSearchedList() {
     let data = {
       optradio: this.selectedTypeDay ? 1 : 2,
-      check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : 0,
-      check_in_time: this.selectedTypeDay ? '00:00:00' : '',
-      check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : 0,
+      //check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : 0,
+      //check_in_time: this.selectedTypeDay ? '00:00:00' : '',
+      //check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : 0,
+      check_in_date: this.selectedDates.checkInDate,
+      check_in_time: this.selectedTypeDay ? '00:00:00' : this.selectedTime.checkInTime,
+      check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.selectedDates.checkInDate,
+      check_out_time: this.selectedTypeDay ? '00:00:00' : this.selectedTime.checkoutTime,
       no_of_adults: this.guestDetails.adult,
       no_of_rooms: this.guestDetails.rooms,
       no_of_childs: this.guestDetails.children,
@@ -252,23 +258,23 @@ export class DashboardPage {
   }
 
   getFeaturedAds() {
-    this.createLoader();
-    this.loading.present().then(() => {
+    this.commonService.createLoader();
+    this.commonService.loading.present().then(() => {
       let seq = this.api.get('featuredAd.php?featuredAd=Ad12345').share();
       seq.subscribe((res: any) => {
-        this.loading.dismiss();
+        this.commonService.loading.dismiss();
         if (res.result == "success") {
           this.slides = res.feature_ad;
         } else {
 
         }
       }, err => {
-        this.loading.dismiss();
+        this.commonService.loading.dismiss();
         console.error('ERROR', err);
       });
     })
   }
-  
+
   getTopHotels() {
     let seq = this.api.get('topHotels.php?tophotels=topHotels12345').share();
     seq.subscribe((res: any) => {
@@ -285,13 +291,13 @@ export class DashboardPage {
     });
   }
 
-  showMoreHotel(){
+  showMoreHotel() {
     this.showMore = true;
     this.topHotelsLIst = this.allTopHotelsList;
   }
 
-  navigateToHotelDetail(item){
-    this.navCtrl.push('HotelDetailPage', {'item': item.hotel_id });
+  navigateToHotelDetail(item) {
+    this.navCtrl.push('HotelDetailPage', { 'item': item.hotel_id });
   }
 
   getCurrentLocation() {

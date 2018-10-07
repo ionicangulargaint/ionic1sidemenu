@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController, Loading } from 'ionic-angular';
 
 @Injectable()
 export class CommonService {
+  loading: Loading;
   
   constructor(
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
   ) { }
 
   showAlert(msg) {
@@ -15,6 +17,12 @@ export class CommonService {
       buttons: ['Dismiss']
     });
     alert.present();
+  }
+
+  createLoader(message: string = "Please wait...") { 
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
   }
 
 }
