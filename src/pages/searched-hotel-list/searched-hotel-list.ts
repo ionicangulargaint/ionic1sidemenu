@@ -12,7 +12,8 @@ export class SearchedHotelListPage {
   hotelList: any = [];
   searchParam: any = {};
   bookingType:boolean = false;
-  
+  selectedAddress:any;
+
   constructor(
     public api: Api, 
     public navCtrl: NavController, 
@@ -21,6 +22,7 @@ export class SearchedHotelListPage {
     public commonService: CommonService
     ) {
     this.searchParam = navParams.get('searchCriterias');
+    this.selectedAddress = navParams.get('selectedAddress');
     if(this.searchParam.optradio == 1){
       this.bookingType = true;
     }

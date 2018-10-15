@@ -11,7 +11,7 @@
 
 <ion-content no-bounce class="no-scroll">
     <ion-searchbar [(ngModel)]="autocompleteInput" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
-    
+
     <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
             {{ item.description }}
@@ -122,34 +122,38 @@
         </ion-col>
     </ion-row>
 
-    <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
-        <ion-card class="myCard">
-            <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.main_image}}" />
-            <div class="myOverlay">
-                <div class="card-title">$1994</div>
-                <div class="card-subtitle">${{slide.price_per_day}}</div>
-                <div class="discount">50% Off</div>
-                <div class="distance">5 km</div>
-            </div>
-        </ion-card>
-        <ion-card style="margin-top:-10px;">
-            <ion-card-header>
-                <ion-row>
-                    <ion-col col-7>
-                        <h3 class="card-title-main">{{slide.hotel_name}}</h3>
-                    </ion-col>
-                    <ion-col col-5>
-                        <div class="main-rating">
-                            <ion-icon name="star" *appTimes="slide.hotel_star_category"></ion-icon>
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-card-header>
-            <ion-card-content class="address-card">
-                <ion-icon name="pin"></ion-icon> {{slide.hotel_address + ', ' + slide.hotel_city + ', ' +
-                slide.hotel_country}}
-            </ion-card-content>
-        </ion-card>
+    <div *ngIf="topHotelsLIst.length!=0">
+        <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
+            <ion-card class="myCard">
+                <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.main_image}}" />
+                <div class="myOverlay">
+                    <div class="card-title">$1994</div>
+                    <div class="card-subtitle">${{slide.price_per_day}}</div>
+                    <div class="discount">50% Off</div>
+                    <div class="distance">5 km</div>
+                </div>
+            </ion-card>
+            <ion-card style="margin-top:-10px;">
+                <ion-card-header>
+                    <ion-row>
+                        <ion-col col-7>
+                            <h3 class="card-title-main">{{slide.hotel_name}}</h3>
+                        </ion-col>
+                        <ion-col col-5>
+                            <div class="main-rating">
+                                <ion-icon name="star" *appTimes="slide.hotel_star_category"></ion-icon>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-header>
+                <ion-card-content class="address-card">
+                    <ion-icon name="pin"></ion-icon> {{slide.hotel_address + ', ' + slide.hotel_city + ', ' +
+                    slide.hotel_country}}
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </div>
+    <div class="text-center toolbar-title">
         <p *ngIf="topHotelsLIst.length==0">No result found</p>
     </div>
     <div class="text-center">

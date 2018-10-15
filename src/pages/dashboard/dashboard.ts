@@ -25,6 +25,7 @@ export class DashboardPage {
   topHotelsLIst: any = [];
   allTopHotelsList: any = [];
   showMore: boolean = false;
+
   guestDetails: any = {
     rooms: 1,
     adult: 1,
@@ -40,7 +41,8 @@ export class DashboardPage {
   }
   selectedLocation: any = {
     lat: '',
-    lng: ''
+    lng: '',
+    address: ''
   }
 
   constructor(public events: Events,
@@ -59,6 +61,7 @@ export class DashboardPage {
       this.autocompleteInput = mapSearchObj.address;
       this.selectedLocation.lat = mapSearchObj.latitude;
       this.selectedLocation.lng = mapSearchObj.longitude;
+      this.selectedLocation.address = mapSearchObj.address;
     }
 
     this.platform.ready().then((readySource) => {
@@ -98,8 +101,11 @@ export class DashboardPage {
       this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
         this.commonService.loading.dismiss();
         if (status === 'OK' && results[0]) {
+          this.selectedLocation.lat = results[0].geometry.location.lat();
+          this.selectedLocation.lng = results[0].geometry.location.lng();
           this.autocompleteItems = [];
           this.autocompleteInput = results[0].formatted_address;
+          this.selectedLocation.address = results[0].formatted_address;
         }
       })
     })
@@ -124,6 +130,7 @@ export class DashboardPage {
           if (status === 'OK') {
             if (results[0]) {
               this.autocompleteInput = results[0].formatted_address;
+              this.selectedLocation.address = results[0].formatted_address;
             } else {
               this.commonService.showAlert('No results found');
             }
@@ -223,11 +230,6 @@ export class DashboardPage {
     this.showSkip = !slider.isEnd();
   }
 
-  ionViewDidEnter() {
-    // the root left menu should be disabled on the tutorial page
-    // this.menu.enable(false);
-  }
-
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
@@ -236,9 +238,6 @@ export class DashboardPage {
   navigateToSearchedList() {
     let data = {
       optradio: this.selectedTypeDay ? 1 : 2,
-      //check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : 0,
-      //check_in_time: this.selectedTypeDay ? '00:00:00' : '',
-      //check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : 0,
       check_in_date: this.selectedDates.checkInDate,
       check_in_time: this.selectedTypeDay ? '00:00:00' : this.selectedTime.checkInTime,
       check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.selectedDates.checkInDate,
@@ -249,7 +248,7 @@ export class DashboardPage {
       lat: this.selectedLocation.lat,
       lng: this.selectedLocation.lng
     }
-    this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data });
+    this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress':this.selectedLocation.address });
   }
 
   ionViewDidLoad() {
@@ -304,6 +303,17 @@ export class DashboardPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.selectedLocation.lat = resp.coords.latitude;
       this.selectedLocation.lng = resp.coords.longitude;
+      this.commonService.createLoader();
+      this.geocoder.geocode({ 'location': { lat: resp.coords.latitude, lng: resp.coords.longitude } }, (results, status) => {
+        this.commonService.loading.dismiss();
+        if (status === 'OK') {
+          if (results[0]) {
+            this.selectedLocation.address = results[0].formatted_address;
+          }
+        } else {
+          this.commonService.showAlert('Geocoder failed due to: ' + status);
+        }
+      });
     }).catch((error) => {
       console.log('Error getting location', error);
     });
