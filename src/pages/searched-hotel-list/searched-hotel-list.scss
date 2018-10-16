@@ -85,5 +85,16 @@ page-searched-hotel-list {
     border-color: #b2b2b2;
     background: #ffffff;
 }
+.not-found {
+  background-image: url(../assets/imgs/404-hotel.png);  
+  background-position: 49% 65%;
+  background-repeat: no-repeat;
+  background-size: 150%;
+}
+.search-again-btn {
+  position: absolute;
+  bottom: 2%;
+  left: 35%;
+}
 
 }

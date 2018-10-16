@@ -33,7 +33,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [ngClass]="noResultFound?'not-found':''">
+  <div class="row search-again-btn" *ngIf="noResultFound">
+    <div class="col">            
+        <button ion-button (click)="searchAgain()">Search again</button>
+    </div>
+  </div>
+  <div *ngIf="!noResultFound">
   <div class="one-item" (click)="navigateToHotelDetail(hotel)" *ngFor="let hotel of hotelList">
     <ion-card class="myCard">
         <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
@@ -64,4 +70,5 @@
       </ion-card-content>
     </ion-card>
   </div>
+</div>
 </ion-content>

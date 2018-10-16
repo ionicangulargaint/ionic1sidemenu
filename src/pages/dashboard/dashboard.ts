@@ -303,9 +303,9 @@ export class DashboardPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.selectedLocation.lat = resp.coords.latitude;
       this.selectedLocation.lng = resp.coords.longitude;
-      this.commonService.createLoader();
+      //this.commonService.createLoader();
       this.geocoder.geocode({ 'location': { lat: resp.coords.latitude, lng: resp.coords.longitude } }, (results, status) => {
-        this.commonService.loading.dismiss();
+       // this.commonService.loading.dismiss();
         if (status === 'OK') {
           if (results[0]) {
             this.selectedLocation.address = results[0].formatted_address;
@@ -315,6 +315,7 @@ export class DashboardPage {
         }
       });
     }).catch((error) => {
+     // this.commonService.loading.dismiss();
       console.log('Error getting location', error);
     });
   }
