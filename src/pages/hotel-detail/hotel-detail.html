@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{hotelDetails.hotel_name}}</ion-title>
+    <ion-title *ngIf="hotelInfo">{{hotelInfo.hotel_detail.hotel_name}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only></button>
     </ion-buttons>
@@ -8,138 +8,141 @@
 </ion-header>
 
 <ion-content>
-  <div class="one-item">
+  <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
     <ion-card class="myCard">
-      <img src="assets/img/a.jpg" />
-      <div class="distance">13 PHOTOS</div>
+      <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" />
+      <div class="distance">{{hotelInfo.hotel_image.length}} PHOTOS</div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
       <ion-card-header>
         <ion-row>
           <ion-col col-7>
-            <h3 class="card-title-main">{{hotelDetails.hotel_name}}</h3>
+            <h3 class="card-title-main">{{hotelInfo.hotel_detail.hotel_name}}</h3>
           </ion-col>
           <ion-col col-5>
             <div class="main-rating">
-              <ion-icon *appTimes="hotelDetails.hotel_star_category" name="star"></ion-icon>
-              <!-- <ion-icon name="star"></ion-icon>
-              <ion-icon name="star"></ion-icon> -->
+              <ion-icon *appTimes="hotelInfo.hotel_detail.hotel_star_category" name="star"></ion-icon>
             </div>
           </ion-col>
         </ion-row>
 
       </ion-card-header>
       <ion-card-content class="address-card">
-        <ion-icon name="pin"></ion-icon> {{hotelDetails.hotel_address + ', ' + hotelDetails.hotel_city + ', ' + hotelDetails.hotel_country + ', ' + hotelDetails.hotel_pin_code}}
+        <ion-icon name="pin"></ion-icon> {{hotelInfo.hotel_detail.hotel_address + ', ' + hotelInfo.hotel_detail.hotel_city + ', ' +
+        hotelInfo.hotel_detail.hotel_country + ', ' + hotelInfo.hotel_detail.hotel_pin_code}}
       </ion-card-content>
     </ion-card>
   </div>
 
-  <div class="one-item">
-    <ion-card class="myCard" padding>
-      <p class="address-card lineHeight-text">3 rooms types with 12 total room offers available (See all rooms) </p>
-      <h4 class="lineHeight-text">Premier Queen</h4>
-      <img src="assets/img/a.jpg" />
-      <div class="myOverlay roomTypeOverLay">
-        <div class="card-title">$1994</div>
-        <div class="card-subtitle">$1292</div>
-        <div class="discount">50% Off</div>
-        <div class="distance">5 km</div>
-      </div>
-    </ion-card>
-    <ion-card style="margin-top:-10px;">
-      <ion-card-content class="address-card">
-        <ion-grid>
-          <ion-row nowrap class="forecast_container">
-            <ion-col col-3>
-              <img src="assets/img/Bed.png">
-              <br>
-              <span>Bedroom</span>
-            </ion-col>
-            <ion-col col-3>
-              <img src="assets/img/smoke.png">
-              <br>
-              <span>No Smoking</span>
-            </ion-col>
-            <ion-col col-3>
-              <img src="assets/img/wifi.png">
-              <br>
-              <span>Wifi Coverage</span>
-            </ion-col>
-            <ion-col col-3>
-              <img src="assets/img/pool.png">
-              <br>
-              <span>Pool & Spa</span>
-            </ion-col>
-            <ion-col col-3>
-              <img src="assets/img/shower.png">
-              <br>
-              <span>Shower</span>
-            </ion-col>
-
-          </ion-row>
-        </ion-grid>
-        <hr>
-        <ion-grid>
-          <ion-row nowrap class="dateTimeSlot">
-            <ion-col col-4>
-              <p>30 Aug 2018 (Thus)</p>
-              <hr>
-              <p>8:00am to 11:00am</p>
-            </ion-col>
-            <ion-col col-4>
-              <p>30 Aug 2018 (Thus)</p>
-              <hr>
-              <p>8:00am to 11:00am</p>
-            </ion-col>
-            <ion-col col-4>
-              <p>30 Aug 2018 (Thus)</p>
-              <hr>
-              <p>8:00am to 11:00am</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <hr>
-        <ion-grid>
-          <ion-row nowrap class="rateSlot">
-            <ion-col col-4>
-              <p>$10
-                <small>30Aug</small>
-              </p>
-              <p>Per Hour</p>
-            </ion-col>
-            <ion-col col-4>
-              <p>$100
-                <small>30Aug</small>
-              </p>
-              <p>Per Day</p>
-            </ion-col>
-            <ion-col col-4>
-              <p>$30
-                <small>30Aug</small>
-              </p>
-              <p>5:30Hr</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <hr>
-        <ion-grid>
-            <ion-row nowrap>
-              <ion-col col-6>
-                  <ion-item>
-                      <ion-label>Room</ion-label>
-                      <ion-select>
-                        <ion-option value="f">1</ion-option>
-                        <ion-option value="m">2</ion-option>
-                      </ion-select>
-                    </ion-item>
+  <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
+    <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types with 12 total room offers available (See all rooms)</b> </p>
+    <div *ngFor="let room of hotelInfo.room_type_detail">
+      <ion-card class="myCard" padding>
+        <h4 class="lineHeight-text">{{room.hotel_room_type}}</h4>
+        <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" />
+        <div class="myOverlay roomTypeOverLay">
+          <div class="card-title">${{room.price_per_day}}</div>
+          <div class="card-subtitle">${{room.price_per_day /2}}</div>
+          <div class="discount">50% Off</div>
+          <div class="distance">5 km</div>
+        </div>
+      </ion-card>
+      <ion-card style="margin-top:-10px;">
+        <ion-card-content class="address-card">
+          <ion-grid>
+            <ion-row nowrap class="forecast_container">
+              <ion-col col-3>
+                <img src="assets/img/Bed.png">
+                <br>
+                <span>Bedroom</span>
               </ion-col>
-              <ion-col col-6>
-                  <button block ion-button class="sideMenu-login-btn" (click)="navigateToPaymentsPage()">Book now</button>
-              </ion-col>              
+              <ion-col col-3>
+                <img src="assets/img/smoke.png">
+                <br>
+                <span>No Smoking</span>
+              </ion-col>
+              <ion-col col-3>
+                <img src="assets/img/wifi.png">
+                <br>
+                <span>Wifi Coverage</span>
+              </ion-col>
+              <ion-col col-3>
+                <img src="assets/img/pool.png">
+                <br>
+                <span>Pool & Spa</span>
+              </ion-col>
+              <ion-col col-3>
+                <img src="assets/img/shower.png">
+                <br>
+                <span>Shower</span>
+              </ion-col>
+
             </ion-row>
           </ion-grid>
-      </ion-card-content>
-    </ion-card>
+          <hr>
+          <ion-grid>
+            <ion-row nowrap class="dateTimeSlot">
+              <ion-col col-4>
+                <p>30 Aug 2018 (Thus)</p>
+                <hr>
+                <p>8:00am to 11:00am</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>30 Aug 2018 (Thus)</p>
+                <hr>
+                <p>8:00am to 11:00am</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>30 Aug 2018 (Thus)</p>
+                <hr>
+                <p>8:00am to 11:00am</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <hr>
+          <ion-grid>
+            <ion-row nowrap class="rateSlot">
+              <ion-col col-4>
+                <p>${{room.price_per_hour}}
+                  <small>30Aug</small>
+                </p>
+                <p>Per Hour</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>${{room.price_per_day}}
+                  <small>30Aug</small>
+                </p>
+                <p>Per Day</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>$30
+                  <small>30Aug</small>
+                </p>
+                <p>5:30Hr</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <hr>
+          <ion-grid>
+            <ion-row nowrap>
+              <ion-col col-6>
+                <ion-item>
+                  <ion-label>Room</ion-label>
+                  <ion-select>
+                    <ion-option value="f">1</ion-option>
+                    <ion-option value="m">2</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                <button block ion-button class="sideMenu-login-btn" (click)="navigateToPaymentsPage()">Book now</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
+
+  <h1 padding *ngIf="noRecordFound"> NO Record Found</h1>
 </ion-content>

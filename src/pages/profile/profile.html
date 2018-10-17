@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content padding>
 
-    <ion-fab right bottom>
+    <ion-fab right bottom *ngIf="!isLoginWithFb">
         <button ion-fab color="primary" style="border-radius: 50%;">
             <ion-icon name="create"></ion-icon>
         </button>
@@ -20,7 +20,7 @@
     </ion-fab>
 
     <div align="center">
-        <img class="profile-image" src="assets/img/user1.png">
+        <img class="profile-image" src="{{imagepath}}">
         <br><hr>
     </div>
 

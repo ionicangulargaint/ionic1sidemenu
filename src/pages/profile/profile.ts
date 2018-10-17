@@ -15,9 +15,10 @@ export class ProfilePage {
     public toastCtrl: ToastController,
     public api:Api,
     public translateService: TranslateService) {  
-          
   }
   public profileData:any = {};
+  public imagepath:any = "assets/img/user1.png";
+  public isLoginWithFb:boolean = false;
 
   loading: Loading;
   loadingConfig: any;
@@ -32,10 +33,18 @@ this.getUserProfileData();
   }
 
   getUserProfileData(){
-    let userId = localStorage.getItem('user');
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if(userDetails.loginFb){
+      this.imagepath = userDetails.image;
+      this.profileData.fname = userDetails.first_name
+      this.profileData.lname = userDetails.last_name
+      this.profileData.email = userDetails.email
+      this.isLoginWithFb = true;
+      return;
+    }
     this.createLoader();
     this.loading.present().then(() => {
-    let seq = this.api.get('getUserData.php?getUserProfile=ARQP12345', { "userId": userId }).share();
+    let seq = this.api.get('getUserData.php?getUserProfile=ARQP12345', { "userId": userDetails.user_id }).share();
     seq.subscribe((res: any) => {
       this.loading.dismiss();
       if (res.result == "1") {

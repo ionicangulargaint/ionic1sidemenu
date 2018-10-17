@@ -107,7 +107,10 @@ export class DashboardPage {
           this.autocompleteInput = results[0].formatted_address;
           this.selectedLocation.address = results[0].formatted_address;
         }
-      })
+      }).catch((error) => {
+        console.log('Error getting location', error);
+        this.commonService.loading.dismiss();
+      });
     })
   }
 
@@ -137,9 +140,11 @@ export class DashboardPage {
           } else {
             this.commonService.showAlert('Geocoder failed due to: ' + status);
           }
+        }).catch((error) => {
+          console.log('Error getting location', error);
+          this.commonService.loading.dismiss();
+          this.commonService.showAlert('Error getting location ' + error);
         });
-      }).catch((error) => {
-        this.commonService.showAlert('Error getting location ' + error);
       });
     })
   }
@@ -264,8 +269,6 @@ export class DashboardPage {
         this.commonService.loading.dismiss();
         if (res.result == "success") {
           this.slides = res.feature_ad;
-        } else {
-
         }
       }, err => {
         this.commonService.loading.dismiss();
@@ -303,7 +306,6 @@ export class DashboardPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.selectedLocation.lat = resp.coords.latitude;
       this.selectedLocation.lng = resp.coords.longitude;
-      this.commonService.createLoader();
       this.geocoder.geocode({ 'location': { lat: resp.coords.latitude, lng: resp.coords.longitude } }, (results, status) => {
         this.commonService.loading.dismiss();
         if (status === 'OK') {

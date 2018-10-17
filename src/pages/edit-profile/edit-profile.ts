@@ -40,10 +40,10 @@ export class EditProfilePage {
   }
 
   getUserProfileData() {
-    let userId = localStorage.getItem('user');
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.createLoader();
     this.loading.present().then(() => {
-      let seq = this.api.get('getUserData.php?getUserProfile=ARQP12345', { "userId": userId }).share();
+      let seq = this.api.get('getUserData.php?getUserProfile=ARQP12345', { "userId": userDetails.user_id }).share();
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "1") {
@@ -68,10 +68,10 @@ export class EditProfilePage {
   }
 
   updateProfile() {
-    let userId = localStorage.getItem('user');
+    let userDetails = JSON.parse(localStorage.getItem('userDetails'));
     this.createLoader();
     let data = {
-      "user_id": userId,
+      "user_id": userDetails.user_id,
       "mob_no": this.editProfileForm.controls['mobile'].value,
       "email": this.editProfileForm.controls['email'].value,
       "lname": this.editProfileForm.controls['lname'].value,

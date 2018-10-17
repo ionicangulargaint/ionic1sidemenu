@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { LoginPage } from './login';
+import { ImagesModalPage } from './images-modal';
 import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
-    LoginPage,
+    ImagesModalPage,
   ],
   providers:[Facebook],
   imports: [
-    IonicPageModule.forChild(LoginPage),
+    IonicPageModule.forChild(ImagesModalPage),
     TranslateModule.forChild()
   ],
   exports: [
-    LoginPage
+    ImagesModalPage
   ]
 })
 export class LoginPageModule { }

@@ -34,7 +34,7 @@ export class MyApp {
 
     events.subscribe('user:loggedin', (user, time) => {
       this.userLogin = true;
-      localStorage.setItem('user', user.user_id);
+      localStorage.setItem('userDetails', JSON.stringify(user));
       // user and time are the same arguments passed in `events.publish(user, time)`
       //console.log('Welcome', user, 'at', time);
     });
