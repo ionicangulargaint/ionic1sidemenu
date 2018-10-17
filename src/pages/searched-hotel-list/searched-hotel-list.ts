@@ -13,6 +13,7 @@ export class SearchedHotelListPage {
   searchParam: any = {};
   bookingType:boolean = false;
   selectedAddress:any;
+  noResultFound:boolean = false;
 
   constructor(
     public api: Api, 
@@ -41,9 +42,12 @@ export class SearchedHotelListPage {
     this.loading.present().then(() => {
       this.api.get('searchResult.php?searchResult=SearchResult12345', this.searchParam).subscribe((resp: any) => {
         this.loading.dismiss();
-        if(resp.result == 'success'){
+        if(resp.searchResult != 0){
           this.bookingType = resp.booking_type;
           this.hotelList = resp.searchResult;
+          this.noResultFound =  false;
+        } else {
+          this.noResultFound = true;
         }        
       }, (err) => {
         this.loading.dismiss();
@@ -69,6 +73,9 @@ export class SearchedHotelListPage {
 
   ionViewDidLoad() {
     this.getHotelList();
+  }
+  searchAgain(){
+    this.navCtrl.pop();
   }
 
 }
