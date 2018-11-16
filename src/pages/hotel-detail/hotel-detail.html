@@ -8,10 +8,11 @@
 </ion-header>
 
 <ion-content>
+    <!-- <button (click)="openModal()" block ion-button class="sideMenu-login-btn">slider</button> -->
   <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
-    <ion-card class="myCard">
+    <ion-card class="myCard" (click)="showImagesModal()">
       <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" />
-      <div class="distance">{{hotelInfo.hotel_image.length}} PHOTOS</div>
+      <div class="distance">{{hotelImagesList.length}} PHOTOS</div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
       <ion-card-header>

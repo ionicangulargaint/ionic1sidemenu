@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, ToastController, Events, LoadingController, Loading } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -7,9 +7,14 @@ import { IonicPage, NavController, ToastController, Events, LoadingController, L
   templateUrl: 'images-modal.html'
 })
 export class ImagesModalPage {
-  //@Output() updateLoginStatus: EventEmitter<any> = new EventEmitter();
-  constructor(
+  
+  imagesList:any = [];
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams) {
+    this.imagesList = this.navParams.get('message');
+   }
 
-  ) {}
+  public closeModal() {
+    this.viewCtrl.dismiss();
+  }
 
 }

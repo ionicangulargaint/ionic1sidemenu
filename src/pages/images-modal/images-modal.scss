@@ -1,0 +1,23 @@
+page-images-modal {
+ion-header {
+    .toolbar {
+      position: absolute;
+  
+      .toolbar-background {
+        background: transparent;
+      }
+      .toolbar-title {
+        color: white;
+      }
+      .bar-button-default-md{
+        color: white;
+      }
+    }
+  }
+  .content-md{
+    background-color: transparent;
+  }
+}
+.modal-backdrop-bg {
+    background-color: rgba(0, 0, 0, 0.88);
+}
