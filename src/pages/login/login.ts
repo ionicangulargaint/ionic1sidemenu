@@ -95,7 +95,7 @@ export class LoginPage {
       password: this.loginFormByMobile.controls['password'].value
     }
     this.user.login(data, 'MOBILE').subscribe((resp:any) => {
-      this.loading.dismiss();
+     // this.loading.dismiss();
       if (resp.login == 'failed') {
         this.loginError.show = true;
         this.loginError.msg = 'Wrong mobile number or password.';

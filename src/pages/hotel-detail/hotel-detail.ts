@@ -8,7 +8,7 @@ import { Api } from '../../providers';
   templateUrl: 'hotel-detail.html'
 })
 export class HotelDetailPage {
-  imgagePath = "https://epimoniapp.com/anytimecheckin/image/";
+  imgagePath = "https://anytimecheckin.com/new/image/";
   selectedHotel: any = '';
   hotelInfo:any;
   noRecordFound:boolean = false;

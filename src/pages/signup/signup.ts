@@ -114,8 +114,23 @@ export class SignupPage {
 
   doSignupByMobile() {
     // Attempt to login in through our User service
-    this.user.signup('', 'MOBILE').subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+    this.createLoader();
+    this.loading.present().then(() => {
+    let data = {
+      userName: this.signUpFormByMobile.controls['firstName'].value,
+      lastName: this.signUpFormByMobile.controls['lastName'].value,
+      mobno: this.signUpFormByMobile.controls['mobile'].value,
+      password: this.signUpFormByMobile.controls['password'].value,
+    }
+    this.user.signup(data, 'MOBILE').subscribe((resp:any) => {
+      this.loading.dismiss();
+      if (resp.success == '1') {
+        let paramData: any = data;
+        paramData.requestFrom = 'MOBILESIGNUP';
+        this.navCtrl.push('OtpVerificationPage', { data: paramData });
+      } else {
+        this.showError(true, 'An server error occured.');
+      }
     }, (err) => {
       this.navCtrl.push(MainPage);
       // Unable to sign up
@@ -126,6 +141,7 @@ export class SignupPage {
       });
       toast.present();
     });
+  });
   }
 
   changeCountryCode() {

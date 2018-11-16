@@ -38,7 +38,7 @@ export class User {
     if (loginBy == 'EMAIL') {
       urlOnBY = 'login.php?loginByEmail=AREMAIL12345';
     } else {
-      urlOnBY = 'login.php?loginByMobile=AREMAIL12345';
+      urlOnBY = 'login.php?loginByMobile=ARQP12345';
     }
     let seq = this.api.get(urlOnBY, accountInfo).share();
 
@@ -68,7 +68,7 @@ export class User {
     if (signUpBy == 'EMAIL') {
       urlOnBY = 'sign_up.php?SignupByEmail=ARQP12345';
     } else {
-      urlOnBY = 'sign_up.php?SignupByMobile=ARQP12345';
+      urlOnBY = 'sign_up.php?SignUpByMobile=AREMAIL12345';
     }
 
     let seq = this.api.get(urlOnBY, accountInfo).share();

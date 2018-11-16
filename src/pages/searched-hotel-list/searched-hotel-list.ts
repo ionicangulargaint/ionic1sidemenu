@@ -8,7 +8,7 @@ import { Api,CommonService } from '../../providers';
   templateUrl: 'searched-hotel-list.html'
 })
 export class SearchedHotelListPage {
-  imgagePath = "https://epimoniapp.com/anytimecheckin/image/";
+  imgagePath = "https://anytimecheckin.com/new/image/";
   hotelList: any = [];
   searchParam: any = {};
   bookingType:boolean = false;
@@ -40,7 +40,7 @@ export class SearchedHotelListPage {
   getHotelList() {
     this.createLoader();
     this.loading.present().then(() => {
-      this.api.get('searchResult.php?searchResult=SearchResult12345', this.searchParam).subscribe((resp: any) => {
+      this.api.get('search.php', this.searchParam).subscribe((resp: any) => {
         this.loading.dismiss();
         if(resp.searchResult != 0){
           this.bookingType = resp.booking_type;

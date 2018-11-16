@@ -92,5 +92,5 @@
         <variable name="APP_NAME" value="Anytime Check In" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.37.0" />
     </plugin>
-    <engine name="android" spec="7.1.1" />
+    <engine name="android" spec="~7.1.1" />
 </widget>

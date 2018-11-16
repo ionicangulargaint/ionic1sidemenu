@@ -11,7 +11,7 @@ declare var google;
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  imgagePath = "https://epimoniapp.com/anytimecheckin/image/";
+  imgagePath = "https://anytimecheckin.com/new/image/";
   showSkip = true;
   selectedTypeDay: boolean = true;
   selectedTypeHour: boolean = false;
@@ -278,7 +278,7 @@ export class DashboardPage {
   }
 
   getTopHotels() {
-    let seq = this.api.get('topHotels.php?tophotels=topHotels12345').share();
+    let seq = this.api.get('topHotelsforHome.php').share();
     seq.subscribe((res: any) => {
       if (res.result == "success") {
         if (res.topHotelsDetails.length > 4) {

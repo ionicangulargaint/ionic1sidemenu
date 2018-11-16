@@ -111,7 +111,7 @@
     </div>
     <ion-slides padding pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
         <ion-slide *ngFor="let slide of slides">
-            <img [src]="slide.banner" class="slide-image" />
+            <img src="{{imgagePath}}{{slide.banner}}" class="slide-image" />
         </ion-slide>
     </ion-slides>
     <ion-row style="margin-top: -35%;">

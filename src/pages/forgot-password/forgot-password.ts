@@ -51,7 +51,7 @@ export class ForgotPasswordPage {
     let mobile = this.forgotPassFormByMobile.controls['mobile'].value;
     this.createLoader();
     this.loading.present().then(() => {
-      this.api.get('forgetpassword.php?mobile=' + mobile).subscribe((resp: any) => {
+      this.api.get('forgetpassword.php?ForgetPasswordByMobile=ARMOBILE12345&mobile=' + mobile).subscribe((resp: any) => {
         this.loading.dismiss();
         this.commonService.showAlert(resp.result);
         if(resp.status == '1'){
@@ -73,7 +73,7 @@ export class ForgotPasswordPage {
     let email = this.forgotPassFormByEmail.controls['email'].value;
     this.createLoader();
     this.loading.present().then(() => {
-      this.api.get('forgetpassword.php?email=' + email).subscribe((resp: any) => {
+      this.api.get('forgetpassword.php?ForgetPasswordByEmail=ARQP12345&email=' + email).subscribe((resp: any) => {
         this.loading.dismiss();
         this.commonService.showAlert(resp.result);
         if(resp.status == '1'){

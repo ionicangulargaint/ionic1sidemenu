@@ -41,10 +41,12 @@ export class ChangePasswordPage {
       this.commonService.showAlert('New password and confirm password should be same.');
       return;
     }
+    var userDetails = JSON.parse(localStorage.getItem('userDetails'));
     let data = {
-      user_id: localStorage.getItem('user.user_id'),
-      password: this.changePasswordForm.controls['newpassword'].value,
-      oldpassword: this.changePasswordForm.controls['oldpassword'].value
+      user_id: userDetails.user_id,
+      current_password: this.changePasswordForm.controls['oldpassword'].value,
+      new_password: this.changePasswordForm.controls['newpassword'].value,
+      confirme_password: this.changePasswordForm.controls['confirmpassword'].value
     }
     this.createLoader();
     console.log(data)
