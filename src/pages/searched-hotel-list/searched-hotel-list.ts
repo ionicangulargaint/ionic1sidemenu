@@ -39,12 +39,11 @@ export class SearchedHotelListPage {
 
   getHotelList() {
     this.createLoader();
-    console.log(JSON.stringify(this.searchParam));
+    console.log(this.bookingType);
     this.loading.present().then(() => {
       this.api.get('searchResult.php?searchResult=SearchResult12345', this.searchParam).subscribe((resp: any) => {
         this.loading.dismiss();
-        if(resp.searchResult != 0){
-          this.bookingType = resp.booking_type;
+        if(resp.result == 'success'){
           this.hotelList = resp.searchResult;
           this.noResultFound =  false;
         } else {

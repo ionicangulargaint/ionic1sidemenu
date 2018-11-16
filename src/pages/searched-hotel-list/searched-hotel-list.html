@@ -19,7 +19,7 @@
         <ion-col col-4>
           <p class="head">CHECK OUT</p>
           <p>{{searchParam.check_out_date}}</p>
-          <p>1:00PM</p>
+          <p>{{searchParam.check_out_time + 'PM'}}</p>
         </ion-col>
         <ion-col col-4>
           <p class="head">{{searchParam.no_of_rooms}} Room</p>
@@ -42,11 +42,11 @@
   <div *ngIf="!noResultFound">
   <div class="one-item" (click)="navigateToHotelDetail(hotel)" *ngFor="let hotel of hotelList">
     <ion-card class="myCard">
-        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
+        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.image}}" />
       <div class="myOverlay">
-        <div class="card-title">$1994</div>
-        <div class="card-subtitle">${{hotel.price_per_day}}</div>
-        <div class="discount">50% Off</div>
+        <!-- <div class="card-title">$1994</div> -->
+        <div class="card-title1">${{hotel.price}}</div>
+        <!-- <div class="discount">50% Off</div> -->
         <div class="distance">5 km</div>
       </div>
     </ion-card>
@@ -60,13 +60,11 @@
             <div class="main-rating">
               <ion-icon name="star" *appTimes="hotel.hotel_star_category"></ion-icon>
             </div>
-
           </ion-col>
         </ion-row>
-
       </ion-card-header>
       <ion-card-content class="address-card">
-        <ion-icon name="pin"></ion-icon> {{hotel.hotel_address + ', ' + hotel.hotel_city + ', ' + hotel.hotel_country}}
+        <ion-icon name="pin"></ion-icon> {{hotel.hotel_address + ', ' + hotel.hotel_city}}
       </ion-card-content>
     </ion-card>
   </div>
