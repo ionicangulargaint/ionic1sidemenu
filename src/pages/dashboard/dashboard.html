@@ -134,12 +134,14 @@
             <ion-card style="margin-top:-10px;">
                 <ion-card-header>
                     <ion-row>
-                        <ion-col col-7>
+                        <ion-col class="col-7">
                             <h3 class="card-title-main">{{slide.hotel_name}}</h3>
                         </ion-col>
-                        <ion-col col-5>
+                        <ion-col class="col-5">
                             <div class="main-rating">
-                                <ion-icon name="star" *appTimes="slide.hotel_star_category"></ion-icon>
+                                <ion-icon class="stars-outer" name="ios-star-outline">
+                                    <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * slide.rating + '%'}"></ion-icon>
+                                </ion-icon>
                             </div>
                         </ion-col>
                     </ion-row>

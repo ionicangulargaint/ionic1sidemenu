@@ -252,10 +252,11 @@ export class DashboardPage {
       no_of_adults: this.guestDetails.adult,
       no_of_rooms: this.guestDetails.rooms,
       no_of_childs: this.guestDetails.children,
-      lat:28.4089123, // this.selectedLocation.lat,
-      lng: 77.31778940000004 //this.selectedLocation.lng
+      //lat:28.4089123, // this.selectedLocation.lat,
+      //lng: 77.31778940000004 //this.selectedLocation.lng
+      lat:this.selectedLocation.lat,
+      lng:this.selectedLocation.lng
     }
-    console.log(data);
     this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress':this.selectedLocation.address });
   }
 
@@ -289,6 +290,9 @@ export class DashboardPage {
           this.allTopHotelsList = res.topHotels;
         } else {
           this.topHotelsLIst = res.topHotels;
+          this.topHotelsLIst.forEach(element => {
+            element.rating = 3.5;
+          });
         }
       }
     }, err => {

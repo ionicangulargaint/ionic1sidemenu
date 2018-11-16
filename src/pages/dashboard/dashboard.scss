@@ -1,26 +1,12 @@
 page-dashboard {
-  // .adsSlide .swiper-container .swiper-pagination {
-  //   left: 0;
-  //   bottom: 30%;
-  // }
-  // .adsSlide {
-  //   margin-top: -40%;
-  // }
-  // .topHotelSlide{
-  //   margin-top: -40%;
-  // }
-  // .topHotelSlide .swiper-container .swiper-pagination {
-  //   left: 0;
-  //   bottom: 30%;
-  // }
-
   .main-rating h5{
-    color: #6e6e6e;
-    font-weight: 500;
+    font-weight: bold;
   }
-  .main-rating ion-icon{
-    color: #d8aa04;    
+
+  .main-rating {
+    text-align: right;
   }
+
   .item-md h2 {
       margin: 2px 0;
       font-size: 2rem;
@@ -196,7 +182,7 @@ page-dashboard {
     color: #545454;
   }
   .main-rating ion-icon{
-    color: #d8aa04;
+    //color: #d8aa04;
     font-size: 13px;
   }
   .address-card {
@@ -206,5 +192,33 @@ page-dashboard {
   }
   .text-center {
     text-align: center;
+  }
+
+  .stars-outer {
+    display: inline-block;
+    position: relative;
+  }
+   
+  .stars-outer.ion-ios-star-outline::before {
+    content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
+  }
+
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    font-size: 14px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+
+  .stars-inner.ion-ios-star::before {
+    content: "\f384 \f384 \f384 \f384 \f384";
+    color: #f8ce0b;
+  }
+
+  .stars-inner {
+    width: 0;
   }
 }

@@ -21,11 +21,10 @@
           </ion-col>
           <ion-col col-5>
             <div class="main-rating">
-              <ion-icon *appTimes="hotelInfo.hotel_detail.hotel_star_category" name="star"></ion-icon>
+              <ion-icon *appTimes="hotelInfo.hotel_detail.rating" name="star"></ion-icon>
             </div>
           </ion-col>
         </ion-row>
-
       </ion-card-header>
       <ion-card-content class="address-card">
         <ion-icon name="pin"></ion-icon> {{hotelInfo.hotel_detail.hotel_address + ', ' + hotelInfo.hotel_detail.hotel_city + ', ' +
@@ -33,9 +32,10 @@
       </ion-card-content>
     </ion-card>
   </div>
-
+ 
   <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
-    <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types with 12 total room offers available (See all rooms)</b> </p>
+    <!-- <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types with 12 total room offers available (See all rooms)</b> </p> -->
+    <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types (See all rooms)</b> </p>
     <div *ngFor="let room of hotelInfo.room_type_detail">
       <ion-card class="myCard" padding>
         <h4 class="lineHeight-text">{{room.hotel_room_type}}</h4>
