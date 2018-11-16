@@ -223,11 +223,13 @@ export class DashboardPage {
   getFormatedTime(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
+    //var ampm = hours >= 12 ? 'pm' : 'am';
+    //hours = hours % 12;
+    //hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? '0' + hours : hours;
     minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
+    //var strTime = hours + ':' + minutes + ' ' + ampm;
+    var strTime = hours + ':' + minutes;
     return strTime;
   }
 
@@ -244,15 +246,16 @@ export class DashboardPage {
     let data = {
       optradio: this.selectedTypeDay ? 1 : 2,
       check_in_date: this.selectedDates.checkInDate,
-      check_in_time: this.selectedTypeDay ? '00:00:00' : this.selectedTime.checkInTime,
+      check_in_time: this.selectedTypeDay ? '' : this.selectedTime.checkInTime,
       check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.selectedDates.checkInDate,
-      check_out_time: this.selectedTypeDay ? '00:00:00' : this.selectedTime.checkoutTime,
+      check_out_time: this.selectedTypeDay ? '' : this.selectedTime.checkoutTime,
       no_of_adults: this.guestDetails.adult,
       no_of_rooms: this.guestDetails.rooms,
       no_of_childs: this.guestDetails.children,
       lat: this.selectedLocation.lat,
       lng: this.selectedLocation.lng
     }
+    console.log(data);
     this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress':this.selectedLocation.address });
   }
 
@@ -280,12 +283,12 @@ export class DashboardPage {
   getTopHotels() {
     let seq = this.api.get('topHotelsforHome.php').share();
     seq.subscribe((res: any) => {
-      if (res.result == "success") {
-        if (res.topHotelsDetails.length > 4) {
-          this.topHotelsLIst = res.topHotelsDetails.slice(0, 4);
-          this.allTopHotelsList = res.topHotelsDetails;
+      if (res.responseCode == "200") {
+        if (res.topHotels.length > 4) {
+          this.topHotelsLIst = res.topHotels.slice(0, 4);
+          this.allTopHotelsList = res.topHotels;
         } else {
-          this.topHotelsLIst = res.topHotelsDetails;
+          this.topHotelsLIst = res.topHotels;
         }
       }
     }, err => {

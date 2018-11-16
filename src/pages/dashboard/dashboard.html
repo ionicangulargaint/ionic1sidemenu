@@ -125,11 +125,9 @@
     <div *ngIf="topHotelsLIst.length!=0">
         <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
             <ion-card class="myCard">
-                <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.main_image}}" />
+                <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}" />
                 <div class="myOverlay">
-                    <div class="card-title">${{slide.price_per_day}}</div>
-                    <div class="card-subtitle">${{slide.price_per_day/2}}</div>
-                    <div class="discount">50% Off</div>
+                    <div class="card-title1">${{slide.price}}</div>
                     <div class="distance">5 km</div>
                 </div>
             </ion-card>
@@ -147,8 +145,7 @@
                     </ion-row>
                 </ion-card-header>
                 <ion-card-content class="address-card">
-                    <ion-icon name="pin"></ion-icon> {{slide.hotel_address + ', ' + slide.hotel_city + ', ' +
-                    slide.hotel_country}}
+                    <ion-icon name="pin"></ion-icon> {{slide.hotel_address + ', ' + slide.hotel_city}}
                 </ion-card-content>
             </ion-card>
         </div>

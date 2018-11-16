@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Api {
   //url: string = 'https://epimoniapp.com/anytimecheckin/api'; 
-  url: string = 'https://anytimecheckin.com/new/api';
+  url: string = 'http://anytimecheckin.com/new/api';
 
   constructor(public http: HttpClient) {
   }
