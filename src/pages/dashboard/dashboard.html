@@ -73,36 +73,41 @@
             <div class="checkInlable">Check In Date</div>
             <ion-grid class="center" style="padding: 5px 0;">
                 <ion-row>
-                    <ion-col col-5 class="check-wrap" (click)="openDatePicker('CHECKIN')">
-                        <!-- <input name="somedate" type="date" style="background: transparent; border: unset; color: transparent; position: absolute;
-                        width: 99%;
-                        left: 1%;
-                        top: 1%;
-                        height: 98%;"> -->
+                    <ion-col col-5 class="check-wrap">
                         <div>CHECK IN</div>
-                        <div>{{selectedDates.checkInDate}}</div>
+                        <!-- <div>{{selectedDates.checkInDate}}</div> -->
+                        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkInMinDate}}" max={{selectedDates.checkInMaxDate}}
+                        [(ngModel)]="selectedDates.checkInDate"></ion-datetime>
                     </ion-col>
                     <ion-col col-2></ion-col>
-                    <ion-col col-5 class="check-wrap" (click)="openDatePicker('CHECKOUT')">
+                    <ion-col col-5 class="check-wrap">
                         <div>CHECH OUT</div>
-                        <div>{{selectedDates.checkoutDate}}</div>
+                        <!-- <div>{{selectedDates.checkoutDate}}</div> -->
+                        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkoutMinDate}}" max={{selectedDates.checkoutMaxDate}}
+                        [(ngModel)]="selectedDates.checkoutDate"></ion-datetime>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </div>
         <div class="checkin-hour" *ngIf="selectedTypeHour">
             <div class="checkInlable">Check In Hour</div>
-            <div class="check-wrap center" style="margin-top: 5px;" (click)="openDatePicker('CHECKIN')">{{selectedDates.checkInDate}}</div>
+            <div class="check-wrap center" style="margin-top: 5px;">
+                <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedTime.checkInMinDate}}" max={{selectedTime.checkInMaxDate}}
+                        [(ngModel)]="selectedTime.checkInDate"></ion-datetime>
+                <!-- {{selectedDates.checkInDate}} -->
+            </div>
             <ion-grid class="center" style="padding: 5px 0;">
                 <ion-row>
-                    <ion-col col-5 class="check-wrap" (click)="openTimePicker('CHECKIN')">
+                    <ion-col col-5 class="check-wrap">
                         <div>CHECK IN</div>
-                        <div>{{selectedTime.checkInTime}}</div>
+                        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="selectedTime.checkInTime"></ion-datetime>
+                        <!-- <div>{{selectedTime.checkInTime}}</div> -->
                     </ion-col>
                     <ion-col col-2></ion-col>
-                    <ion-col col-5 class="check-wrap" (click)="openTimePicker('CHECKOUT')">
+                    <ion-col col-5 class="check-wrap">
                         <div>CHECH OUT</div>
-                        <div>{{selectedTime.checkoutTime}}</div>
+                        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="selectedTime.checkoutTime"></ion-datetime>
+                        <!-- <div>{{selectedTime.checkoutTime}}</div> -->
                     </ion-col>
                 </ion-row>
             </ion-grid>

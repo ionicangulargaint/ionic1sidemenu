@@ -31,13 +31,22 @@ export class DashboardPage {
     adult: 1,
     children: 0
   };
+  checkoutDate:any = new Date().setDate(new Date().getDate() + 1);
+  nextThreeMonth:any = new Date().setMonth((new Date()).getMonth() + 3);
   selectedDates: any = {
     checkInDate: this.getFormatedDate(new Date()),
-    checkoutDate: this.getFormatedDate(new Date().setDate(new Date().getDate() + 1))
+    checkInMinDate:this.getFormatedDate(new Date()),
+    checkInMaxDate:this.getFormatedDate(this.nextThreeMonth),
+    checkoutDate: this.getFormatedDate(this.checkoutDate),
+    checkoutMinDate:this.getFormatedDate(this.checkoutDate),
+    checkoutMaxDate:this.getFormatedDate((new Date(this.nextThreeMonth)).setDate((new Date(this.nextThreeMonth)).getDate() + 1))
   }
   selectedTime: any = {
-    checkInTime: this.getFormatedTime(new Date()),
-    checkoutTime: this.getFormatedTime(new Date())
+    checkInDate: this.getFormatedDate(new Date()),
+    checkInTime: this.getFormatedTime(new Date()),  
+    checkoutTime: this.getFormatedTime(new Date(new Date().setHours(new Date().getHours() + 2))),  
+    checkInMinDate:this.getFormatedDate(new Date()),
+    checkInMaxDate:this.getFormatedDate(new Date().setDate(new Date().getDate() + 3)),
   }
   selectedLocation: any = {
     lat: '',
@@ -76,6 +85,8 @@ export class DashboardPage {
       this.guestDetails = guest;
       console.log(this.guestDetails);
     });
+
+    this.openDatePicker1('CHECKIN','min')
   }
 
   updateSearchResults() {
@@ -186,6 +197,21 @@ export class DashboardPage {
     );
   }
 
+  openDatePicker1(pickerIs,type) {
+    var dateString = (new Date()).toISOString();
+    dateString = dateString.split(' ').join('T');
+    let date: any = new Date(dateString);
+    date = this.getFormatedDate(date);
+    console.log(date);
+    var minDate;
+    var maxDate = this.selectedTypeDay ? (new Date()).setMonth((new Date()).getMonth() + 3) : (new Date()).setDate((new Date()).getDate() + 3);
+    if(type == 'min'){
+      return minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 1);
+    }else{
+      return maxDate = (pickerIs == 'CHECKIN') ? (maxDate) : (new Date(maxDate)).setDate((new Date(maxDate)).getDate() + 1);
+    }
+  }
+
   openTimePicker(pickerIs) {
     var dateString = (new Date()).toISOString();
     dateString = dateString.split(' ').join('T');
@@ -245,18 +271,19 @@ export class DashboardPage {
   navigateToSearchedList() {
     let data = {
       optradio: this.selectedTypeDay ? 1 : 2,
-      check_in_date: this.selectedDates.checkInDate,
+      check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : this.selectedTime.checkInDate,
       check_in_time: this.selectedTypeDay ? '00:00' : this.selectedTime.checkInTime,
-      check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.selectedDates.checkInDate,
+      check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.selectedTime.checkInDate,
       check_out_time: this.selectedTypeDay ? '00:00' : this.selectedTime.checkoutTime,
       no_of_adults: this.guestDetails.adult,
       no_of_rooms: this.guestDetails.rooms,
       no_of_childs: this.guestDetails.children,
-      //lat:28.4089123, // this.selectedLocation.lat,
-      //lng: 77.31778940000004 //this.selectedLocation.lng
       lat:this.selectedLocation.lat,
-      lng:this.selectedLocation.lng
+      lng:this.selectedLocation.lng,
+      selectedTypeDay:this.selectedTypeDay,
+      selectedAddress:this.selectedLocation.address
     }
+    localStorage.setItem('dashboardSearch',JSON.stringify(data));
     this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress':this.selectedLocation.address });
   }
 
