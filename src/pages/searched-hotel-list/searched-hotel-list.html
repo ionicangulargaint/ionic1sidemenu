@@ -10,16 +10,16 @@
   </ion-navbar>
   <ion-toolbar class="custom-toolbar">
     <ion-grid>
-      <ion-row *ngIf="bookingType">
+      <ion-row>
         <ion-col col-4>
           <p class="head">CHECK IN</p>
           <p>{{searchParam.check_in_date}}</p>
-          <p>{{searchParam.check_in_time + 'PM'}}</p>
+          <p>{{searchParam.check_in_time }}</p>
         </ion-col>
         <ion-col col-4>
           <p class="head">CHECK OUT</p>
           <p>{{searchParam.check_out_date}}</p>
-          <p>{{searchParam.check_out_time + 'PM'}}</p>
+          <p>{{searchParam.check_out_time }}</p>
         </ion-col>
         <ion-col col-4>
           <p class="head">{{searchParam.no_of_rooms}} Room</p>
@@ -56,9 +56,11 @@
           <ion-col col-7>
             <h3 class="card-title-main">{{hotel.hotel_name}}</h3>
           </ion-col>
-          <ion-col col-5>
+          <ion-col col-5 style="text-align: right;">
             <div class="main-rating">
-              <ion-icon name="star" *appTimes="hotel.rating"></ion-icon>
+              <ion-icon class="stars-outer" name="ios-star-outline">
+                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotel.rating + '%'}"></ion-icon>
+            </ion-icon>
             </div>
           </ion-col>
         </ion-row>

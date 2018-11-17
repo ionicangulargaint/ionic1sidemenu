@@ -182,7 +182,7 @@ page-dashboard {
     color: #545454;
   }
   .main-rating ion-icon{
-    //color: #d8aa04;
+    color: #cfc8a6;
     font-size: 13px;
   }
   .address-card {
@@ -230,5 +230,8 @@ page-dashboard {
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+  .item-cover {
+    height: auto;
   }
 }

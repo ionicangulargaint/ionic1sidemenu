@@ -85,7 +85,7 @@ img{
     color: #545454;
   }
   .main-rating ion-icon{
-    color: #d8aa04;
+    color: #cfc8a6;
     font-size: 13px;
   }
   .address-card {
@@ -157,6 +157,24 @@ img{
 .rateSlot ion-col p small{
   font-weight: 100;
 }
+.stars-outer {
+  display: inline-block;
+  position: relative;
+}
+ 
+.stars-outer.ion-ios-star-outline::before {
+  content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  font-size: 14px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
 
 .img-loaded + ion-spinner {
   display:none;
@@ -177,5 +195,13 @@ ion-spinner * {
   fill: white !important;
 }
 
+.stars-inner.ion-ios-star::before {
+  content: "\f384 \f384 \f384 \f384 \f384";
+  color: #f8ce0b;
+}
+
+.stars-inner {
+  width: 0;
+}
 
 }
