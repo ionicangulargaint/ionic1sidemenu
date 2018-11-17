@@ -177,7 +177,6 @@ export class DashboardPage {
     dateString = dateString.split(' ').join('T');
     let date: any = new Date(dateString);
     date = date.getTime();
-    //let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
     var maxDate = this.selectedTypeDay ? (new Date()).setMonth((new Date()).getMonth() + 3) : (new Date()).setDate((new Date()).getDate() + 3);
     this.datePicker.show({
       date: new Date(),
@@ -197,27 +196,11 @@ export class DashboardPage {
     );
   }
 
-  openDatePicker1(pickerIs,type) {
-    var dateString = (new Date()).toISOString();
-    dateString = dateString.split(' ').join('T');
-    let date: any = new Date(dateString);
-    date = this.getFormatedDate(date);
-    console.log(date);
-    var minDate;
-    var maxDate = this.selectedTypeDay ? (new Date()).setMonth((new Date()).getMonth() + 3) : (new Date()).setDate((new Date()).getDate() + 3);
-    if(type == 'min'){
-      return minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 1);
-    }else{
-      return maxDate = (pickerIs == 'CHECKIN') ? (maxDate) : (new Date(maxDate)).setDate((new Date(maxDate)).getDate() + 1);
-    }
-  }
-
   openTimePicker(pickerIs) {
     var dateString = (new Date()).toISOString();
     dateString = dateString.split(' ').join('T');
     let date: any = new Date(dateString);
     date = date.getTime();
-    //let minDate = (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 3);
     this.datePicker.show({
       date: new Date(),
       mode: 'time',

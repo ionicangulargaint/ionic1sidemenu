@@ -20,9 +20,11 @@
           <ion-col col-7>
             <h3 class="card-title-main">{{hotelInfo.hotel_detail.hotel_name}}</h3>
           </ion-col>
-          <ion-col col-5>
+          <ion-col col-5 style="text-align: right;">
             <div class="main-rating">
-              <ion-icon *appTimes="hotelInfo.hotel_detail.rating" name="star"></ion-icon>
+              <ion-icon class="stars-outer" name="ios-star-outline">
+                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotelInfo.rating + '%'}"></ion-icon>
+            </ion-icon>
             </div>
           </ion-col>
         </ion-row>
