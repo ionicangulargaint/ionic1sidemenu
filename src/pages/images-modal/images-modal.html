@@ -1,28 +1,19 @@
 <ion-header>
     <ion-navbar no-border-bottom>
-        <ion-title>ModalPage</ion-title>
+        <ion-title>Hotel images</ion-title>
         <ion-buttons end>
-            <button ion-button (click)="closeModal()">Close</button>
+            <button ion-button (click)="closeModal()"> <ion-icon name="md-close"></ion-icon></button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-slides pager>
-
-        <ion-slide *ngFor="let images of imagesList">
+        <ion-slide *ngFor="let image of imagesList">
             <div class="swiper-zoom-container">
-                <img [src]="images.src">
+                <img src="{{image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
             </div>
         </ion-slide>
-
-        <!-- <ion-slide style="background-color: blue">
-            <h2>Slide 2</h2>
-        </ion-slide>
-
-        <ion-slide style="background-color: red">
-            <h2>Slide 3</h2>
-        </ion-slide> -->
-
     </ion-slides>
 </ion-content>

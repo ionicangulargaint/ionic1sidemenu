@@ -221,4 +221,14 @@ page-dashboard {
   .stars-inner {
     width: 0;
   }
+
+  .img-loaded + ion-spinner {
+    display:none;
+  }
+  
+  .spinner-center-custom{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }

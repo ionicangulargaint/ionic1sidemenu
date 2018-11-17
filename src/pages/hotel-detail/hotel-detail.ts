@@ -36,32 +36,6 @@ export class HotelDetailPage {
     this.getHotelDetail();
   } 
 
-  public showImagesModal(){
-    let options = {
-      showBackdrop: false,
-      enableBackdropDismiss: false,
-      cssClass: 'modal-backdrop-bg'
-    }
-    var data = { message : [
-      {
-        src: 'https://anytimecheckin.com/new/image/front/110918062819wwee_thumb.png'
-      },
-      {
-        src: 'https://anytimecheckin.com/new/image/front/110918052545sa_thumb.png'
-      },
-      {
-        src: 'https://anytimecheckin.com/new/image/front/110918054734we_thumb.jpg'
-      },
-      {
-        src: 'https://anytimecheckin.com/new/image/110918064147hmi.png'
-      }
-    ] };
-    var modalPage = this.modalCtrl.create('ImagesModalPage', data, options);
-    modalPage.present();
-  }  
-
-
-
   navigateToPaymentsPage() {
     this.navCtrl.push('PaymentsPage'); 
   }
@@ -75,7 +49,9 @@ export class HotelDetailPage {
         if(resp.result == 'success'){
           this.hotelInfo = resp;
           if(this.hotelInfo.hotel_image){
-            this.hotelImagesList = this.hotelInfo.hotel_image.split(',');
+            this.hotelInfo.hotel_image.split(/\s*,\s*/).forEach((myString)=> {
+              this.hotelImagesList.push(this.imgagePath + myString);
+          });
           }         
         } else {
           this.noRecordFound = true;
@@ -85,5 +61,18 @@ export class HotelDetailPage {
       });
     })
   }
+
+  public showImagesModal(){
+    if(this.hotelImagesList.length < 1){
+      return false;
+    }
+    let options = {
+      showBackdrop: false,     
+      cssClass: 'modal-backdrop-bg'
+    }
+    var data = { message : this.hotelImagesList};
+    var modalPage = this.modalCtrl.create('ImagesModalPage', data, options);
+    modalPage.present();
+  }  
 
 }

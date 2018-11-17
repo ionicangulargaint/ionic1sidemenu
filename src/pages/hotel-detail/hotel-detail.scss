@@ -30,7 +30,7 @@ img{
   
   .myOverlay{
       width: 100%;
-      height: 60px;
+      height: 35px;
       position: absolute;
       z-index: 99;
       bottom: 0px;      
@@ -51,9 +51,9 @@ img{
     font-size: 11px;
   }
   .card-subtitle{
-    font-size: 25px;
-    margin: 0px 8px;
-    font-weight: 200;
+    font-size: 21px;
+    margin: 4px 8px;
+    font-weight: 800;
   }
   .card-title{
     font-weight: 400;
@@ -68,6 +68,16 @@ img{
     color: white;
     bottom: 20%;
   }
+  .photo-length-info {
+    position: absolute;
+      right: 2px;
+      color: #dedede;
+      bottom: 2%;
+      background: rgba(0, 0, 0, 0.62);
+      padding: 10px;
+      font-weight: 500;
+  }
+
   .card-title-main {
     margin: 0px -10px;
     font-size: 1.4rem;
@@ -146,6 +156,25 @@ img{
 }
 .rateSlot ion-col p small{
   font-weight: 100;
+}
+
+.img-loaded + ion-spinner {
+  display:none;
+}
+
+.spinner-center-custom{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.loader-container {
+  background: #000000ba;
+  padding: 45%;
+}
+ion-spinner * {
+  stroke: white !important;
+  fill: white !important;
 }
 
 

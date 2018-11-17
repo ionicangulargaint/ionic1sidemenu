@@ -11,8 +11,16 @@
     <!-- <button (click)="openModal()" block ion-button class="sideMenu-login-btn">slider</button> -->
   <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
     <ion-card class="myCard" (click)="showImagesModal()">
-      <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" />
-      <div class="distance">{{hotelImagesList.length}} PHOTOS</div>
+      <!-- <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" /> -->
+
+      <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <div  class="loader-container" *ngIf="!loaded">          
+        <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" ></ion-spinner>
+      </div>
+      
+
+
+      <div class="photo-length-info">{{hotelImagesList.length}} PHOTOS</div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
       <ion-card-header>
@@ -22,7 +30,7 @@
           </ion-col>
           <ion-col col-5>
             <div class="main-rating">
-              <ion-icon *appTimes="hotelInfo.hotel_detail.rating" name="star"></ion-icon>
+              <ion-icon *appTimes="hotelInfo.hotel_detail.hotel_star_category" name="star"></ion-icon>
             </div>
           </ion-col>
         </ion-row>
@@ -40,11 +48,15 @@
     <div *ngFor="let room of hotelInfo.room_type_detail">
       <ion-card class="myCard" padding>
         <h4 class="lineHeight-text">{{room.hotel_room_type}}</h4>
-        <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" />
+        <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <div  class="loader-container" *ngIf="!loaded">          
+        <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" ></ion-spinner>
+      </div>
+
         <div class="myOverlay roomTypeOverLay">
-          <div class="card-title">${{room.price_per_day}}</div>
-          <div class="card-subtitle">${{room.price_per_day /2}}</div>
-          <div class="discount">50% Off</div>
+          <!-- <div class="card-title">${{room.price_per_day}}</div> -->
+          <div class="card-subtitle">${{room.price_per_day}}</div>
+          <!-- <div class="discount">50% Off</div> -->
           <div class="distance">5 km</div>
         </div>
       </ion-card>
@@ -81,7 +93,7 @@
             </ion-row>
           </ion-grid>
           <hr>
-          <ion-grid>
+          <!-- <ion-grid>
             <ion-row nowrap class="dateTimeSlot">
               <ion-col col-4>
                 <p>30 Aug 2018 (Thus)</p>
@@ -99,7 +111,7 @@
                 <p>8:00am to 11:00am</p>
               </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid> -->
           <hr>
           <ion-grid>
             <ion-row nowrap class="rateSlot">

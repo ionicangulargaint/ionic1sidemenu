@@ -17,6 +17,26 @@ ion-header {
   .content-md{
     background-color: transparent;
   }
+
+.img-loaded + ion-spinner {
+  display:none;
+}
+
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+ion-spinner * {
+  stroke: white !important;
+  fill: white !important;
+}
+
+
+.swiper-pagination-bullet {
+  background: #fff;
+}
 }
 .modal-backdrop-bg {
     background-color: rgba(0, 0, 0, 0.88);
