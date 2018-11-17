@@ -10,16 +10,16 @@
   </ion-navbar>
   <ion-toolbar class="custom-toolbar">
     <ion-grid>
-      <ion-row *ngIf="bookingType">
+      <ion-row>
         <ion-col col-4>
           <p class="head">CHECK IN</p>
           <p>{{searchParam.check_in_date}}</p>
-          <p>{{searchParam.check_in_time + 'PM'}}</p>
+          <p>{{searchParam.check_in_time }}</p>
         </ion-col>
         <ion-col col-4>
           <p class="head">CHECK OUT</p>
           <p>{{searchParam.check_out_date}}</p>
-          <p>{{searchParam.check_out_time + 'PM'}}</p>
+          <p>{{searchParam.check_out_time }}</p>
         </ion-col>
         <ion-col col-4>
           <p class="head">{{searchParam.no_of_rooms}} Room</p>

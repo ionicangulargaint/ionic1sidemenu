@@ -85,8 +85,6 @@ export class DashboardPage {
       this.guestDetails = guest;
       console.log(this.guestDetails);
     });
-
-    this.openDatePicker1('CHECKIN','min')
   }
 
   updateSearchResults() {
@@ -300,9 +298,6 @@ export class DashboardPage {
           this.allTopHotelsList = res.topHotels;
         } else {
           this.topHotelsLIst = res.topHotels;
-          this.topHotelsLIst.forEach(element => {
-            element.rating = 3.5;
-          });
         }
       }
     }, err => {
