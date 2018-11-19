@@ -51,10 +51,10 @@ export class ChangePasswordPage {
     this.createLoader();
     console.log(data)
     this.loading.present().then(() => {
-      this.api.get('changepassword.php?', data).subscribe((resp: any) => {
+      this.api.get('changepassword.php?ChangePassword=ARQP12345', data).subscribe((resp: any) => {
         this.loading.dismiss();
         this.commonService.showAlert(resp.result);
-        if(resp.status == '1'){
+        if(resp.result == 'success'){
           console.log('success');
         }        
       }, (err) => {
