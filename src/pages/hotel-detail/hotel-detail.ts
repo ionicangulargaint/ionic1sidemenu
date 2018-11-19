@@ -44,12 +44,13 @@ export class HotelDetailPage {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
+      //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
+        this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=5').subscribe((resp: any) => {
         this.loading.dismiss();
         if(resp.result == 'success'){
           this.hotelInfo = resp;
-          if(this.hotelInfo.hotel_image){
-            this.hotelInfo.hotel_image.split(/\s*,\s*/).forEach((myString)=> {
+          if(this.hotelInfo.hotelimage){
+            this.hotelInfo.hotelimage.hotelimage.split(/\s*,\s*/).forEach((myString)=> {
               this.hotelImagesList.push(this.imgagePath + myString);
           });
           }         

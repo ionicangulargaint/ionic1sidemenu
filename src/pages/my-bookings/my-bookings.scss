@@ -92,5 +92,15 @@ page-my-bookings {
     font-size: 15px;
     padding: 10px 15px;
   }
+
+  .img-loaded + ion-spinner {
+    display:none;
+  }
+  
+  .spinner-center-custom{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
   
 }

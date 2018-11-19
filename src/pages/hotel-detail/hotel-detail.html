@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="hotelInfo">{{hotelInfo.hotel_detail.hotel_name}}</ion-title>
+    <ion-title *ngIf="hotelInfo">{{hotelInfo.hoteldetail.hotel_name}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only></button>
     </ion-buttons>
@@ -13,7 +13,7 @@
     <ion-card class="myCard" (click)="showImagesModal()">
       <!-- <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" /> -->
 
-      <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <img src="{{hotelInfo.hoteldetail.image == null ? 'assets/imgs/no-image-found.png' : imgagePath + hotelInfo.hoteldetail.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
       <div  class="loader-container" *ngIf="!loaded">          
         <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" ></ion-spinner>
       </div>
@@ -26,31 +26,30 @@
       <ion-card-header>
         <ion-row>
           <ion-col col-7>
-            <h3 class="card-title-main">{{hotelInfo.hotel_detail.hotel_name}}</h3>
+            <h3 class="card-title-main">{{hotelInfo.hoteldetail.hotel_name}}</h3>
           </ion-col>
           <ion-col col-5 style="text-align: right;">
             <div class="main-rating">
               <ion-icon class="stars-outer" name="ios-star-outline">
-                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotelInfo.rating + '%'}"></ion-icon>
+                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotelInfo.hoteldetail.hotel_star_category + '%'}"></ion-icon>
             </ion-icon>
             </div>
           </ion-col>
         </ion-row>
       </ion-card-header>
       <ion-card-content class="address-card">
-        <ion-icon name="pin"></ion-icon> {{hotelInfo.hotel_detail.hotel_address + ', ' + hotelInfo.hotel_detail.hotel_city + ', ' +
-        hotelInfo.hotel_detail.hotel_country + ', ' + hotelInfo.hotel_detail.hotel_pin_code}}
+        <ion-icon name="pin"></ion-icon> {{hotelInfo.hoteldetail.hotel_address + ', ' + hotelInfo.hoteldetail.hotel_city}}
       </ion-card-content>
     </ion-card>
   </div>
  
   <div class="one-item" *ngIf="hotelInfo && !noRecordFound">
     <!-- <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types with 12 total room offers available (See all rooms)</b> </p> -->
-    <p style="padding: 15px;"><b>{{hotelInfo.room_type_detail.length}} room types (See all rooms)</b> </p>
-    <div *ngFor="let room of hotelInfo.room_type_detail">
+    <p style="padding: 15px;"><b>{{hotelInfo.roomtype.length}} room types (See all rooms)</b> </p>
+    <div *ngFor="let room of hotelInfo.roomtype">
       <ion-card class="myCard" padding>
-        <h4 class="lineHeight-text">{{room.hotel_room_type}}</h4>
-        <img src="{{imgagePath}}{{hotelInfo.hotel_detail.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+        <h4 class="lineHeight-text" style="text-transform: capitalize">{{room.hotel_room_type}}</h4>
+        <img src="{{room.image == null ? 'assets/imgs/no-image-found.png' : imgagePath + room.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
       <div  class="loader-container" *ngIf="!loaded">          
         <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" ></ion-spinner>
       </div>
