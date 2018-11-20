@@ -7,7 +7,7 @@
 <ion-content no-bounce class="no-scroll">
   <div class="center" style="padding:10px 20px;">
     <img class="hotel-img" src="assets/img/hotel-pic.jpeg" alt="Smiley face" height="70" width="70">
-    <div class="hotel-lable">Park Plaza Faridabad Hotel</div>
+    <div class="hotel-lable">{{bookingDetails.hotelDetails.hotel_name}}</div>
     <div class="main-rating">
       <ion-icon name="star"></ion-icon>
       <ion-icon name="star"></ion-icon>
@@ -16,17 +16,17 @@
       <ion-icon name="star"></ion-icon>
     </div>
     <div class="hotel-address">
-      Plot no 1, Sector 21c, Faridabad, New Delhi and NCR, India 121003
+      {{bookingDetails.hotelDetails.hotel_address + ', ' + bookingDetails.hotelDetails.hotel_city}}
     </div>
   </div>
 
   <ion-grid>
     <ion-row class="center">
       <ion-col col-6 style="border: 1px solid #E9E9E9;" (click)="navigateToPymentsDetails()">
-        <h6>1 Room, 1 Guest</h6>
+        <h6>{{bookingDetails.noOfRooms}} Room, {{searchCriteria.no_of_adults}} Guest</h6>
       </ion-col>
       <ion-col col-6 style="border: 1px solid #E9E9E9;">
-        <h6>Rs 1380</h6>
+        <h6>RM {{bookingDetails.selectedRoomType.price_per_day}}</h6>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -38,23 +38,23 @@
           Room Tarrif
         </ion-col>
         <ion-col col-3>
-          Rs 1334
+          {{bookingDetails.selectedRoomType.price_per_day}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-          Discount (85%)
+            Discount({{searchCriteria.optradio == 1 ? bookingDetails.discount[1].discount_price : bookingDetails.discount[1].discount_percent}})
         </ion-col>
         <ion-col col-3>
-          -404
+          -198
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-          Net Booking Amount (After 10% payble)
+          Net Booking Amount (payble)
         </ion-col>
         <ion-col col-3>
-          Rs 943
+          RM {{bookingDetails.selectedRoomType.price_per_day - 198}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
@@ -63,7 +63,7 @@
           <div class="tax-lable">Inclusive all the taxes</div>
         </ion-col>
         <ion-col col-3>
-          Rs 943
+          RM {{bookingDetails.selectedRoomType.price_per_day - 198}}
         </ion-col>
       </ion-row>
     </ion-grid>
