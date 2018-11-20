@@ -134,16 +134,11 @@
         <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
             <ion-card class="myCard">
                 <!-- <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}" /> -->
-
-
-
                 <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
-
-
                 <div class="myOverlay">
-                    <div class="card-title1">${{slide.price}}</div>
-                    <div class="distance">5 km</div>
+                    <div class="card-title1">RM {{slide.price}}</div>
+                    <!-- <div class="distance">5 km</div> -->
                 </div>
             </ion-card>
             <ion-card style="margin-top:-10px;">

@@ -58,7 +58,7 @@
           <!-- <div class="card-title">${{room.price_per_day}}</div> -->
           <div class="card-subtitle">RM {{room.price_per_day}}</div>
           <!-- <div class="discount">50% Off</div> -->
-          <div class="distance">{{room.roomPhotoList.length}} PHOTOS</div>
+          <div class="distance" *ngIf="room.roomPhotoList">{{room.roomPhotoList.length}} PHOTOS</div>
         </div>
       </ion-card>
       <ion-card style="margin-top:-10px;">

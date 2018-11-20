@@ -77,6 +77,8 @@ export class pinOnMapPage {
           } else {
             window.alert('Geocoder failed due to: ' + status);
           }
+        }, (error) => {
+          console.log(error);
         });
       }
     }).catch((error) => {

@@ -50,10 +50,12 @@ export class HotelDetailPage {
         if (resp.result == 'success') {
           this.hotelInfo = resp;
           if (this.hotelInfo.hotelimage) {
-            this.hotelInfo.hotelimage.hotelimage.split(/\s*,\s*/).forEach((myString) => {
-              this.hotelImagesList.push(this.imgagePath + myString);
-            });
-            this.createRoomTypeData();
+            if(this.hotelInfo.hotelimage.hotelimage){
+              this.hotelInfo.hotelimage.hotelimage.split(/\s*,\s*/).forEach((myString) => {
+                this.hotelImagesList.push(this.imgagePath + myString);
+              });
+              this.createRoomTypeData();
+            }
           }
         } else {
           this.noRecordFound = true;

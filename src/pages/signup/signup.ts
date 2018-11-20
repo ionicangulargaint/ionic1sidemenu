@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController, Loading, Events } from 'ionic-angular';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { User, Api } from '../../providers';
 import { MainPage } from '../';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({
@@ -37,7 +38,10 @@ export class SignupPage {
     public toastCtrl: ToastController,
     public translateService: TranslateService,
     private httpClient: HttpClient,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    private fb: Facebook,
+    public events: Events
+    ) {
     this.signUpFormByEmail = this._FORMBUILDER.group({
       'email':  ['', [Validators.required, Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")]],
       'password': ['', Validators.required],
@@ -183,5 +187,25 @@ export class SignupPage {
   showError(show, msg) {
     this.signUpError.show = show;
     this.signUpError.msg = msg;
+  }
+
+  loginWithFacebook() {
+    this.fb.login(['public_profile', 'email'])
+      .then((res: FacebookLoginResponse) => {
+        this.fb.api('me/?fields=id,first_name,last_name,email,picture.width(720).height(720).as(picture_large)',["public_profile","email"]).then( apires => {
+          var user = {
+            user_id:apires.id,
+            email:apires.email,
+            first_name:apires.first_name,
+            last_name:apires.last_name,
+            image:apires.picture_large.data.url,
+            loginFb:true
+          }
+          this.events.publish('user:loggedin', user, Date.now());
+          this.navCtrl.setRoot('DashboardPage');
+        }).catch(err => console.log('Error in profile info', err));
+      })
+      .catch(e => console.log('Error logging into Facebook', e));
+      this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
   }
 }
