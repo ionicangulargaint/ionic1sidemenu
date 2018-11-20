@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
+import { IonicPage, MenuController, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,7 +8,13 @@ import { IonicPage, MenuController, NavController, Platform } from 'ionic-angula
 })
 export class PaymentsPage {
 
-  constructor(public navCtrl: NavController) { }
+  bookingDetails:any ={};
+  searchCriteria: any = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
+    this.bookingDetails = JSON.parse(navParams.get("bookingDetails"));
+   }
 
   navigateToBookingConfirmed() {
     this.navCtrl.push('BookingConfirmedPage');

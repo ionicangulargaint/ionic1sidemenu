@@ -22,12 +22,10 @@
 
   <div [ngSwitch]="bookingOptionsModel">
     <div *ngSwitchCase="'Upcoming'">
-      <ion-card>
-        <div *ngFor="let upcomig of upcomingBookingDetail">
+      <ion-card *ngFor="let upcomig of upcomingBookingDetail">        
           <ion-grid>
             <ion-row>
-              <ion-col col-5>
-                <!-- <img src="{{imgagePath}}{{upcomig.main_image}}" alt="books-pic"> -->
+              <ion-col col-5>                
                 <img src="{{imgagePath}}{{upcomig.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
                   [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
@@ -58,8 +56,17 @@
           <div class="btn-wrap">
             <button (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button>
           </div>
-        </div>
-
+          <ion-item>
+              <button ion-button icon-start clear item-start>
+                  <ion-icon name="md-clipboard"></ion-icon>
+                  View detail
+                </button>              
+              <button ion-button icon-start clear item-end color="danger">
+                <ion-icon name="md-remove-circle"></ion-icon>
+                Cancel Booking
+              </button>
+            </ion-item>        
+      </ion-card>
 
         <!-- <ion-grid>
           <ion-row>
@@ -92,7 +99,7 @@
         <div class="btn-wrap">
           <button (click)="navigateToBookingCancelled()" ion-button block disabled color="dark">Booking Cancelled</button>
         </div> -->
-      </ion-card>
+      
     </div>
 
     <div *ngSwitchCase="'Completed'">
