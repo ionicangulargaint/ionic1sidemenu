@@ -31,22 +31,22 @@ export class DashboardPage {
     adult: 1,
     children: 0
   };
-  checkoutDate:any = new Date().setDate(new Date().getDate() + 1);
-  nextThreeMonth:any = new Date().setMonth((new Date()).getMonth() + 3);
+  checkoutDate: any = new Date().setDate(new Date().getDate() + 1);
+  nextThreeMonth: any = new Date().setMonth((new Date()).getMonth() + 3);
   selectedDates: any = {
     checkInDate: this.getFormatedDate(new Date()),
-    checkInMinDate:this.getFormatedDate(new Date()),
-    checkInMaxDate:this.getFormatedDate(this.nextThreeMonth),
+    checkInMinDate: this.getFormatedDate(new Date()),
+    checkInMaxDate: this.getFormatedDate(this.nextThreeMonth),
     checkoutDate: this.getFormatedDate(this.checkoutDate),
-    checkoutMinDate:this.getFormatedDate(this.checkoutDate),
-    checkoutMaxDate:this.getFormatedDate((new Date(this.nextThreeMonth)).setDate((new Date(this.nextThreeMonth)).getDate() + 1))
+    checkoutMinDate: this.getFormatedDate(this.checkoutDate),
+    checkoutMaxDate: this.getFormatedDate((new Date(this.nextThreeMonth)).setDate((new Date(this.nextThreeMonth)).getDate() + 1))
   }
   selectedTime: any = {
     checkInDate: this.getFormatedDate(new Date()),
-    checkInTime: this.getFormatedTime(new Date()),  
-    checkoutTime: this.getFormatedTime(new Date(new Date().setHours(new Date().getHours() + 2))),  
-    checkInMinDate:this.getFormatedDate(new Date()),
-    checkInMaxDate:this.getFormatedDate(new Date().setDate(new Date().getDate() + 3)),
+    checkInTime: this.getFormatedTime(new Date()),
+    checkoutTime: this.getFormatedTime(new Date(new Date().setHours(new Date().getHours() + 2))),
+    checkInMinDate: this.getFormatedDate(new Date()),
+    checkInMaxDate: this.getFormatedDate(new Date().setDate(new Date().getDate() + 3)),
   }
   selectedLocation: any = {
     lat: '',
@@ -109,6 +109,8 @@ export class DashboardPage {
     this.commonService.loading.present().then(() => {
       this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
         this.commonService.loading.dismiss();
+        console.log(results[0])
+        console.log(status)
         if (status === 'OK' && results[0]) {
           this.selectedLocation.lat = results[0].geometry.location.lat();
           this.selectedLocation.lng = results[0].geometry.location.lng();
@@ -128,15 +130,21 @@ export class DashboardPage {
   }
 
   getCurrentLatLongAndFindAddress() {
-    this.geolocation.getCurrentPosition().then((res) => {
-      let latlng = {
-        lat: res.coords.latitude,
-        lng: res.coords.longitude
-      };
-      this.selectedLocation.lat = res.coords.latitude;
-      this.selectedLocation.lng = res.coords.longitude;
-      this.commonService.createLoader();
-      this.commonService.loading.present().then(() => {
+    var options = {
+      enableHighAccuracy: false,
+      timeout: 10000,
+      maximumAge: 0
+    };
+    this.commonService.createLoader();
+    this.commonService.loading.present().then(() => {
+      this.geolocation.getCurrentPosition(options).then((res) => {
+        let latlng = {
+          lat: res.coords.latitude,
+          lng: res.coords.longitude
+        };
+        console.log(latlng)
+        this.selectedLocation.lat = res.coords.latitude;
+        this.selectedLocation.lng = res.coords.longitude;
         this.geocoder.geocode({ 'location': latlng }, (results, status) => {
           this.commonService.loading.dismiss();
           if (status === 'OK') {
@@ -259,13 +267,13 @@ export class DashboardPage {
       no_of_adults: this.guestDetails.adult,
       no_of_rooms: this.guestDetails.rooms,
       no_of_childs: this.guestDetails.children,
-      lat:this.selectedLocation.lat,
-      lng:this.selectedLocation.lng,
-      selectedTypeDay:this.selectedTypeDay,
-      selectedAddress:this.selectedLocation.address
+      lat: this.selectedLocation.lat,
+      lng: this.selectedLocation.lng,
+      selectedTypeDay: this.selectedTypeDay,
+      selectedAddress: this.selectedLocation.address
     }
-    localStorage.setItem('dashboardSearch',JSON.stringify(data));
-    this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress':this.selectedLocation.address });
+    localStorage.setItem('dashboardSearch', JSON.stringify(data));
+    this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress': this.selectedLocation.address });
   }
 
   ionViewDidLoad() {
@@ -315,11 +323,16 @@ export class DashboardPage {
   }
 
   getCurrentLocation() {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    };
+    this.geolocation.getCurrentPosition(options).then((resp) => {
       this.selectedLocation.lat = resp.coords.latitude;
       this.selectedLocation.lng = resp.coords.longitude;
       this.geocoder.geocode({ 'location': { lat: resp.coords.latitude, lng: resp.coords.longitude } }, (results, status) => {
-       // this.commonService.loading.dismiss();
+        // this.commonService.loading.dismiss();
         if (status === 'OK') {
           if (results[0]) {
             this.selectedLocation.address = results[0].formatted_address;
@@ -329,7 +342,7 @@ export class DashboardPage {
         }
       });
     }).catch((error) => {
-     // this.commonService.loading.dismiss();
+      // this.commonService.loading.dismiss();
       console.log('Error getting location', error);
     });
   }

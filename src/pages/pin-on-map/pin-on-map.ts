@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { CommonService } from '../../providers';
 import { Items } from '../../providers';
 
 declare var google;
@@ -25,16 +26,19 @@ export class pinOnMapPage {
   @ViewChild('map') mapElement: ElementRef;
   latlng: any;
 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation) { }
+  constructor(public navCtrl: NavController, public geolocation: Geolocation,public commonService: CommonService,) { }
 
   ionViewDidLoad() {
     this.loadMap();
   }
 
   loadMap() {
+    this.commonService.createLoader();
+    this.commonService.loading.present().then(() => {
     this.geolocation.getCurrentPosition().then((res) => {
       selectedlatitude = res.coords.latitude;
       selectedlongitude = res.coords.longitude;
+      this.commonService.loading.dismiss();
       var myLatlng = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
       map = new google.maps.Map(this.mapElement.nativeElement, {
         center: myLatlng,
@@ -77,7 +81,9 @@ export class pinOnMapPage {
       }
     }).catch((error) => {
       window.alert('Error getting location ' + error);
+      this.commonService.loading.dismiss();
     });
+  });
   }
 
   navigateToDashboard() {

@@ -3,6 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { pinOnMapPage } from './pin-on-map';
+import { CommonService } from '../../providers';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { pinOnMapPage } from './pin-on-map';
     IonicPageModule.forChild(pinOnMapPage),
     TranslateModule.forChild()
   ],
-  providers: [Geolocation],
+  providers: [Geolocation,CommonService],
   exports: [
     pinOnMapPage
   ]

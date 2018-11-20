@@ -19,7 +19,8 @@ export class ChangePasswordPage {
     public toastCtrl: ToastController,
     private _FORMBUILDER: FormBuilder,
     public loadingCtrl: LoadingController,
-    public commonService:CommonService
+    public commonService:CommonService,
+    public navCtrl: NavController
     ) {
     this.changePasswordForm = this._FORMBUILDER.group({
       'oldpassword': ['', Validators.required],
@@ -53,10 +54,12 @@ export class ChangePasswordPage {
     this.loading.present().then(() => {
       this.api.get('changepassword.php?ChangePassword=ARQP12345', data).subscribe((resp: any) => {
         this.loading.dismiss();
-        this.commonService.showAlert(resp.result);
         if(resp.result == 'success'){
-          console.log('success');
-        }        
+          this.commonService.showAlert(resp.ChangePassword);
+          this.navCtrl.setRoot('DashboardPage');
+        }else{
+          this.commonService.showAlert(resp.error);
+        }
       }, (err) => {
         this.loading.dismiss();
         this.commonService.showAlert('An server error occured.');
