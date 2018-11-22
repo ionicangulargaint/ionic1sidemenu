@@ -76,14 +76,14 @@
                     <ion-col col-5 class="check-wrap">
                         <div>CHECK IN</div>
                         <!-- <div>{{selectedDates.checkInDate}}</div> -->
-                        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkInMinDate}}" max={{selectedDates.checkInMaxDate}}
+                        <ion-datetime class="smallSreeenFont" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkInMinDate}}" max={{selectedDates.checkInMaxDate}}
                         [(ngModel)]="selectedDates.checkInDate"></ion-datetime>
                     </ion-col>
                     <ion-col col-2></ion-col>
                     <ion-col col-5 class="check-wrap">
-                        <div>CHECH OUT</div>
+                        <div>CHECK OUT</div>
                         <!-- <div>{{selectedDates.checkoutDate}}</div> -->
-                        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkoutMinDate}}" max={{selectedDates.checkoutMaxDate}}
+                        <ion-datetime class="smallSreeenFont" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedDates.checkoutMinDate}}" max={{selectedDates.checkoutMaxDate}}
                         [(ngModel)]="selectedDates.checkoutDate"></ion-datetime>
                     </ion-col>
                 </ion-row>
@@ -92,7 +92,7 @@
         <div class="checkin-hour" *ngIf="selectedTypeHour">
             <div class="checkInlable">Check In Hour</div>
             <div class="check-wrap center" style="margin-top: 5px;">
-                <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedTime.checkInMinDate}}" max={{selectedTime.checkInMaxDate}}
+                <ion-datetime class="smallSreeenFont" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMMM DD" min="{{selectedTime.checkInMinDate}}" max={{selectedTime.checkInMaxDate}}
                         [(ngModel)]="selectedTime.checkInDate"></ion-datetime>
                 <!-- {{selectedDates.checkInDate}} -->
             </div>
