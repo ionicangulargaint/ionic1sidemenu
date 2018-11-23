@@ -9,7 +9,7 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
   templateUrl: 'hotel-detail.html'
 })
 export class HotelDetailPage {
-  imgagePath = "https://anytimecheckin.com/new/image/";
+  imgagePath = "https://anytimecheckin.com/new/";
   selectedHotel: any = '';
   hotelInfo: any;
   hotelImagesList: any = [];
@@ -45,17 +45,22 @@ export class HotelDetailPage {
     this.noRecordFound = false;
     this.loading.present().then(() => {
       this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
-      //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
+        //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
         this.loading.dismiss();
         if (resp.result == 'success') {
           this.hotelInfo = resp;
           if (this.hotelInfo.hotelimage) {
-            if(this.hotelInfo.hotelimage.hotelimage){
-              this.hotelInfo.hotelimage.hotelimage.split(/\s*,\s*/).forEach((myString) => {
-                this.hotelImagesList.push(this.imgagePath + myString);
-              });
-              this.createRoomTypeData();
-            }
+            // if(this.hotelInfo.hotelimage.hotelimage){
+            //   this.hotelInfo.hotelimage.split(/\s*,\s*/).forEach((myString) => {
+            //     this.hotelImagesList.push(this.imgagePath + myString);
+            //   });
+            this.hotelInfo.hotelimage.forEach((myString) => {
+              this.hotelImagesList.push({ 'image': this.imgagePath + myString.hotelimage_url });
+            });
+            // }  
+          }
+          if (this.hotelInfo.roomtype) {
+            this.createRoomTypeData();
           }
         } else {
           this.noRecordFound = true;
@@ -71,7 +76,7 @@ export class HotelDetailPage {
       if (element.room_photo) {
         element.roomPhotoList = [];
         element.room_photo.split(/\s*,\s*/).forEach((myString) => {
-          element.roomPhotoList.push(this.imgagePath + myString);
+          element.roomPhotoList.push({ 'image': this.imgagePath + myString });
         });
       } else {
         element.roomPhotoList = [];
@@ -87,6 +92,7 @@ export class HotelDetailPage {
       showBackdrop: false,
       cssClass: 'modal-backdrop-bg'
     }
+    console.log(photoList);
     var data = { message: photoList };
     var modalPage = this.modalCtrl.create('ImagesModalPage', data, options);
     modalPage.present();
