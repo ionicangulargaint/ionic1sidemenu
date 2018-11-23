@@ -11,7 +11,7 @@
     <ion-slides pager>
         <ion-slide *ngFor="let image of imagesList">
             <div class="swiper-zoom-container">
-                <img src="{{image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                <img src="{{image.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
             </div>
         </ion-slide>
