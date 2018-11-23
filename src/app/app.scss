@@ -72,7 +72,8 @@ ion-menu ion-header .toolbar-background-md {
               }
               .button-block {
                 width: 81%;
-                margin: auto;                
+                //margin-left: 27%;      
+                margin: 5px auto;          
             }
             .label-ios {
                 margin: 3px 0px 11px 0;
@@ -104,3 +105,16 @@ ion-menu ion-header .toolbar-background-md {
 //         width: 30%;
 //       }
 //  }
+
+.main-header .toolbar-ios {
+    min-height: 75px;
+}
+
+.main-header .toolbar-ios ion-title {
+    padding: 0 45px 1px;
+        width: auto;
+}
+
+.ion-content {
+    top:31px;
+}
