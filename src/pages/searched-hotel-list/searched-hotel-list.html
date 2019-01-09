@@ -29,6 +29,89 @@
             <ion-icon name="person"></ion-icon> {{searchParam.no_of_childs}} Child</p>
         </ion-col>
       </ion-row>
+      <ion-row class="filterview">
+        <ion-col col-4>
+          <p class="head">BUDGET</p>
+          <ion-item>
+            <ion-label>Below 15</ion-label>
+            <ion-checkbox [(ngModel)]="budget1"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>75-100</ion-label>
+            <ion-checkbox [(ngModel)]="budget2"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>100-125</ion-label>
+            <ion-checkbox [(ngModel)]="budget3"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Above 125</ion-label>
+            <ion-checkbox [(ngModel)]="budget4"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">STAR NIGHT</p>
+          <ion-item>
+            <ion-label>3 Star</ion-label>
+            <ion-checkbox [(ngModel)]="budget1"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>2 Star</ion-label>
+            <ion-checkbox [(ngModel)]="budget2"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>1 Star</ion-label>
+            <ion-checkbox [(ngModel)]="budget3"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Boutique</ion-label>
+            <ion-checkbox [(ngModel)]="budget4"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">CUSTOMER REVIEWS</p>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="reviews1"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="reviews2"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="reviews3"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="reviews4"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="reviews5"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-header>
@@ -44,10 +127,7 @@
     <ion-card class="myCard">
         <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.image}}" />
       <div class="myOverlay">
-        <!-- <div class="card-title">$1994</div> -->
         <div class="card-title1">RM {{hotel.price}}</div>
-        <!-- <div class="discount">50% Off</div> -->
-        <!-- <div class="distance">5 km</div> -->
       </div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
