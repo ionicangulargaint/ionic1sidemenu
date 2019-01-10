@@ -30,19 +30,19 @@
         </ion-row>
       </ion-card-header>
       <ion-card-content class="address-card">
-        <ion-icon name="pin" class="location-icon"></ion-icon> 
-        <span class="address-text">{{selectedHotelDetail.hotel_address + ', ' + selectedHotelDetail.hotel_city}}</span>
+        <!-- <ion-icon name="pin" class="location-icon"></ion-icon>  -->                
         <ion-row>
-          <ion-col col>
-            <div class="main-rating">
-              <ion-icon class="stars-outer" name="ios-star-outline">
-                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * selectedHotelDetail.hotel_star_category + '%'}"></ion-icon>
-              </ion-icon>
-            </div>
-            
+          <ion-col col-3>
+              <img (click)="navigateToSearchedHotelOnmapPage()" src="assets/img/map-pin.jpg">                        
           </ion-col>
-          <ion-col col text-right>
-            <a class="review-link" (click)="scrollToId()">Review {{selectedHotelDetail.review_count}}</a>
+          <ion-col col-9 text-left>
+              <span class="address-text">{{selectedHotelDetail.hotel_address + ', ' + selectedHotelDetail.hotel_city}}</span><br>
+              <div class="main-rating">
+                  <ion-icon class="stars-outer" name="ios-star-outline">
+                    <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * selectedHotelDetail.hotel_star_category + '%'}"></ion-icon>
+                  </ion-icon>&nbsp;&nbsp;&nbsp;
+                  <a class="review-link" (click)="scrollToId()">Review {{selectedHotelDetail.review_count}}</a>
+                </div>            
           </ion-col>
           </ion-row>
       </ion-card-content>
@@ -70,7 +70,8 @@
       <ion-card style="margin-top:-10px;" class="myCard" no-border>
         <ion-card-content class="address-card">
           <ion-grid>
-            <ion-row nowrap class="forecast_container">
+            <p>Available facilities</p>
+            <ion-row nowrap class="forecast_container">              
               <ion-col col-4 *ngFor="let facility of room.facilities">
                 <!-- <img src="assets/img/Bed.png"> 
                 <br>-->
@@ -105,15 +106,15 @@
           <ion-grid>
             <ion-row nowrap>
               <ion-col col-5>
-                <ion-item style="padding-left: 5px;"> 
+                <ion-item style="padding-left: 5px; background-color: #eaeaea;"> 
                   <ion-label>Room</ion-label>
-                  <ion-select [(ngModel)]="room.selectedNoOfRooms">
+                  <ion-select [(ngModel)]="room.selectedNoOfRooms" (ionChange)="noOfRoomChange(room)">
                     <ion-option value="{{i+1}}" *ngFor="let in of counter(room.available_room) ;let i = index">{{i+1}}</ion-option>
                   </ion-select>
                 </ion-item>
               </ion-col>
               <ion-col col-7 text-right>
-                <h5 class="price-detail">Price per night <span class="price-info"> RM {{room.price_per_day}}</span></h5>
+                <h5 class="price-detail"><strong>Price per night</strong> &nbsp;&nbsp;<span class="price-info"> RM {{room.price_per_day}}</span></h5>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -157,7 +158,6 @@
 
   <div id="review">
     <ion-card>
-
       <ion-item>
         <ion-avatar item-start>
           <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
@@ -199,6 +199,61 @@
       </ion-row>
     
     </ion-card>
+
+
+
+
+
+
+    <ion-card>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
+          </ion-avatar>
+          
+          <ion-row>
+              <ion-col>
+                
+                  <h4><strong>Marty McFly:</strong></h4>
+                <p>November 5, 1955</p>
+              </ion-col>
+              <ion-col text-right>
+                  <div class="main-rating">
+                      <ion-icon class="stars-outer" name="ios-star-outline">
+                        <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * 4 + '%'}"></ion-icon>
+                      </ion-icon>
+                    </div>
+              </ion-col>
+          </ion-row>
+          <!-- <p>November 5, 1955 <span>
+              
+          </span></p> -->
+        </ion-item>
+      
+        <ion-card-content>
+          <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        </ion-card-content>
+      
+        <ion-row>
+          <ion-col>
+            <div class="top-arrow">
+                <h4><strong>Reply from owner:</strong></h4>
+              <p>Tag defines a multi-line text input control.
+      A text area can hold an unlimited number of characters, and the text renders in a fixed-width font (usually Courier).
+      The size of a text area can be specified by the cols and rows attributes, or even better; through CSS' height and width properties.</p>
+              </div>
+          </ion-col>
+          
+        </ion-row>
+      
+      </ion-card>
+
+
+
+
+
+
+
   </div>
   <h1 padding *ngIf="noRecordFound"> NO Record Found</h1>
 </ion-content>
