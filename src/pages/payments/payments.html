@@ -43,7 +43,7 @@
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-            Discount({{searchCriteria.optradio == 1 ? bookingDetails.discount[1].discount_price : bookingDetails.discount[1].discount_percent}})
+            Discount({{searchCriteria.optradio == 1 ? bookingDetails.selectedRoomType.room_type_discount : bookingDetails.selectedRoomType.room_type_discount}})
         </ion-col>
         <ion-col col-3>
           -198

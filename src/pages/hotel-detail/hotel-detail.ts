@@ -23,7 +23,7 @@ export class HotelDetailPage {
   hotelImagesList: any = [];
   noRecordFound: boolean = false;
   searchCriteria: any = {};
-  selectedNoOfRooms: any = 0;
+
   totalNoOfDays:any = 0;
 
   constructor(
@@ -45,8 +45,7 @@ export class HotelDetailPage {
 
   ionViewDidLoad() {
     this.getHotelDetail();
-    this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
-    this.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
+    this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));    
     var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     var firstDate = new Date(this.searchCriteria.check_in_date);
     var secondDate = new Date(this.searchCriteria.check_out_date);
@@ -63,8 +62,8 @@ export class HotelDetailPage {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
-      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
+      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
+      //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
         //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
         this.loading.dismiss();
         if (resp.result == 'success') {
@@ -106,6 +105,8 @@ export class HotelDetailPage {
       element.roomPhotoList = [];
       element.totalPriceCalculated = this.totalNoOfDays * element.price_per_day;
 
+      element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
+
 
       if (element.room_image) {
         element.room_image.forEach(img => {
@@ -146,12 +147,12 @@ export class HotelDetailPage {
 
   navigateToPaymentsPage(selectedRoomType) {
     this.navCtrl.push('PaymentsPage', {
-      // bookingDetails: JSON.stringify({
-      //   discount: this.hotelInfo.discount,
-      //   noOfRooms: this.selectedNoOfRooms,
-      //   selectedRoomType: selectedRoomType,
-      //   hotelDetails: this.hotelInfo.hoteldetail
-      // })
+      bookingDetails: JSON.stringify({
+        discount: selectedRoomType.room_type_discount,
+        noOfRooms: selectedRoomType.selectedNoOfRooms,
+        selectedRoomType: selectedRoomType,
+        hotelDetails: this.selectedHotelDetail
+      })
     });
   }
 

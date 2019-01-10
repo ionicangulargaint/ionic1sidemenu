@@ -107,7 +107,7 @@
               <ion-col col-5>
                 <ion-item style="padding-left: 5px;"> 
                   <ion-label>Room</ion-label>
-                  <ion-select [(ngModel)]="selectedNoOfRooms">
+                  <ion-select [(ngModel)]="room.selectedNoOfRooms">
                     <ion-option value="{{i+1}}" *ngFor="let in of counter(room.available_room) ;let i = index">{{i+1}}</ion-option>
                   </ion-select>
                 </ion-item>
