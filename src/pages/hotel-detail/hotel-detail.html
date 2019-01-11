@@ -123,19 +123,19 @@
             <ion-row nowrap class="rateSlot">
               <ion-col col-4>
                 <p>RM {{room.price_per_hour}}
-                  <small>{{searchCriteria.check_in_date | date :'dd:MMM'}}</small>
+                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
                 </p>
                 <p>Per Hour</p>
               </ion-col>
               <ion-col col-4>
                 <p>RM {{room.price_per_day}}
-                  <small>{{searchCriteria.check_in_date | date :'dd:MMM'}}</small>
+                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
                 </p>
                 <p>Per Day</p>
               </ion-col>
               <ion-col col-4>
                 <p>RM {{room.totalPriceCalculated}}
-                  <small>{{searchCriteria.check_in_date | date :'dd:MMM'}}</small>
+                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
                 </p>
                 <p>Total Price</p>
               </ion-col>

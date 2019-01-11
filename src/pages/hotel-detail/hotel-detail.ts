@@ -10,11 +10,6 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 })
 export class HotelDetailPage {
 
-
-
-
-
-
   imgagePath = "https://anytimecheckin.com/new/image/";
   selectedHotel: any = '';
   selectedHotelDetail: any;
@@ -22,7 +17,7 @@ export class HotelDetailPage {
   selectedHotelRoomType: any;
   hotelImagesList: any = [];
   noRecordFound: boolean = false;
-  searchCriteria: any = {};
+  searchCriteria: any = {check_in_date: ''};
 
   totalNoOfDays: any = 0;
 
@@ -121,13 +116,10 @@ export class HotelDetailPage {
       element.totalPriceCalculated = this.totalNoOfDays * element.price_per_day;
       if(this.searchCriteria){
         element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
+        element.check_in_date = this.searchCriteria.check_in_date
       } else {
         element.selectedNoOfRooms = 1;
       }
-
-      
-
-
       if (element.room_image) {
         element.room_image.forEach(img => {
           element.roomPhotoList.push({ 'image': this.imgagePath + img });
