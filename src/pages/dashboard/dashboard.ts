@@ -101,11 +101,14 @@ export class DashboardPage {
     this.GoogleAutocomplete.getPlacePredictions({ input: this.autocompleteInput },
       (predictions, status) => {
         this.autocompleteItems = [];
-        this.zone.run(() => {
-          predictions.forEach((prediction) => {
-            this.autocompleteItems.push(prediction);
+        console.log(predictions)
+        if(predictions != null && predictions.length != 0 && predictions != undefined){
+          this.zone.run(() => {
+            predictions.forEach((prediction) => {
+              this.autocompleteItems.push(prediction);
+            });
           });
-        });
+        }
       });
   }
 
@@ -186,54 +189,7 @@ export class DashboardPage {
       this.selectedTypeDay = !this.selectedTypeHour;
     }
   }
-
-  /*openDatePicker(pickerIs) {
-    var dateString = (new Date()).toISOString();
-    dateString = dateString.split(' ').join('T');
-    let date: any = new Date(dateString);
-    date = date.getTime();
-    var maxDate = this.selectedTypeDay ? (new Date()).setMonth((new Date()).getMonth() + 3) : (new Date()).setDate((new Date()).getDate() + 3);
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      minDate: (pickerIs == 'CHECKIN') ? (date) : (new Date()).setDate((new Date()).getDate() + 1),
-      maxDate: (pickerIs == 'CHECKIN') ? (maxDate) : (new Date(maxDate)).setDate((new Date(maxDate)).getDate() + 1),
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => {
-        if (pickerIs == 'CHECKIN') {
-          this.selectedDates.checkInDate = this.getFormatedDate(date);
-        } else {
-          this.selectedDates.checkoutDate = this.getFormatedDate(date);
-        }
-      },
-      err => console.log('Error occurred while getting date: ', err)
-    );
-  }
-  
-  openTimePicker(pickerIs) {
-    var dateString = (new Date()).toISOString();
-    dateString = dateString.split(' ').join('T');
-    let date: any = new Date(dateString);
-    date = date.getTime();
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'time',
-      minDate: date,
-      maxDate: date,
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      time => {
-        if (pickerIs == 'CHECKIN') {
-          this.selectedTime.checkInTime = this.getFormatedTime(time);
-        } else {
-          this.selectedTime.checkoutTime = this.getFormatedTime(time);
-        }
-      },
-      err => console.log('Error occurred while getting date: ', err)
-    );
-  }*/
-
+ 
   getFormatedDate(date) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -262,7 +218,6 @@ export class DashboardPage {
   }
 
   ionViewWillLeave() {
-    // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
   }
 
@@ -286,7 +241,6 @@ export class DashboardPage {
       optradio: this.selectedTypeDay ? 1 : 2,
       check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : this.selectedTime.checkInDate,
       check_in_time: this.selectedTypeDay ? '00:00' : this.selectedTime.checkInTime,
-
       check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.getCheckOutDate(),
       check_out_time: this.selectedTypeDay ? '00:00' : this.getCheckOutTime(),
       no_of_adults: this.guestDetails.adult,
@@ -298,7 +252,7 @@ export class DashboardPage {
       selectedAddress: this.selectedLocation.address
     }
     localStorage.setItem('dashboardSearch', JSON.stringify(data));
-    this.navCtrl.push('SearchedHotelListPage', { 'searchCriterias': data, 'selectedAddress': this.selectedLocation.address });
+    this.navCtrl.push('SearchedHotelListPage');
   }
 
   ionViewDidLoad() {
