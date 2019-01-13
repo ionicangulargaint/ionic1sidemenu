@@ -6,27 +6,39 @@
 
 <ion-content no-bounce class="no-scroll">
   <div class="center" style="padding:10px 20px;">
-    <img class="hotel-img" src="assets/img/hotel-pic.jpeg" alt="Smiley face" height="70" width="70">
+    <!-- <img class="hotel-img" src="assets/img/hotel-pic.jpeg" alt="Smiley face" height="70" width="70"> -->
+    <img height="70" width="70" class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{bookingDetails.hotelDetails.hotel_image == null ? 'assets/imgs/no-image-found.png' : imgagePath + bookingDetails.hotelDetails.hotel_image}}"
+        (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
     <div class="hotel-lable">{{bookingDetails.hotelDetails.hotel_name}}</div>
+    <!-- <div class="main-rating">
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+    </div>ratings -->
+    <!-- <div class="main-rating">
+      <ion-icon class="stars-outer" name="ios-star-outline">
+        <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * bookingDetails.hotelDetails.ratings + '%'}"></ion-icon>
+      </ion-icon>
+    </div> -->
     <div class="main-rating">
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-    </div>
+        <ion-icon class="stars-outer" name="ios-star-outline">
+          <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * bookingDetails.hotelDetails.ratings + '%'}"></ion-icon>
+        </ion-icon>        
+      </div> 
     <div class="hotel-address">
-      {{bookingDetails.hotelDetails.hotel_address + ', ' + bookingDetails.hotelDetails.hotel_city}}
+      {{bookingDetails.hotelDetails.hotel_address}}
     </div>
   </div>
 
   <ion-grid>
     <ion-row class="center">
       <ion-col col-6 style="border: 1px solid #E9E9E9;" (click)="navigateToPymentsDetails()">
-        <h6>{{bookingDetails.noOfRooms}} Room, {{searchCriteria.no_of_adults}} Guest</h6>
+        <h6>{{bookingDetails.apiParam.noofroom}} Room, {{bookingDetails.apiParam.no_of_person}} Guest</h6>
       </ion-col>
       <ion-col col-6 style="border: 1px solid #E9E9E9;">
-        <h6>RM {{bookingDetails.selectedRoomType.price_per_day}}</h6>
+        <h6>RM 111</h6>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -38,12 +50,13 @@
           Room Tarrif
         </ion-col>
         <ion-col col-3>
-          {{bookingDetails.selectedRoomType.price_per_day}}
+          111
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-            Discount({{searchCriteria.optradio == 1 ? bookingDetails.selectedRoomType.room_type_discount : bookingDetails.selectedRoomType.room_type_discount}})
+            Discount 100
+            <!-- Discount({{searchCriteria.optradio == 1 ? bookingDetails.selectedRoomType.room_type_discount : bookingDetails.selectedRoomType.room_type_discount}}) -->
         </ion-col>
         <ion-col col-3>
           -198
@@ -54,7 +67,7 @@
           Net Booking Amount (payble)
         </ion-col>
         <ion-col col-3>
-          RM {{bookingDetails.selectedRoomType.price_per_day - 198}}
+          RM 100
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
@@ -63,7 +76,7 @@
           <div class="tax-lable">Inclusive all the taxes</div>
         </ion-col>
         <ion-col col-3>
-          RM {{bookingDetails.selectedRoomType.price_per_day - 198}}
+          RM 100
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -10,7 +10,7 @@ page-payments {
     font-weight: 500;
   }
   .main-rating ion-icon{
-    color: #d8aa04;
+    color: #cfc8a6;
     font-size: 13px;
   }
   .hotel-address {
@@ -74,6 +74,32 @@ page-payments {
     content: "";
     clear: both;
     display: table;
+}
+.stars-outer {
+  display: inline-block;
+  position: relative;
+}
+ 
+.stars-outer.ion-ios-star-outline::before {
+  content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  font-size: 14px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+.stars-inner.ion-ios-star::before {
+  content: "\f384 \f384 \f384 \f384 \f384";
+  color: #f8ce0b;
+}
+
+.stars-inner {
+  width: 0;
 }
 // }
 // @media (min-width: 320px) and (max-width: 480px) {
