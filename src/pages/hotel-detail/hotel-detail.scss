@@ -1,4 +1,8 @@
 page-hotel-detail {
+  
+  .sideMenu-login-btn {
+    background: #3b3c4d;
+}
   .price-info{
     background: #e3e3e3;
     padding: 17px;
@@ -48,7 +52,7 @@ page-hotel-detail {
   }
   .myCard {
     margin: 0px;
-    width: calc(100% - 2px);
+    width: calc(100% - 0px);
     box-shadow: none;
   }
   .scroll-content {
@@ -165,7 +169,7 @@ img{
     line-height: 23px;
   }
 .forecast_container{
-  overflow-x: scroll!important;
+  overflow-x: auto!important;
   overflow-y: hidden;
   word-wrap: break-word;
   height:10vw;
@@ -182,7 +186,7 @@ img{
   font-size: 1.1rem;
 }
 .forecast_container .col{
-  text-align: center;
+  text-align: left;
     font-weight: 400;
     color: #0d9811;
     padding-top: 3%;

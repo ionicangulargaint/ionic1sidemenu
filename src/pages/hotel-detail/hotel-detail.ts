@@ -10,11 +10,6 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 })
 export class HotelDetailPage {
 
-
-
-
-
-
   imgagePath = "https://anytimecheckin.com/new/image/";
   selectedHotel: any = '';
   selectedHotelDetail: any;
@@ -22,9 +17,9 @@ export class HotelDetailPage {
   selectedHotelRoomType: any;
   hotelImagesList: any = [];
   noRecordFound: boolean = false;
-  searchCriteria: any = {};
-  selectedNoOfRooms: any = 0;
-  totalNoOfDays:any = 0;
+  searchCriteria: any = {check_in_date: ''};
+
+  totalNoOfDays: any = 0;
 
   constructor(
     public api: Api,
@@ -33,7 +28,7 @@ export class HotelDetailPage {
     public navParams: NavParams,
     public modalCtrl: ModalController
   ) {
-    this.selectedHotel = navParams.get('item');    
+    this.selectedHotel = navParams.get('item');
   }
   loading: Loading;
   loadingConfig: any;
@@ -46,12 +41,15 @@ export class HotelDetailPage {
   ionViewDidLoad() {
     this.getHotelDetail();
     this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
-    this.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
-    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    var firstDate = new Date(this.searchCriteria.check_in_date);
-    var secondDate = new Date(this.searchCriteria.check_out_date);
+    if (this.searchCriteria) {
+      var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+      var firstDate = new Date(this.searchCriteria.check_in_date);
+      var secondDate = new Date(this.searchCriteria.check_out_date);
 
-    this.totalNoOfDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+      this.totalNoOfDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+    } else {
+      this.totalNoOfDays = 1;
+    }
   }
 
   scrollToId() {
@@ -59,12 +57,23 @@ export class HotelDetailPage {
     if (b) b.scrollIntoView({ behavior: "instant" })
   }
 
+  navigateToSearchedHotelOnmapPage() {
+    this.navCtrl.push('SearchedHotelOnmapPage', {
+      'hotelList': [
+        {
+          hotel_latitude: this.selectedHotelDetail.hotel_latitude,
+          hotel_longitude: this.selectedHotelDetail.hotel_longitude,
+          hotel_name: this.selectedHotelDetail.hotel_name
+        }]
+    });
+  }
+
   getHotelDetail() {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
-      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
+      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
+        // this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
         //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
         this.loading.dismiss();
         if (resp.result == 'success') {
@@ -105,8 +114,12 @@ export class HotelDetailPage {
     roomType.forEach(element => {
       element.roomPhotoList = [];
       element.totalPriceCalculated = this.totalNoOfDays * element.price_per_day;
-
-
+      if(this.searchCriteria){
+        element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
+        element.check_in_date = this.searchCriteria.check_in_date
+      } else {
+        element.selectedNoOfRooms = 1;
+      }
       if (element.room_image) {
         element.room_image.forEach(img => {
           element.roomPhotoList.push({ 'image': this.imgagePath + img });
@@ -129,6 +142,11 @@ export class HotelDetailPage {
     this.selectedHotelRoomType = roomType;
   }
 
+  noOfRoomChange(currentRoomType) {
+    currentRoomType.totalPriceCalculated = currentRoomType.price_per_day * currentRoomType.selectedNoOfRooms;
+    currentRoomType;
+  }
+
   public showImagesModal(photoList) {
     if (photoList.length < 1) {
       return false;
@@ -146,12 +164,12 @@ export class HotelDetailPage {
 
   navigateToPaymentsPage(selectedRoomType) {
     this.navCtrl.push('PaymentsPage', {
-      // bookingDetails: JSON.stringify({
-      //   discount: this.hotelInfo.discount,
-      //   noOfRooms: this.selectedNoOfRooms,
-      //   selectedRoomType: selectedRoomType,
-      //   hotelDetails: this.hotelInfo.hoteldetail
-      // })
+      bookingDetails: JSON.stringify({
+        discount: selectedRoomType.room_type_discount,
+        noOfRooms: selectedRoomType.selectedNoOfRooms,
+        selectedRoomType: selectedRoomType,
+        hotelDetails: this.selectedHotelDetail
+      })
     });
   }
 
