@@ -125,7 +125,7 @@
   <div *ngIf="!noResultFound">
   <div class="one-item" (click)="navigateToHotelDetail(hotel)" *ngFor="let hotel of hotelList">
     <ion-card class="myCard">
-        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.image}}" />
+        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
       <div class="myOverlay">
         <div class="card-title1">RM {{hotel.price}}</div>
       </div>
