@@ -296,6 +296,7 @@ export class DashboardPage {
   }
 
   navigateToHotelDetail(item) {
+    localStorage.setItem('selected_hotel_id', item.hotel_id)
     this.navCtrl.push('HotelDetailPage', { 'item': item.hotel_id });
   }
 

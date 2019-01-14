@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, MenuController, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, Loading, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Api } from '../../providers';
 @IonicPage()
 @Component({
   selector: 'page-payments',
@@ -8,19 +8,58 @@ import { IonicPage, MenuController, NavController, NavParams } from 'ionic-angul
 })
 export class PaymentsPage {
 
-  bookingDetails:any ={};
+  bookingDetails: any = {};
   searchCriteria: any = {};
+  noRecordFound: boolean = false;
+  imgagePath = "https://anytimecheckin.com/new/image/";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public api: Api,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController
+  ) {
+    this.bookingDetails = JSON.parse(this.navParams.get("bookingDetails"));
+  }
+  loading: Loading;
+  loadingConfig: any;
+  createLoader(message: string = "Please wait...") {
+    this.loading = this.loadingCtrl.create({
+      content: message
+    });
+  }
+  ionViewDidLoad(){
     this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
-    this.bookingDetails = JSON.parse(navParams.get("bookingDetails"));
-   }
+        
+  }
+
+
+  getBookingDetails() {
+
+    this.createLoader();
+    this.noRecordFound = false;
+    this.loading.present().then(() => {
+      this.api.get(`bookingDetail.php?BookingDetail=ARQP12345&${this.bookingDetails.apiParam}`).subscribe((resp: any) => {
+        // this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
+        //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
+        this.loading.dismiss();
+        if (resp.result == 'success') {
+
+
+        } else {
+          this.noRecordFound = true;
+        }
+      }, (err) => {
+        this.loading.dismiss();
+      });
+    })
+  }
 
   navigateToBookingConfirmed() {
     this.navCtrl.push('BookingConfirmedPage');
   }
-  
+
   navigateToPymentsDetails() {
     this.navCtrl.push('PymentsDetailsPage');
-  } 
+  }
 }

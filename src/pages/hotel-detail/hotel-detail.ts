@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Api } from '../../providers';
-import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -13,11 +12,11 @@ export class HotelDetailPage {
   imgagePath = "https://anytimecheckin.com/new/image/";
   selectedHotel: any = '';
   selectedHotelDetail: any;
-  selectedHotelReviews: any;
+  selectedHotelReviews: any = [];
   selectedHotelRoomType: any;
   hotelImagesList: any = [];
   noRecordFound: boolean = false;
-  searchCriteria: any = {check_in_date: ''};
+  searchCriteria: any = { check_in_date: '' };
 
   totalNoOfDays: any = 0;
 
@@ -28,7 +27,8 @@ export class HotelDetailPage {
     public navParams: NavParams,
     public modalCtrl: ModalController
   ) {
-    this.selectedHotel = navParams.get('item');
+    //this.selectedHotel = navParams.get('item');
+    this.selectedHotel = localStorage.getItem('selected_hotel_id');
   }
   loading: Loading;
   loadingConfig: any;
@@ -40,6 +40,7 @@ export class HotelDetailPage {
 
   ionViewDidLoad() {
     this.getHotelDetail();
+    this.getHotelReviews();
     this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
     if (this.searchCriteria) {
       var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -72,9 +73,8 @@ export class HotelDetailPage {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=' + this.selectedHotel).subscribe((resp: any) => {
-        // this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {
-        //this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=hotelDetail=Hotel12345&hotel_id=2').subscribe((resp: any) => {
+      this.api.get(`hotelDetail.php?hotelDetail=Hotel12345&hotel_id=${this.selectedHotel}`).subscribe((resp: any) => {
+        // this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {        
         this.loading.dismiss();
         if (resp.result == 'success') {
           this.selectedHotelDetail = resp.hotel_detail;
@@ -83,20 +83,10 @@ export class HotelDetailPage {
             imageList.push(this.imgagePath + myString);
           });
           this.selectedHotelDetail.customeImageList = imageList;
-          // if (this.hotelInfo.hotelimage) {
-          //   // if(this.hotelInfo.hotelimage.hotelimage){
-          //   //   this.hotelInfo.hotelimage.split(/\s*,\s*/).forEach((myString) => {
-          //   //     this.hotelImagesList.push(this.imgagePath + myString);
-          //   //   });
-
-          //   // }  
-          // }
           if (resp.room_type) {
             this.createRoomTypeData(resp.room_type);
           }
-          if (resp.reviews) {
-            this.selectedHotelReviews = resp.reviews;
-          }
+
         } else {
           this.noRecordFound = true;
         }
@@ -104,6 +94,18 @@ export class HotelDetailPage {
         this.loading.dismiss();
       });
     })
+  }
+
+  getHotelReviews() {
+    this.api.get(`user_vendor_review.php?UserReview=ARQP12345&hotel_id=${this.selectedHotel}`).subscribe((resp: any) => {
+      if (resp.result == 'success') {
+        this.selectedHotelReviews = resp.reviews;
+      } else {
+        this.noRecordFound = true;
+      }
+    }, (err) => {
+      alert(err)
+    });
   }
 
   counter(i: number) {
@@ -114,7 +116,7 @@ export class HotelDetailPage {
     roomType.forEach(element => {
       element.roomPhotoList = [];
       element.totalPriceCalculated = this.totalNoOfDays * element.price_per_day;
-      if(this.searchCriteria){
+      if (this.searchCriteria) {
         element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
         element.check_in_date = this.searchCriteria.check_in_date
       } else {
@@ -127,17 +129,6 @@ export class HotelDetailPage {
       } else {
         element.roomPhotoList = [];
       }
-
-
-
-      // if (element.room_photo) {
-      //   element.roomPhotoList = [];
-      //   element.room_image.split(/\s*,\s*/).forEach((myString) => {
-      //     element.roomPhotoList.push({ 'image': this.imgagePath + myString });
-      //   });
-      // } else {
-      //   element.roomPhotoList = [];
-      // }
     });
     this.selectedHotelRoomType = roomType;
   }
@@ -165,90 +156,26 @@ export class HotelDetailPage {
   navigateToPaymentsPage(selectedRoomType) {
     this.navCtrl.push('PaymentsPage', {
       bookingDetails: JSON.stringify({
-        discount: selectedRoomType.room_type_discount,
-        noOfRooms: selectedRoomType.selectedNoOfRooms,
-        selectedRoomType: selectedRoomType,
-        hotelDetails: this.selectedHotelDetail
+        apiParam: {
+          hotel_id: this.selectedHotel,
+          noofroom: selectedRoomType.selectedNoOfRooms,
+          hotel_room_type_id: selectedRoomType.room_type_id,
+          no_of_person: this.searchCriteria.no_of_adults,
+          no_of_childs: this.searchCriteria.no_of_childs,
+          check_in_date: this.searchCriteria.check_out_date,
+          check_out_date: this.searchCriteria.check_out_date,
+          check_in_time: this.searchCriteria.check_in_time,
+          check_out_time: this.searchCriteria.check_out_time,
+          optradio: this.searchCriteria.optradio
+        },
+        hotelDetails: {
+          hotel_image: this.selectedHotelDetail.main_image,
+          hotel_address: `${this.selectedHotelDetail.hotel_address} ${this.selectedHotelDetail.hotel_city}`,
+          ratings: this.selectedHotelDetail.hotel_star_category,
+          hotel_name: this.selectedHotelDetail.hotel_name
+        }
       })
     });
   }
 
-
-
-
 }
-
-// hello: any = {
-//   result: 'success',
-//   hotel_detail: {
-//     hotel_id: '17',
-//     hotel_name: 'Marriof Gold INN',
-//     star_rating: '5',
-//     hotel_address: '925, Doroteo Street Corner',
-//     hotel_city: 'Noida',
-//     hotel_country: 'India',
-//     hotel_review_count: '5',
-//     hotel_main_image: '120318043143Hydrangeas.jpg',
-//     hotel_images_list: ['120318041509Desert.jpg', '120318043143Hydrangeas.jpg', '120318041509Desert.jpg']
-//   },
-//   hotel_room_type: [
-//     {
-//       room_type_id: '10',
-//       room_type_name: 'Majestic Room',
-//       available_rooms_count: '10',
-//       room_main_thumb: '120318041509Desert.jpg',
-//       price_per_night: '100',
-//       price_per_hour: '50',
-//       discount_on_hour_book: '104',
-//       discount_on_day_book: '500',
-//       room_type_image_list: ['120318041509Desert.jpg', '120318043143Hydrangeas.jpg', '120318041509Desert.jpg'],
-//       facilities: [1, 2, 3, 4],
-//       hourly_available_slots_for_booking: [
-//         {
-//           from: '10AM',
-//           to: '12AM',
-//           canBook: true
-//         },
-//         {
-//           from: '12AM',
-//           to: '2PM',
-//           canBook: false
-//         }
-//       ]
-//     },
-//     {
-//       room_type_id: '20',
-//       room_type_name: '',
-//       available_rooms_count: '5',
-//       room_main_thumb: '120318043143Hydrangeas.jpg',
-//       price_per_night: '100',
-//       price_per_hour: '50',
-//       discount_on_hour_book: '104',
-//       discount_on_day_book: '500',
-//       room_type_image_list: ['120318041509Desert.jpg', '120318041509Desert.jpg', '120318043143Hydrangeas.jpg'],
-//       facilities: [1, 2, 3, 4],
-//       hourly_available_slots_for_booking: [
-//         {
-//           from: '10AM',
-//           to: '12AM',
-//           canBook: true
-//         },
-//         {
-//           from: '12AM',
-//           to: '2PM',
-//           canBook: false
-//         }
-//       ]
-//     }
-//   ],
-//   reviews: [
-//     {
-//       review_id: '34',
-//       customer_name:'Bittu Singh',
-//       review_text: 'Such a nice place to stay here. Love food and there services.',
-//       star_rating_by_customer: '3.5',
-//       vendor_name:'Raju',
-//       vendor_response_text:'Thanks for your valiuable response.'
-//     }
-//   ]
-// }
