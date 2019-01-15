@@ -37,11 +37,11 @@ export class MyBookingsPage {
     this.createLoader();
     this.loading.present().then(() => {
       let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-      let seq = this.api.post('mybooking.php?MyBooking=ARQP12345&userId=49', '').share();
+      let seq = this.api.get(`upcomingBooking.php?upcomingBooking=UPCOM12345&user_id=${loggedInUserId}`).share();
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
-          this.upcomingBookingDetail = res.UpcomingData;
+          this.upcomingBookingDetail = res.data;
         } else {
           let toast = this.toastCtrl.create({
             message: 'An server error occured,',
@@ -61,11 +61,11 @@ export class MyBookingsPage {
     this.createLoader();
     this.loading.present().then(() => {
       let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-      let seq = this.api.post('mybooking.php?MyBooking=AREMAIL12345&userId=49', '').share();
+      let seq = this.api.get(`completeBooking.php?completeBooking=COMPLE12345&user_id=${loggedInUserId}`).share();
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
-          this.completedBookingDetail = res['Upcoming Data'];
+          this.completedBookingDetail = res.data;
         } else {
           let toast = this.toastCtrl.create({
             message: 'An server error occured,',
@@ -85,11 +85,11 @@ export class MyBookingsPage {
     this.createLoader();
     this.loading.present().then(() => {
       let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-      let seq = this.api.post('mybooking.php?MyBooking=ARRP12345&userId=49', '').share();
+      let seq = this.api.get(`cancel_booking.php?cancelBooking=ARQP12345&user_id=${loggedInUserId}`).share();
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
-          this.cancelledBookingDetail = res.CancelData;
+          this.cancelledBookingDetail = res.data;
         } else {
           let toast = this.toastCtrl.create({
             message: 'An server error occured,',

@@ -158,6 +158,7 @@ export class HotelDetailPage {
       bookingDetails: JSON.stringify({
         apiParam: {
           hotel_id: this.selectedHotel,
+          book_now: 1,
           noofroom: selectedRoomType.selectedNoOfRooms,
           hotel_room_type_id: selectedRoomType.room_type_id,
           no_of_person: this.searchCriteria.no_of_adults,
@@ -166,13 +167,17 @@ export class HotelDetailPage {
           check_out_date: this.searchCriteria.check_out_date,
           check_in_time: this.searchCriteria.check_in_time,
           check_out_time: this.searchCriteria.check_out_time,
-          optradio: this.searchCriteria.optradio
+          optradio: this.searchCriteria.optradio,
+          no_of_days: this.totalNoOfDays,
+          no_of_hours: ''
         },
         hotelDetails: {
           hotel_image: this.selectedHotelDetail.main_image,
           hotel_address: `${this.selectedHotelDetail.hotel_address} ${this.selectedHotelDetail.hotel_city}`,
           ratings: this.selectedHotelDetail.hotel_star_category,
-          hotel_name: this.selectedHotelDetail.hotel_name
+          hotel_name: this.selectedHotelDetail.hotel_name,
+          lat: this.selectedHotelDetail.hotel_longitude,
+          long: this.selectedHotelDetail.hotel_longitude
         }
       })
     });

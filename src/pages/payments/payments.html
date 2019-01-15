@@ -35,10 +35,10 @@
   <ion-grid>
     <ion-row class="center">
       <ion-col col-6 style="border: 1px solid #E9E9E9;" (click)="navigateToPymentsDetails()">
-        <h6>{{bookingDetails.apiParam.noofroom}} Room, {{bookingDetails.apiParam.no_of_person}} Guest</h6>
+        <h6>{{serverBookingPaymentDetails.no_of_rooms}} Room, {{serverBookingPaymentDetails.no_adult}} Guest</h6>
       </ion-col>
       <ion-col col-6 style="border: 1px solid #E9E9E9;">
-        <h6>RM 111</h6>
+        <h6>RM{{serverBookingPaymentDetails.total_amount_payable}}</h6>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -50,24 +50,24 @@
           Room Tarrif
         </ion-col>
         <ion-col col-3>
-          111
+          {{serverBookingPaymentDetails.total_amount}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-            Discount 100
+            Discount {{serverBookingPaymentDetails.discount_amount}}
             <!-- Discount({{searchCriteria.optradio == 1 ? bookingDetails.selectedRoomType.room_type_discount : bookingDetails.selectedRoomType.room_type_discount}}) -->
         </ion-col>
         <ion-col col-3>
-          -198
+          {{serverBookingPaymentDetails.discount_amount}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-9>
-          Net Booking Amount (payble)
+          Net Booking Amount
         </ion-col>
         <ion-col col-3>
-          RM 100
+          RM{{serverBookingPaymentDetails.booking_fee}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
@@ -76,7 +76,7 @@
           <div class="tax-lable">Inclusive all the taxes</div>
         </ion-col>
         <ion-col col-3>
-          RM 100
+          RM{{serverBookingPaymentDetails.total_amount_payable}}
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -94,13 +94,14 @@
           <img src="assets/img/paypal.jpg" alt="paypal img" height="100">
         </ion-col>
         <ion-col col-6>
-          <div class="paypal-amount">660.00</div>
-          <div class="paypal-discount-lable">10% of total discount</div>
+          <div class="paypal-amount">RM{{serverBookingPaymentDetails.total_amount_payable}}</div>
+          <div class="paypal-discount-lable">{{serverBookingPaymentDetails.discount_amount}} of total discount</div>
         </ion-col>
       </ion-row>
     </ion-grid>
     <div style="margin:10px;">
-      <button ion-button block (click)="navigateToBookingConfirmed()">Book & Pay Now</button>
+      <button ion-button block (click)="openLoginMOdal()">Book & Pay Now</button>
+      <!-- <button ion-button block (click)="navigateToBookingConfirmed()">Book & Pay Now</button> -->
     </div>
   </ion-card>
 

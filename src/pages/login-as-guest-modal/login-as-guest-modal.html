@@ -1,0 +1,92 @@
+<!-- <ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Hotel images</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="closeModal()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header> -->
+
+
+<ion-header>
+        <ion-navbar no-border-bottom>
+                <ion-buttons end>
+                        <button ion-button (click)="closeModal()">
+                            <ion-icon name="md-close"></ion-icon>
+                        </button>
+                    </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+<ion-content padding>
+    <div class="container-log">
+        <ion-toolbar no-border-top>
+            <ion-segment [(ngModel)]="loginModel">
+                <ion-segment-button value="login">
+                    <span class="text">LOGIN</span>
+                </ion-segment-button>
+                <ion-segment-button value="continueAsGuest">
+                    <span class="text">CONTINUE AS GUEST</span>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
+
+        <div [ngSwitch]="loginModel">
+            <div *ngSwitchCase="'login'">
+                <form [formGroup]="loginForm" (ngSubmit)="doLogin()" class="login-form">
+                    <ion-list>
+                        <ion-row *ngIf="loginError.show">
+                            <ion-col text-center>
+                                <p style="color:#ec6f6a">{{ loginError.msg }}</p>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-item>
+                            <ion-label stacked>Email*</ion-label>
+                            <ion-input type="email" formControlName="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Password*</ion-label>
+                            <ion-input type="password" formControlName="password"></ion-input>
+                        </ion-item>
+
+                        <div padding>
+                            <button [disabled]="!loginForm.valid" ion-button color="primary" block>Sign In</button>
+                        </div>
+                    </ion-list>
+                </form>
+            </div>
+            <div *ngSwitchCase="'continueAsGuest'">
+                <form [formGroup]="continueAsGuestForm" (submit)="continueAsGuest()" class="login-form">
+                    <ion-list>
+                        <ion-row *ngIf="continueAsGuestError.show">
+                            <ion-col text-center>
+                                <p style="color:#ec6f6a">{{ continueAsGuestError.msg }}</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-item margin-bottom>
+                            <ion-label stacked>First name*</ion-label>
+                            <ion-input formControlName="fname" type="text"></ion-input>
+                        </ion-item>
+                        <ion-item margin-bottom>
+                            <ion-label stacked>Last name*</ion-label>
+                            <ion-input formControlName="lname" type="text"></ion-input>
+                        </ion-item>
+                        <ion-item margin-bottom>
+                            <ion-label stacked>E-Mail*</ion-label>
+                            <ion-input formControlName="email" type="email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label stacked>Mobile*</ion-label>
+                            <ion-input formControlName="mobile" type="number" name="mobile"></ion-input>
+                        </ion-item>
+                        <div padding>
+                            <button [disabled]="!continueAsGuestForm.valid" ion-button color="primary" block>Complete Booking</button>
+                        </div>
+                    </ion-list>
+                </form>
+            </div>
+        </div>
+    </div>
+</ion-content>

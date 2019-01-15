@@ -25,14 +25,14 @@
       <ion-card *ngFor="let upcomig of upcomingBookingDetail">        
           <ion-grid>
             <ion-row>
-              <ion-col col-5>                
-                <img src="{{imgagePath}}{{upcomig.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
-                  [hidden]="!loaded" />
+              <ion-col col-5>                                              
+                  <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{upcomig.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + upcomig.hotel_image_thumb}}"
+                  (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
               </ion-col>
               <ion-col col-7>
                 <div class="hotel-name">{{upcomig.hotel_name}}</div>
-                <div class="small-lable">Booking ID: {{upcomig.hotel_booking_id}}</div>
+                <div class="small-lable">Booking ID: {{upcomig.booking_id}}</div>
                 <ion-grid>
                   <ion-row class="center">
                     <ion-col col-6 class="right-dotted-border">
@@ -49,11 +49,11 @@
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-                <p class="small-lable">{{upcomig.room_type_id}}</p>
+                <p class="small-lable">{{upcomig.room_type_name}}</p>
               </ion-col>
             </ion-row>
           </ion-grid>
-          <div class="btn-wrap">
+          <div class="btn-wrap" *ngIf="upcomig">
             <button (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button>
           </div>
           <ion-item>
@@ -103,74 +103,47 @@
     </div>
 
     <div *ngSwitchCase="'Completed'">
-      <ion-card>
-        <ion-grid>
-          <ion-row>
-            <ion-col col-5>
-              <img src="assets/img/books.jpg" alt="books-pic">
-            </ion-col>
-            <ion-col col-7>
-              <div class="hotel-name">Sogor Dormitory</div>
-              <div class="small-lable">Booking ID:84234243</div>
-              <ion-grid>
-                <ion-row class="center">
-                  <ion-col col-6 class="right-dotted-border">
-                    <div class="checkin-lbl">CHECK IN</div>
-                    <div class="date-lbl">31 Aug 2018</div>
-                    <div class="date-lbl">02:30 PM</div>
-                    <div class="small-lable">Saturday</div>
-                  </ion-col>
-                  <ion-col col-6>
-                    <div class="checkin-lbl">CHECK OUT</div>
-                    <div class="date-lbl">31 Aug 2018</div>
-                    <div class="date-lbl">04:30 PM</div>
-                    <div class="small-lable">Saturday</div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <p class="small-lable">Exicutive Room</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <div class="btn-wrap">
-          <button ion-button block color="dark">write a Comment</button>
-        </div>
-
-        <ion-grid>
-          <ion-row>
-            <ion-col col-5>
-              <img src="assets/img/books.jpg" alt="books-pic">
-            </ion-col>
-            <ion-col col-7>
-              <div class="hotel-name">Sogor Dormitory</div>
-              <div class="small-lable">Booking ID:84234243</div>
-              <ion-grid>
-                <ion-row class="center">
-                  <ion-col col-6 class="right-dotted-border">
-                    <div class="checkin-lbl">CHECK IN</div>
-                    <div class="date-lbl">31 Aug 2018</div>
-                    <!-- <div class="date-lbl">02:30 PM</div> -->
-                    <div class="small-lable">Saturday</div>
-                  </ion-col>
-                  <ion-col col-6>
-                    <div class="checkin-lbl">CHECK OUT</div>
-                    <div class="date-lbl">31 Aug 2018</div>
-                    <!-- <div class="date-lbl">04:30 PM</div> -->
-                    <div class="small-lable">Saturday</div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <p class="small-lable">Exicutive Room</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <div class="btn-wrap">
-          <button ion-button block disabled color="dark">write a Comment</button>
-        </div>
-
-      </ion-card>
+        <ion-card *ngFor="let completed of completedBookingDetail">        
+            <ion-grid>
+              <ion-row>
+                <ion-col col-5>                                              
+                    <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{completed.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + completed.hotel_image_thumb}}"
+                    (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                  <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
+                </ion-col>
+                <ion-col col-7>
+                  <div class="hotel-name">{{completed.hotel_name}}</div>
+                  <div class="small-lable">Booking ID: {{completed.booking_id}}</div>
+                  <ion-grid>
+                    <ion-row class="center">
+                      <ion-col col-6 class="right-dotted-border">
+                        <div class="checkin-lbl">CHECK IN</div>
+                        <div class="date-lbl">{{completed.check_in_date | date :'mediumDate'}}</div>
+                        <div class="date-lbl">{{completed.check_in_time | date : 'shortTime'}}</div>
+                        <div class="small-lable">{{ completed.check_in_date | date : "EEE" }}</div>
+                      </ion-col>
+                      <ion-col col-6>
+                        <div class="checkin-lbl">CHECK OUT</div>
+                        <div class="date-lbl">{{completed.check_out_date | date :'mediumDate'}}</div>
+                        <div class="date-lbl">{{completed.check_out_time | date : 'shortTime'}}</div>
+                        <div class="small-lable">{{ completed.check_out_date | date : "EEE" }}</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <p class="small-lable">{{completed.room_type_name}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <div class="btn-wrap" *ngIf="upcomig">
+              <button ion-button block color="dark">Write comment</button>
+            </div>
+            <ion-item>
+                <button ion-button icon-start clear item-start>
+                    <ion-icon name="md-clipboard"></ion-icon>
+                    View detail
+                  </button>                              
+              </ion-item>        
+        </ion-card>
     </div>
 
     <div *ngSwitchCase="'Cancelled'">
@@ -179,13 +152,13 @@
           <ion-grid>
             <ion-row>
               <ion-col col-5>
-                  <img src="{{imgagePath}}{{cancel.main_image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
-                  [hidden]="!loaded" />
-                <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
+                  <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{cancel.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + cancel.hotel_image_thumb}}"
+                    (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                  <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
               </ion-col>
               <ion-col col-7>
                 <div class="hotel-name">{{cancel.hotel_name}}</div>
-                <div class="small-lable">Booking ID: {{cancel.hotel_booking_id}}</div>
+                <div class="small-lable">Booking ID: {{cancel.booking_id}}</div>
                 <ion-grid>
                   <ion-row class="center">
                     <ion-col col-6 class="right-dotted-border">
