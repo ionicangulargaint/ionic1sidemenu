@@ -1,0 +1,37 @@
+<!-- <ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Hotel images</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="closeModal()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header> -->
+
+
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-buttons end>
+            <button ion-button (click)="closeModal()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div class="container-log">
+        <h5>Average user rating</h5>
+        <ionic3-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#f8ce0b" defaultColor="#6e6e6e"
+            readonly="false" [rating]="0">
+        </ionic3-star-rating>
+
+        <ion-item>
+            <ion-textarea placeholder="Write a comment" rows="1" name="dummyText" [(ngModel)]="commentBoxText" autosize></ion-textarea>
+        </ion-item>
+        <br>
+        <div style="text-align: right;">
+            <button [disabled]="!commentBoxText" ion-button (click)="doComment()">Submit</button>
+        </div>
+    </div>
+</ion-content>

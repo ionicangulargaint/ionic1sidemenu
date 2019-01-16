@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, LoadingController, NavController, ToastController, Loading } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, Loading, ModalController } from 'ionic-angular';
 import { User, Api } from '../../providers';
 
 @IonicPage()
@@ -8,7 +8,7 @@ import { User, Api } from '../../providers';
   templateUrl: 'my-bookings.html'
 })
 export class MyBookingsPage {
-  imgagePath = "https://anytimecheckin.com/new/image/";
+  imgagePath = "https://anytimecheckin.com/new/image/front/";
   loading: Loading;
   loadingConfig: any;
   createLoader(message: string = "Please wait...") {
@@ -25,7 +25,8 @@ export class MyBookingsPage {
   constructor(public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public toastCtrl: ToastController,
-    public api: Api, ) {
+    public api: Api,
+    public modalCtrl: ModalController ) {
     //this.getUpcomingBookingDetails();
   }
 
@@ -105,7 +106,24 @@ export class MyBookingsPage {
     })
   }
 
-  navigateToBookingCancelled() {
-    this.navCtrl.push('CancelBookingPage');
+  navigateToBookingCancelled(bookingDetails) {
+    this.navCtrl.push('CancelBookingPage', {bookingId: bookingDetails.booking_id, hotel_image: bookingDetails.hotel_image_thumb});
+  }
+
+  openCommentBox(selectedBooking){
+    let options = {
+      showBackdrop: false,
+      cssClass: 'modal-backdrop-bg'
+    }
+    let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
+    var data = { 
+      param:{ 
+        hotel_id: selectedBooking.hotel_id,
+        user_id: loggedInUserId,
+        booking_id: selectedBooking.booking_id, 
+      }
+    };
+    var modalPage = this.modalCtrl.create('CommentModalPage', data, options);
+    modalPage.present();
   }
 }

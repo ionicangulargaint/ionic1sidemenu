@@ -54,18 +54,19 @@
             </ion-row>
           </ion-grid>
           <div class="btn-wrap" *ngIf="upcomig">
+            <!-- <button [disabled]="upcomig.user_can_comment" (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button> -->
             <button (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button>
           </div>
-          <ion-item>
+          <!-- <ion-item>
               <button ion-button icon-start clear item-start>
                   <ion-icon name="md-clipboard"></ion-icon>
                   View detail
                 </button>              
-              <button ion-button icon-start clear item-end color="danger">
+              <button (click)="navigateToBookingCancelled(upcomig)" ion-button icon-start clear item-end color="danger">
                 <ion-icon name="md-remove-circle"></ion-icon>
                 Cancel Booking
               </button>
-            </ion-item>        
+            </ion-item>         -->
       </ion-card>
 
         <!-- <ion-grid>
@@ -134,15 +135,16 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <div class="btn-wrap" *ngIf="upcomig">
-              <button ion-button block color="dark">Write comment</button>
+            <div class="btn-wrap" *ngIf="completed">
+              <!-- <button [disabled]="completed.user_can_comment" (click)="openCommentBox(completed)" ion-button block color="dark">Write comment</button> -->
+              <button ion-button block color="dark" (click)="openCommentBox(completed)">Write comment</button>
             </div>
-            <ion-item>
+            <!-- <ion-item>
                 <button ion-button icon-start clear item-start>
                     <ion-icon name="md-clipboard"></ion-icon>
                     View detail
                   </button>                              
-              </ion-item>        
+              </ion-item>         -->
         </ion-card>
     </div>
 
@@ -202,7 +204,7 @@
           </ion-grid>
 
           <div class="btn-wrap">
-            <button ion-button block color="dark">write a Comment</button>
+            <button ion-button block color="dark" (click)="openCommentBox(cancel)">write a Comment</button>
           </div>
         </div>
       </ion-card>
@@ -237,7 +239,7 @@
         <div class="btn-wrap">
           <button ion-button block color="dark">write a Comment</button>
         </div> -->
-        <div class="main-rating">
+        <!-- <div class="main-rating">
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
@@ -249,7 +251,7 @@
         </ion-item>
         <div class="btn-wrap right">
           <button (click)="comments()" ion-button small color="dark">Submit</button>
-        </div>
+        </div> -->
 
       
     </div>
