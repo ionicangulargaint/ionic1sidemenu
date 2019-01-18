@@ -185,17 +185,17 @@
 
           <ion-grid>
             <ion-row class="progressbar center">
-              <ion-col col-4>
-                <div class="step-strips" [ngClass]="{'running-steps': cancel.Cancellation_status.Cancelled}"></div>
+              <ion-col col-4 [ngClass]="{'running-steps': (cancel.Cancellation_status.Cancelled == 'true' ? true : false)}">
+                <div class="step-strips"></div>
                 <div class="progress-step">1</div>
                 <div class="small-lable">Cancelled</div>
               </ion-col>
-              <ion-col col-4 [ngClass]="{'running-steps': cancel.Cancellation_status.Inprogress}">
+              <ion-col col-4 [ngClass]="{'running-steps': (cancel.Cancellation_status.Inprogress == 'true' ? true : false)}">
                 <div class="step-strips"></div>
                 <div class="progress-step">2</div>
                 <div class="small-lable">In progress</div>
               </ion-col>
-              <ion-col col-4 [ngClass]="{'running-steps': cancel.Cancellation_status.Confirmed}">
+              <ion-col col-4 [ngClass]="{'running-steps': (cancel.Cancellation_status.Confirmed == 'true' ? true : false)}">
                 <div class="progress-step">3</div>
                 <div class="small-lable">Confirmed</div>
               </ion-col>
