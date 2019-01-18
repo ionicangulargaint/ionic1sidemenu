@@ -53,7 +53,7 @@
               </ion-col>
             </ion-row>
           </ion-grid>
-          <div class="btn-wrap" *ngIf="upcomig">
+          <div class="btn-wrap" *ngIf="upcomig.user_can_cancel=='true' ? true : false">
             <!-- <button [disabled]="upcomig.user_can_comment" (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button> -->
             <button (click)="navigateToBookingCancelled(upcomig)" ion-button block color="dark">Cancel Booking</button>
           </div>
@@ -135,7 +135,7 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-            <div class="btn-wrap" *ngIf="completed">
+            <div class="btn-wrap" *ngIf="completed.user_can_comment=='true' ? true : false">
               <!-- <button [disabled]="completed.user_can_comment" (click)="openCommentBox(completed)" ion-button block color="dark">Write comment</button> -->
               <button ion-button block color="dark" (click)="openCommentBox(completed)">Write comment</button>
             </div>
@@ -186,16 +186,16 @@
           <ion-grid>
             <ion-row class="progressbar center">
               <ion-col col-4>
-                <div class="step-strips"></div>
+                <div class="step-strips" [ngClass]="{'running-steps': cancel.Cancellation_status.Cancelled}"></div>
                 <div class="progress-step">1</div>
                 <div class="small-lable">Cancelled</div>
               </ion-col>
-              <ion-col col-4 class="running-steps">
+              <ion-col col-4 [ngClass]="{'running-steps': cancel.Cancellation_status.Inprogress}">
                 <div class="step-strips"></div>
                 <div class="progress-step">2</div>
                 <div class="small-lable">In progress</div>
               </ion-col>
-              <ion-col col-4>
+              <ion-col col-4 [ngClass]="{'running-steps': cancel.Cancellation_status.Confirmed}">
                 <div class="progress-step">3</div>
                 <div class="small-lable">Confirmed</div>
               </ion-col>
@@ -203,7 +203,7 @@
 
           </ion-grid>
 
-          <div class="btn-wrap">
+          <div class="btn-wrap" *ngIf="cancel.user_can_comment=='true' ? true : false">
             <button ion-button block color="dark" (click)="openCommentBox(cancel)">write a Comment</button>
           </div>
         </div>
