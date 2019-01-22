@@ -36,7 +36,7 @@ export class CommentModalPage {
   
 
 
-  doComment() {
+  doComment() {    
     this.createLoader();
     this.loading.present().then(() => {
       let data = {
