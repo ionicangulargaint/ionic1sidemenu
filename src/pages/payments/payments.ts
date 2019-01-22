@@ -62,13 +62,19 @@ export class PaymentsPage {
   
 
   openLoginMOdal(){
-    let options = {
-      showBackdrop: false,
-      cssClass: 'modal-backdrop-bg'
+    let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
+    if(loggedInUserId){
+      this.modalChangeStatus('ALREADYLOGIN');
+    } else{
+      let options = {
+        showBackdrop: false,
+        cssClass: 'modal-backdrop-bg'
+      }
+      var data = { message: '', change:this.modalChangeStatus.bind(this) };
+      var modalPage = this.modalCtrl.create('LoginAsGuestModalPage', data, options);
+      modalPage.present();
     }
-    var data = { message: '', change:this.modalChangeStatus.bind(this) };
-    var modalPage = this.modalCtrl.create('LoginAsGuestModalPage', data, options);
-    modalPage.present();
+    
   }
 
   modalChangeStatus(item){
@@ -93,9 +99,12 @@ export class PaymentsPage {
       email:'',
       mob_no:''
     }
+    
     if(item.type == 'LOGIN'){
       apiParam.user_id = item.data;
-    } else{
+    } else if(item == 'ALREADYLOGIN'){
+      apiParam.user_id = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
+    }else{
       apiParam.fname = item.data.fname;
       apiParam.lname = item.data.lname;
       apiParam.email = item.data.email;

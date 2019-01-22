@@ -115,7 +115,7 @@ export class HotelDetailPage {
   createRoomTypeData(roomType) {
     roomType.forEach(element => {
       element.roomPhotoList = [];
-      element.totalPriceCalculated = this.totalNoOfDays * element.price_per_day;
+      element.totalPriceCalculated = this.searchCriteria.no_of_rooms * element.price_per_day;
       if (this.searchCriteria) {
         element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
         element.check_in_date = this.searchCriteria.check_in_date
