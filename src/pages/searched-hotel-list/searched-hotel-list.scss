@@ -51,10 +51,10 @@ page-searched-hotel-list {
     font-weight: 200;
   }
   .card-title{
-    font-weight: 400;
-    text-decoration: line-through;
-    margin: 5px 18px;
-    font-size: 15px;
+    position: absolute;
+    right: 10px;
+    color: white;
+    bottom: 20%;
   }
   .distance{
     position: absolute;

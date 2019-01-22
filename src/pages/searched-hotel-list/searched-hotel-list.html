@@ -127,7 +127,8 @@
     <ion-card class="myCard">
         <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
       <div class="myOverlay">
-        <div class="card-title1">RM {{hotel.price}}</div>
+        <div class="card-title1">RM {{hotel.price_per_day}}</div>
+        <div class="card-title" *ngIf="hotel.distance"> {{roundOffDistance(hotel.distance)}} Km</div>
       </div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
@@ -139,7 +140,7 @@
           <ion-col col-5 style="text-align: right;">
             <div class="main-rating">
               <ion-icon class="stars-outer" name="ios-star-outline">
-                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotel.rating + '%'}"></ion-icon>
+                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotel.hotel_star_category + '%'}"></ion-icon>
             </ion-icon>
             </div>
           </ion-col>

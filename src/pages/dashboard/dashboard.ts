@@ -102,7 +102,7 @@ export class DashboardPage {
       (predictions, status) => {
         this.autocompleteItems = [];
         console.log(predictions)
-        if(predictions != null && predictions.length != 0 && predictions != undefined){
+        if (predictions != null && predictions.length != 0 && predictions != undefined) {
           this.zone.run(() => {
             predictions.forEach((prediction) => {
               this.autocompleteItems.push(prediction);
@@ -150,32 +150,51 @@ export class DashboardPage {
     this.commonService.createLoader();
     this.commonService.loading.present().then(() => {
       this.geolocation.getCurrentPosition(options).then((res) => {
-        let latlng = {
+        var latlng = {
           lat: res.coords.latitude,
           lng: res.coords.longitude
         };
-        console.log(latlng)
+        console.log(latlng);
         this.selectedLocation.lat = res.coords.latitude;
         this.selectedLocation.lng = res.coords.longitude;
-        this.geocoder.geocode({ 'location': latlng }, (results, status) => {
-          this.commonService.loading.dismiss();
-          if (status === 'OK') {
-            if (results[0]) {
-              this.autocompleteInput = results[0].formatted_address;
-              this.selectedLocation.address = results[0].formatted_address;
-            } else {
-              this.commonService.showAlert('No results found');
-            }
-          } else {
-            this.commonService.showAlert('Geocoder failed due to: ' + status);
-          }
-        }).catch((error) => {
-          console.log('Error getting location', error);
-          this.commonService.loading.dismiss();
-          this.commonService.showAlert('Error getting location ' + error);
-        });
+        this.reverseGeocode(latlng);
+      }).catch((error) => {
+        console.log( error);
+        // if (navigator.geolocation) {
+        //   navigator.geolocation.getCurrentPosition((res) => {
+        //     var latlng = {
+        //       lat: res.coords.latitude,
+        //       lng: res.coords.longitude
+        //     };
+        //     console.log(latlng);
+        //     this.selectedLocation.lat = res.coords.latitude;
+        //     this.selectedLocation.lng = res.coords.longitude;
+        //     this.reverseGeocode(latlng);
+        //   }
+        //   );
+        // }
       });
     })
+  }
+
+  reverseGeocode(latlng) {
+    this.geocoder.geocode({ 'location': latlng }, (results, status) => {
+      this.commonService.loading.dismiss();
+      if (status === 'OK') {
+        if (results[0]) {
+          this.autocompleteInput = results[0].formatted_address;
+          this.selectedLocation.address = results[0].formatted_address;
+        } else {
+          this.commonService.showAlert('No results found');
+        }
+      } else {
+        this.commonService.showAlert('Geocoder failed due to: ' + status);
+      }
+    }).catch((error) => {
+      console.log('Error in reverse geocode location', error);
+      this.commonService.loading.dismiss();
+      this.commonService.showAlert('Error getting location ' + error);
+    });
   }
 
   addguestDetails() {
@@ -189,7 +208,7 @@ export class DashboardPage {
       this.selectedTypeDay = !this.selectedTypeHour;
     }
   }
- 
+
   getFormatedDate(date) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -226,14 +245,14 @@ export class DashboardPage {
     var temp1 = this.selectedTime.checkInTime.split(':');
     var d = new Date(temp[0], temp[1] - 1, temp[2]);
     d.setHours(parseInt(temp1[0]) + parseInt(this.selectedTime.selectedHours), parseInt(temp1[1]));
-    return this.getFormatedDate(d); 
+    return this.getFormatedDate(d);
   }
 
   getCheckOutTime() {
     var temp = this.selectedTime.checkInTime.split(':');
     var d = new Date();
     d.setHours(parseInt(temp[0]) + parseInt(this.selectedTime.selectedHours), parseInt(temp[1]));
-    return this.getFormatedTime(d); 
+    return this.getFormatedTime(d);
   }
 
   navigateToSearchedList() {

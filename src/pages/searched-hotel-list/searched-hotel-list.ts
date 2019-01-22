@@ -54,6 +54,11 @@ export class SearchedHotelListPage {
     });
   }
 
+  roundOffDistance(distance){
+    distance = Number(distance);
+    return distance.toFixed(4);
+  }
+
   getHotelList() {
     this.createLoader();
     let searchParm = this.createObj();
