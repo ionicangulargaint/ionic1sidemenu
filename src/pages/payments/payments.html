@@ -6,81 +6,108 @@
 
 <ion-content no-bounce class="no-scroll">
   <div class="center" style="padding:10px 20px;">
-    <!-- <img class="hotel-img" src="assets/img/hotel-pic.jpeg" alt="Smiley face" height="70" width="70"> -->
+
     <img height="70" width="70" class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{bookingDetails.hotelDetails.hotel_image == null ? 'assets/imgs/no-image-found.png' : imgagePath + bookingDetails.hotelDetails.hotel_image}}"
-        (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
     <div class="hotel-lable">{{bookingDetails.hotelDetails.hotel_name}}</div>
-    <!-- <div class="main-rating">
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-      <ion-icon name="star"></ion-icon>
-    </div>ratings -->
-    <!-- <div class="main-rating">
+    <div class="main-rating">
       <ion-icon class="stars-outer" name="ios-star-outline">
         <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * bookingDetails.hotelDetails.ratings + '%'}"></ion-icon>
       </ion-icon>
-    </div> -->
-    <div class="main-rating">
-        <ion-icon class="stars-outer" name="ios-star-outline">
-          <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * bookingDetails.hotelDetails.ratings + '%'}"></ion-icon>
-        </ion-icon>        
-      </div> 
+    </div>
     <div class="hotel-address">
       {{bookingDetails.hotelDetails.hotel_address}}
     </div>
   </div>
-
-  <ion-grid>
-    <ion-row class="center">
-      <ion-col col-6 style="border: 1px solid #E9E9E9;" (click)="navigateToPymentsDetails()">
-        <h6>{{serverBookingPaymentDetails.no_of_rooms}} Room, {{serverBookingPaymentDetails.no_adult}} Guest</h6>
+  <hr>
+  <div class="datelbl">
+    <ion-row>
+      <ion-col text-center >
+        <strong class="card-title"><ion-icon name="log-in" item-start></ion-icon> Check in date </strong><br>
+        <small>{{serverBookingPaymentDetails.check_in_date | date :'dd-MMM-yyyy'}}</small>
       </ion-col>
-      <ion-col col-6 style="border: 1px solid #E9E9E9;">
-        <h6>RM{{serverBookingPaymentDetails.total_amount_payable}}</h6>
+      <ion-col text-center>        
+        <strong class="card-title"><ion-icon name="log-out" item-start></ion-icon> Check out date </strong><br>
+        <small>{{serverBookingPaymentDetails.check_out_date | date :'dd-MMM-yyyy'}}</small>
       </ion-col>
     </ion-row>
-  </ion-grid>
+
+    <ion-row>
+        <ion-col text-center>
+          <strong class="hotel-address">Room type - </strong>
+          <small> {{bookingDetails.hotelDetails.room_type_name}}</small>
+        </ion-col>        
+      </ion-row>
+  </div>
 
   <ion-card>
+    <ion-list>
+      <ion-item>
+        <h3 class="card-title"><strong>Booking details</strong></h3>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-icon name="moon" item-start></ion-icon>
+        {{totalNoOfDays}} Night
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-square" item-start></ion-icon>
+        {{serverBookingPaymentDetails.no_of_rooms}} Room, {{serverBookingPaymentDetails.no_adult}} Adults
+      </ion-item>
+      <ion-item>
+        <ion-icon name="md-people" item-start></ion-icon>
+        {{serverBookingPaymentDetails.no_child}} Child (0-6 year)
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <h3 class="card-title"><strong>Price details</strong></h3>
+      </ion-item>
+    </ion-list>
+    <hr>
     <ion-grid>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Room Tarrif
+        <ion-col col-8>
+          Original price (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
         </ion-col>
-        <ion-col col-3>
-          {{serverBookingPaymentDetails.total_amount}}
-        </ion-col>
-      </ion-row>
-      <ion-row class="payment-list">
-        <ion-col col-9>
-            Discount {{serverBookingPaymentDetails.discount_amount}}
-            <!-- Discount({{searchCriteria.optradio == 1 ? bookingDetails.selectedRoomType.room_type_discount : bookingDetails.selectedRoomType.room_type_discount}}) -->
-        </ion-col>
-        <ion-col col-3>
-          {{serverBookingPaymentDetails.discount_amount}}
+        <ion-col col-4>
+           {{serverBookingPaymentDetails.total_amount | currency:"RM"}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Net Booking Amount
+        <ion-col col-8>
+          Discount (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
+
         </ion-col>
-        <ion-col col-3>
-          RM{{serverBookingPaymentDetails.booking_fee}}
+        <ion-col col-4>
+           {{serverBookingPaymentDetails.discount_amount | currency:"RM"}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Amount to be paid at the hotel
+        <ion-col col-8>
+          Booking Fees
+        </ion-col>
+        <ion-col col-4>
+           {{serverBookingPaymentDetails.booking_fee | currency:"RM"}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="payment-list">
+        <ion-col col-8>
+          Total Price
           <div class="tax-lable">Inclusive all the taxes</div>
         </ion-col>
-        <ion-col col-3>
-          RM{{serverBookingPaymentDetails.total_amount_payable}}
+        <ion-col col-4>
+           {{serverBookingPaymentDetails.total_amount_payable | currency:"RM"}}
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
+
+
+
 
   <div class="coupon-box">
     <input class="inputTxt" type="text" placeholder="Apply coupon here" name="search">
@@ -94,7 +121,7 @@
           <img src="assets/img/paypal.jpg" alt="paypal img" height="100">
         </ion-col>
         <ion-col col-6>
-          <div class="paypal-amount">RM{{serverBookingPaymentDetails.total_amount_payable}}</div>
+          <div class="paypal-amount">{{serverBookingPaymentDetails.total_amount_payable | currency:"RM"}}</div>
           <div class="paypal-discount-lable">{{serverBookingPaymentDetails.discount_amount}} of total discount</div>
         </ion-col>
       </ion-row>

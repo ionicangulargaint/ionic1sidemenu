@@ -163,7 +163,7 @@ export class HotelDetailPage {
           hotel_room_type_id: selectedRoomType.room_type_id,
           no_of_person: this.searchCriteria.no_of_adults,
           no_of_childs: this.searchCriteria.no_of_childs,
-          check_in_date: this.searchCriteria.check_out_date,
+          check_in_date: this.searchCriteria.check_in_date,
           check_out_date: this.searchCriteria.check_out_date,
           check_in_time: this.searchCriteria.check_in_time,
           check_out_time: this.searchCriteria.check_out_time,
@@ -177,7 +177,9 @@ export class HotelDetailPage {
           ratings: this.selectedHotelDetail.hotel_star_category,
           hotel_name: this.selectedHotelDetail.hotel_name,
           lat: this.selectedHotelDetail.hotel_longitude,
-          long: this.selectedHotelDetail.hotel_longitude
+          long: this.selectedHotelDetail.hotel_longitude,
+          room_type_name: selectedRoomType.room_type_name
+
         }
       })
     });

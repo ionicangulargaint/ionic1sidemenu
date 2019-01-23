@@ -23,7 +23,7 @@
   <div [ngSwitch]="bookingOptionsModel">
     <div *ngSwitchCase="'Upcoming'">
       <ion-card *ngFor="let upcomig of upcomingBookingDetail">        
-          <ion-grid>
+          <ion-grid (click)="openBookingDetailModal()">
             <ion-row>
               <ion-col col-5>                                              
                   <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{upcomig.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + upcomig.hotel_image_thumb}}"
@@ -105,7 +105,7 @@
 
     <div *ngSwitchCase="'Completed'">
         <ion-card *ngFor="let completed of completedBookingDetail">        
-            <ion-grid>
+            <ion-grid (click)="openBookingDetailModal()">
               <ion-row>
                 <ion-col col-5>                                              
                     <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{completed.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + completed.hotel_image_thumb}}"
@@ -151,7 +151,7 @@
     <div *ngSwitchCase="'Cancelled'">
       <ion-card *ngFor="let cancel of cancelledBookingDetail">
         <div >
-          <ion-grid>
+          <ion-grid (click)="openBookingDetailModal()">
             <ion-row>
               <ion-col col-5>
                   <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{cancel.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + cancel.hotel_image_thumb}}"

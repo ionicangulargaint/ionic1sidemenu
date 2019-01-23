@@ -42,14 +42,17 @@ export class BookingConfirmedPage {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      //this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=VQZ1014342`).subscribe((resp: any) => {
-        this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=VQZ1014342${this.bookingId}`).subscribe((resp: any) => {
+     // this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=VQZ1014342`).subscribe((resp: any) => {
+        this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=${this.bookingId}`).subscribe((resp: any) => {
         this.loading.dismiss();
         this.bookingDetails = resp;
       }, (err) => {
         this.loading.dismiss();
       });
     })
+  }
+  backToHome(){
+    this.navCtrl.popToRoot();
   }
 
 }

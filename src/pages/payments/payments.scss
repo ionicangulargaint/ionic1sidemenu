@@ -34,10 +34,11 @@ page-payments {
     color:#969696;
   }
   .paypal-amount {
-    font-size: 35px;
+    font-size: 23px;
     font-weight: 500;
     text-align: center;
     margin-top: 16px;
+    margin-bottom: 16px;
   }
   .paypal-discount-lable {
     font-size: 10px;
@@ -110,4 +111,35 @@ page-payments {
 //       width: 30%;
 //     }
 // }
+
+.center {
+  text-align: center;
+}
+.room-typelbl {
+  padding: 10px;
+  background: #FA9D00;
+  font-size: 25px;
+  font-weight: 500;
+  color: #fff;
+}
+.card-title{
+  color: #025fe1;
+}
+.paid-amount {
+  color: #5295FA;
+  font-size: 20px;
+  font-weight: 500;
+}
+.payment-wrap {
+  margin-top: 50px;
+  border-top: 1px solid #BBBBBB;
+  border-bottom: 1px solid #BBBBBB;
+}
+.datelbl {
+  padding:10px 15px;
+  border-bottom: 1px solid #BBBBBB; 
+}
+.item > ion-icon:first-child {
+  color: #f19d0b;
+}
 }

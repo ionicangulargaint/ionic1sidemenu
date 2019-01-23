@@ -26,7 +26,7 @@ export class MyBookingsPage {
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public api: Api,
-    public modalCtrl: ModalController ) {
+    public modalCtrl: ModalController) {
     //this.getUpcomingBookingDetails();
   }
 
@@ -107,23 +107,39 @@ export class MyBookingsPage {
   }
 
   navigateToBookingCancelled(bookingDetails) {
-    this.navCtrl.push('CancelBookingPage', {bookingId: bookingDetails.booking_id, hotel_image: bookingDetails.hotel_image_thumb});
+    this.navCtrl.push('CancelBookingPage', { bookingId: bookingDetails.booking_id, hotel_image: bookingDetails.hotel_image_thumb });
   }
 
-  openCommentBox(selectedBooking){
+  openCommentBox(selectedBooking) {
     let options = {
       showBackdrop: false,
       cssClass: 'modal-backdrop-bg'
     }
     let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-    var data = { 
-      param:{ 
+    var data = {
+      param: {
         hotel_id: selectedBooking.hotel_id,
         user_id: loggedInUserId,
-        booking_id: selectedBooking.booking_id, 
+        booking_id: selectedBooking.booking_id,
       }
     };
     var modalPage = this.modalCtrl.create('CommentModalPage', data, options);
     modalPage.present();
   }
+
+
+  openBookingDetailModal() {
+    let options = {
+      showBackdrop: false,
+      cssClass: 'modal-backdrop-bg'
+    }
+    var data = { message: '', change: this.modalChangeStatus.bind(this) };
+    var modalPage = this.modalCtrl.create('MyBookingDetailModalPage', data, options);
+    modalPage.present();
+  }
+
+  modalChangeStatus(item) {
+
+  }
+
 }

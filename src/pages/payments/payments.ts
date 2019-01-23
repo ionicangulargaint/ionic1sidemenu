@@ -13,6 +13,7 @@ export class PaymentsPage {
   noRecordFound: boolean = false;
   imgagePath = "https://anytimecheckin.com/new/image/";
   serverBookingPaymentDetails:any ={};
+  totalNoOfDays:any;
 
   constructor(
     public api: Api,
@@ -33,8 +34,7 @@ export class PaymentsPage {
   ionViewDidLoad(){
     this.getBookingDetails();
     this.searchCriteria = JSON.parse(localStorage.getItem('dashboardSearch'));
-    //this.getBookingDetails();
-        
+    //this.getBookingDetails();            
   }
 
 
@@ -49,6 +49,18 @@ export class PaymentsPage {
         this.loading.dismiss();
         if (resp.result == 'success') {
           this.serverBookingPaymentDetails = resp.Data;
+          if (this.serverBookingPaymentDetails) {
+            var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date(this.serverBookingPaymentDetails.check_in_date);
+            var secondDate = new Date(this.serverBookingPaymentDetails.check_out_date);
+      
+            this.totalNoOfDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+            if(this.totalNoOfDays == 0){
+              this.totalNoOfDays = 1;
+            }
+          } else {
+            this.totalNoOfDays = 1;
+          }
 
         } else {
           this.noRecordFound = true;
@@ -62,10 +74,10 @@ export class PaymentsPage {
   
 
   openLoginMOdal(){
-    let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-    if(loggedInUserId){
-      this.modalChangeStatus('ALREADYLOGIN');
-    } else{
+   // let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
+    //if(loggedInUserId){
+      //this.modalChangeStatus('ALREADYLOGIN');
+    //} else{
       let options = {
         showBackdrop: false,
         cssClass: 'modal-backdrop-bg'
@@ -73,7 +85,7 @@ export class PaymentsPage {
       var data = { message: '', change:this.modalChangeStatus.bind(this) };
       var modalPage = this.modalCtrl.create('LoginAsGuestModalPage', data, options);
       modalPage.present();
-    }
+    //}
     
   }
 

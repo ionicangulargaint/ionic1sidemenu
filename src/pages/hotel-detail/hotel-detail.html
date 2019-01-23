@@ -122,24 +122,25 @@
           <hr>
           <ion-grid>
             <ion-row nowrap class="rateSlot">
-              <ion-col col-4>
-                <p>RM {{room.price_per_hour}}
-                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
-                </p>
+              <ion-col col-6>
+                <p>RM {{room.price_per_hour}}</p>
                 <p>Per Hour</p>
               </ion-col>
-              <ion-col col-4>
-                <p>RM {{room.price_per_day}}
-                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
-                </p>
+              <ion-col col-6>
+                <p>RM {{room.price_per_day}}</p>
                 <p>Per Day</p>
-              </ion-col>
-              <ion-col col-4>
-                <p>RM {{room.totalPriceCalculated}}
-                  <small>{{room.check_in_date | date :'dd:MMM'}}</small>
-                </p>
-                <p>Total Price</p>
-              </ion-col>
+              </ion-col>              
+            </ion-row><br>
+            <ion-row nowrap class="price-data">
+                <ion-col>
+                    <strong> Total Price</strong>
+                  </ion-col>
+                  <ion-col text-center>
+                      <strong>{{room.check_in_date | date :'dd:MMM'}}</strong>
+                  </ion-col>
+                  <ion-col text-right>
+                      <strong>RM {{room.totalPriceCalculated}}</strong>
+                  </ion-col>
             </ion-row>
           </ion-grid>
           <hr>
@@ -161,7 +162,7 @@
     <ion-card *ngFor="let review of selectedHotelReviews">
       <ion-item>
         <ion-avatar item-start>
-          <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
+          <img src="assets/img/user1.png">
         </ion-avatar>
 
         <ion-row>
@@ -197,5 +198,5 @@
       </ion-row>
     </ion-card>
   </div>
-  <h1 padding *ngIf="noRecordFound"> NO Record Found</h1>
+  <h1 padding *ngIf="noRecordFound"> No data found for the hotel.</h1>
 </ion-content>
