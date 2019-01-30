@@ -1,0 +1,83 @@
+comment-modal {
+  .item.item-textarea {
+    border-radius: 10px;
+    background: #e1e1e1;
+    margin-top: 8%;
+  }
+  .text-input-md {
+    margin: 13px 0px;
+  }
+  ion-header .toolbar-background,
+  .scroll-content {
+    background-image: url(/../assets/img/screen.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .toolbar-title,
+  .bar-button-default-md {
+    color: white !important;
+  }
+  .toolbar .segment-md {
+    background: #ffffff;
+  }
+  .container-log {
+    background: white;
+    margin-top: 30%;
+    border-radius: 1px;
+    padding: 20px;
+  }
+  .container-log .toolbar-md {
+    padding: unset;
+    min-height: unset;
+  }
+  .container-log .segment-md .segment-button {
+    padding: unset;
+    color: #8c8c8c;
+  }
+  .container-log .segment-md .segment-button .text {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    font-weight: 400;
+    margin-left: 10px;
+  }
+  .container-log .segment-md .segment-button.segment-activated {
+    border-color: #3b5999;
+    opacity: 1;
+    color: #3b5999;
+  }
+  .container-log .login-form {
+    margin-top: 38px;
+  }
+  .container-log .login-form .item {
+    margin-bottom: 25px;
+  }
+  .container-log .login-form .forgotText {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  .container-log .login-form .forgotText a {
+    text-decoration: none;
+    color: #5289ff;
+  }
+  .faceBookBtn {
+    background: #3e5b99;
+    text-transform: none;
+    border-radius: 5px;
+  }
+  .facebookLoginContainer {
+    text-align: center;
+    padding: 0px 20px;
+  }
+  .facebookLoginContainer h4 {
+    color: white;
+  }
+  .mobileForget {
+    text-align: right !important;
+    margin-top: -20px !important;
+  }
+  .hideBorder .item-inner {
+    border-bottom: none !important;
+    color: #aeaeae;
+  }
+}

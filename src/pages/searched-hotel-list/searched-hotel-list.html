@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{selectedAddress}}</ion-title>
+    <ion-title><span *ngIf="searchParam"></span>{{searchParam.selectedAddress}}</ion-title>
     <ion-buttons end>   
       <button ion-button icon-only (click)="navigateToSearchedHotelOnmapPage()">
         <!-- <ion-icon name="map"></ion-icon> -->
@@ -29,6 +29,89 @@
             <ion-icon name="person"></ion-icon> {{searchParam.no_of_childs}} Child</p>
         </ion-col>
       </ion-row>
+      <ion-row class="filterview">
+        <ion-col col-4>
+          <p class="head">BUDGET</p>
+          <ion-item>
+            <ion-label>Below 15</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.budget_1.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>75-100</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.budget_2.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>100-125</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.budget_3.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Above 125</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.budget_4.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">STAR NIGHT</p>
+          <ion-item>
+            <ion-label>3 Star</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.star3.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>2 Star</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.star2.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>1 Star</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.star1.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Boutique</ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.star0.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <p class="head">CUSTOMER REVIEWS</p>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.rating5.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.rating4.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.rating3.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.rating2.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label class="starColor">
+              <ion-icon name="ios-star"></ion-icon>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="filterObj.rating1.checked" (ionChange)="getHotelList()"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-header>
@@ -42,12 +125,10 @@
   <div *ngIf="!noResultFound">
   <div class="one-item" (click)="navigateToHotelDetail(hotel)" *ngFor="let hotel of hotelList">
     <ion-card class="myCard">
-        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.image}}" />
+        <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{hotel.main_image}}" />
       <div class="myOverlay">
-        <!-- <div class="card-title">$1994</div> -->
-        <div class="card-title1">RM {{hotel.price}}</div>
-        <!-- <div class="discount">50% Off</div> -->
-        <!-- <div class="distance">5 km</div> -->
+        <div class="card-title1">RM {{hotel.price_per_day}}</div>
+        <div class="card-title" *ngIf="hotel.distance"> {{roundOffDistance(hotel.distance)}} Km</div>
       </div>
     </ion-card>
     <ion-card style="margin-top:-10px;">
@@ -59,7 +140,7 @@
           <ion-col col-5 style="text-align: right;">
             <div class="main-rating">
               <ion-icon class="stars-outer" name="ios-star-outline">
-                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotel.rating + '%'}"></ion-icon>
+                <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * hotel.hotel_star_category + '%'}"></ion-icon>
             </ion-icon>
             </div>
           </ion-col>

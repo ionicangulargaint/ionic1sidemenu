@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
+
 
 @IonicPage()
 @Component({
@@ -14,7 +15,9 @@ export class GetDirectionsPage {
   latlng:any;
   formattedAddress:any;
 
-  constructor(public navCtrl: NavController,public geolocation: Geolocation) { }
+  constructor(public navParams: NavParams, public navCtrl: NavController,public geolocation: Geolocation) {
+    this.latlng = this.navParams.get("hotelDetails");
+   }
 
   ionViewDidLoad() {
     this.loadMap();
@@ -23,7 +26,7 @@ export class GetDirectionsPage {
   loadMap() {
     this.geolocation.getCurrentPosition().then((res) => {
       var myOriginLatlng = new google.maps.LatLng(res.coords.latitude, res.coords.longitude);
-      var myDestinationLatlng = new google.maps.LatLng(28.7041, 77.1025);
+      var myDestinationLatlng = new google.maps.LatLng(this.latlng.lat, this.latlng.long);
 
       var directionsService = new google.maps.DirectionsService();
       var directionsDisplay = new google.maps.DirectionsRenderer();

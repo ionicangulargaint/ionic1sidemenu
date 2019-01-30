@@ -88,7 +88,8 @@ export class EditProfilePage {
             position: 'top'
           });
           toast.present();
-          this.getUserProfileData();
+          //this.getUserProfileData();
+          this.navCtrl.pop();
         } else {
           let toast = this.toastCtrl.create({
             message: 'An server error occured,',

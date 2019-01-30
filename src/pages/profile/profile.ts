@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController, LoadingController, Loading  } from 'ionic-angular';
+import { FabContainer, IonicPage, NavController, ToastController, LoadingController, Loading  } from 'ionic-angular';
 import { User, Api } from '../../providers';
 
 @IonicPage()
@@ -28,7 +28,7 @@ export class ProfilePage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
 this.getUserProfileData();
   }
 
@@ -67,7 +67,8 @@ this.getUserProfileData();
     this.navCtrl.push('ForgotPasswordPage');
   }
 
-  editProfile(){
+  editProfile(fab: FabContainer){
+    fab.close();
     this.navCtrl.push('EditProfilePage');
   }
   changePassword(){

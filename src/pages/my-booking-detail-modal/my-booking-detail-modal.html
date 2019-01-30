@@ -1,0 +1,153 @@
+<!-- <ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Hotel images</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="closeModal()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header> -->
+
+
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="container-log"><br><br>
+    <div class="center">
+      <!-- <img height="70" width="70" class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{hotelDetails.hotel_image == null ? 'assets/imgs/no-image-found.png' : imgagePath + hotelDetails.hotel_image}}"
+                        (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" /> -->
+      <!-- <div class="hotel-direction" (click)="getDirections()">
+                        <img src="assets/img/direction.png" alt="direction" height="25" width="25">
+                        <div>Get Direction</div>
+                    </div> -->
+      <h4>{{bookingDetails.hotel_name}}</h4>
+      <div>{{bookingDetails.room_type}}</div>
+      <div class="hotel-address">
+        {{bookingDetails.hotel_address}}
+      </div>
+    </div>
+
+
+    <div class="datelbl">
+      <ion-row>
+        <ion-col text-center>
+          <strong class="card-title">
+            <ion-icon name="log-in" item-start></ion-icon> Check in date
+          </strong><br>
+          <small>{{bookingDetails.check_in_date | date :'dd-MMM-yyyy'}}</small>
+        </ion-col>
+        <ion-col text-center>
+          <strong class="card-title">
+            <ion-icon name="log-out" item-start></ion-icon> Check out date
+          </strong><br>
+          <small>{{bookingDetails.check_out_date | date :'dd-MMM-yyyy'}}</small>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col text-center>
+          <strong class="hotel-address">Room type - </strong>
+          <small> {{bookingDetails.room_type}}</small>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <h3 class="card-title"><strong>Booking details</strong></h3>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-icon name="moon" item-start></ion-icon>
+          {{bookingDetails.no_of_days}} Night
+        </ion-item>
+        <ion-item>
+          <ion-icon name="ios-square" item-start></ion-icon>
+          {{bookingDetails.no_of_rooms}} Room, {{bookingDetails.no_adult}} Adults
+        </ion-item>
+        <ion-item>
+          <ion-icon name="md-people" item-start></ion-icon>
+          {{bookingDetails.no_child}} Child (0-6 year)
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <h3 class="card-title"><strong>User details</strong></h3>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-icon name="person" item-start></ion-icon>
+          {{bookingDetails.primary_guest_name}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail" item-start></ion-icon>
+          {{bookingDetails.guest_email_id}}
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call" item-start></ion-icon>
+          {{bookingDetails.guest_mobile_no}}
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <h3 class="card-title"><strong>Price details</strong></h3>
+        </ion-item>
+      </ion-list>
+      <hr>
+      <ion-grid>
+        <ion-row class="payment-list">
+          <ion-col col-8>
+            Net payable amount
+          </ion-col>
+          <ion-col col-4>
+            {{bookingDetails.net_payable_amount | currency:"RM"}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="payment-list">
+          <ion-col col-8>
+            Amount paid
+
+          </ion-col>
+          <ion-col col-4>
+            {{bookingDetails.amount_paid | currency:"RM"}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="payment-list">
+          <ion-col col-8>
+            Outstanding amount
+          </ion-col>
+          <ion-col col-4>
+            {{bookingDetails.outstanding_amount | currency:"RM"}}
+          </ion-col>
+        </ion-row>
+        <ion-row class="payment-list">
+          <ion-col col-8>
+            Total Price
+            <div class="tax-lable">Inclusive all the taxes</div>
+          </ion-col>
+          <ion-col col-4>
+            {{bookingDetails.net_payable_amount | currency:"RM"}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+    <br><br><br>
+  </div>
+</ion-content>

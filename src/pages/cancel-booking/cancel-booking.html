@@ -7,14 +7,18 @@
 <ion-content no-bounce class="no-scroll">
   <div style="padding:10px;">
     <div class="small-lable">
-      <b>Booking ID </b> - QYBG3015 </div>
+      <b>Booking ID </b> - {{bookingDetails.booking_id}} </div>
     <ion-grid>
       <ion-row style="border-bottom: 1px solid #E9E9E9;">
         <ion-col col-5>
-          <img src="assets/img/hotel-pic.jpeg" alt="hotel-pic" width="100">
+          <!-- <img src="assets/img/hotel-pic.jpeg" alt="hotel-pic" width="100"> -->
+          <img width="100" onError="this.src='assets/imgs/no-image-found.png';" src="{{hotelImage == null ? 'assets/imgs/no-image-found.png' : imgagePath + hotelImage}}"
+          (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+        <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
         </ion-col>
         <ion-col col-7 class="hotel-address">
-          Plot no 1, Sector 21c, Faridabad, New Delhi and NCR, India 121003
+          <h4 style="text-transform: capitalize;">{{bookingDetails.hotel_name}}</h4>
+            <p>{{bookingDetails.hotel_address}}</p>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -22,22 +26,23 @@
     <ion-grid>
       <ion-row class="center">
         <ion-col col-5 style="border-right: 1px solid #E9E9E9;">
-          <h4>Aug 13</h4>
-          <div>Mon 12:00 PM</div>
+          <h4>{{bookingDetails.check_in_date  | date :'mediumDate'}}</h4>
+          <!-- <div> {{bookingDetails.check_in_time | date : 'shortTime'}}</div> -->
+          <div> {{bookingDetails.check_in_time}}</div>
         </ion-col>
         <ion-col col-7>
-          <h4>Aug 14</h4>
-          <div>Tue 11:00 PM</div>
+          <h4>{{bookingDetails.check_out_date  | date :'mediumDate'}}</h4>
+          <div>{{bookingDetails.check_out_time}}</div>
         </ion-col>
       </ion-row>
       <br>
       <ion-row class="center">
         <ion-col col-5 style="border-right: 1px solid #E9E9E9;">
-          <h4>1 Guest</h4>
-          <div>1 Adult</div>
+          <h4>{{bookingDetails.no_of_child}} Child</h4>
+          <div>{{bookingDetails.no_of_adult}} Adult</div>
         </ion-col>
         <ion-col col-7>
-          <h4>1 Clasic(2x)</h4>
+          <h4>{{bookingDetails.no_of_rooms}} {{bookingDetails.room_type}} </h4>
           <div>Room</div>
         </ion-col>
       </ion-row>
@@ -45,27 +50,27 @@
 
     <ion-grid>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Total Amount Rs(3000)
+        <ion-col col-7>
+          Total Amount
         </ion-col>
-        <ion-col col-3>
-          Rs 3000
-        </ion-col>
-      </ion-row>
-      <ion-row class="payment-list">
-        <ion-col col-9>
-          Amount Pay Rs(2000)
-        </ion-col>
-        <ion-col col-3>
-          Rs 2000
+        <ion-col col-5>
+          RM {{bookingDetails.total_amount}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Outstanding Amount Rs(1000)
+        <ion-col col-7>
+          Amount Pay
         </ion-col>
-        <ion-col col-3>
-          Rs 1000
+        <ion-col col-5>
+          RM{{bookingDetails.total_amount - bookingDetails.outstanding_amount}}
+        </ion-col>
+      </ion-row>
+      <ion-row class="payment-list">
+        <ion-col col-7>
+          Outstanding Amount
+        </ion-col>
+        <ion-col col-5>
+          RM{{bookingDetails.outstanding_amount}}
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -78,28 +83,28 @@
     </div>
     <ion-grid>
       <ion-row class="payment-list">
-        <ion-col col-9>
+        <ion-col col-7>
           Total Amount
         </ion-col>
-        <ion-col col-3>
-          Rs 3000
+        <ion-col col-5>
+          RM{{bookingDetails.total_amount}}
         </ion-col>
       </ion-row>
       <ion-row class="payment-list">
-        <ion-col col-9>
-          Refound Amount
+        <ion-col col-7>
+          Refund Amount
         </ion-col>
-        <ion-col col-3>
-          Rs 2100
+        <ion-col col-5>
+          RM{{bookingDetails.total_amount - bookingDetails.outstanding_amount}}
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-item>
       <ion-label class="small-lable">I accept the terms and condition in the licence aggrement</ion-label>
-      <ion-checkbox color="dark"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="termsConditionCheck"color="dark"></ion-checkbox>
     </ion-item>
     <div style="text-align: right;">
-      <button ion-button>Submit</button>
+      <button [disabled]="!termsConditionCheck" ion-button (click)="cancleHotelBooking()">Submit</button>
     </div>
   </div>
 </ion-content>

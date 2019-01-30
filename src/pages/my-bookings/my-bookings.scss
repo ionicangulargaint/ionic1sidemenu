@@ -15,18 +15,19 @@ page-my-bookings {
   .hotel-name {
     font-size: 16px;
     font-weight: 500;
-    padding: 5px 0px;
+    padding: 5px 15px;
+    text-transform: capitalize;
   }
   .segment-md .segment-button {
     padding: unset;
     color: #39a7d1;
     height: unset;
     margin: 8px 5px;
-    border : none;
-    border-right :1px dotted #656565;
+    border: none;
+    border-right: 1px dotted #656565;
   }
   .segment-md .segment-button:last-child {
-    border : none;
+    border: none;
   }
   .segment-md .segment-button .text {
     font-size: 1.5rem;
@@ -38,26 +39,26 @@ page-my-bookings {
     opacity: 1;
     color: #000;
   }
-.small-lable {
-    font-size:10px; 
-    padding-left:5px;
+  .small-lable {
+    font-size: 10px;
+    padding-left: 15px;
     color: #969696;
   }
   .checkin-lbl {
-    font-size:13px; 
-    padding:2px;
+    font-size: 13px;
+    padding: 2px;
     color: #33abd0;
     font-weight: 500;
     text-transform: uppercase;
   }
   .date-lbl {
-    font-size:11px; 
-    padding-left:5px;
-    padding:2px;
+    font-size: 11px;
+    padding-left: 5px;
+    padding: 2px;
   }
   .right-dotted-border {
-    border : none;
-    border-right :1px dotted #656565;
+    border: none;
+    border-right: 1px dotted #656565;
   }
   .btn-wrap {
     margin: 10px 5px;
@@ -74,7 +75,7 @@ page-my-bookings {
     left: 0;
     right: 0;
     margin: 0 auto;
-  } 
+  }
   .step-strips {
     width: 72%;
     border: 2px solid darkgrey;
@@ -86,7 +87,7 @@ page-my-bookings {
     background: #5392f9;
   }
   .running-steps .small-lable {
-    color:#5392f9;
+    color: #5392f9;
   }
   .main-rating {
     font-size: 15px;
@@ -94,13 +95,20 @@ page-my-bookings {
   }
 
   .img-loaded + ion-spinner {
-    display:none;
+    display: none;
   }
-  
-  .spinner-center-custom{
+
+  .spinner-center-custom {
     margin-left: auto;
     margin-right: auto;
     display: block;
   }
-  
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #ffffff;
+  }
+  ion-card img {
+    height: 11.6rem;
+  }
 }

@@ -10,7 +10,7 @@ page-payments {
     font-weight: 500;
   }
   .main-rating ion-icon{
-    color: #d8aa04;
+    color: #cfc8a6;
     font-size: 13px;
   }
   .hotel-address {
@@ -34,10 +34,11 @@ page-payments {
     color:#969696;
   }
   .paypal-amount {
-    font-size: 35px;
+    font-size: 23px;
     font-weight: 500;
     text-align: center;
     margin-top: 16px;
+    margin-bottom: 16px;
   }
   .paypal-discount-lable {
     font-size: 10px;
@@ -75,6 +76,32 @@ page-payments {
     clear: both;
     display: table;
 }
+.stars-outer {
+  display: inline-block;
+  position: relative;
+}
+ 
+.stars-outer.ion-ios-star-outline::before {
+  content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  font-size: 14px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+.stars-inner.ion-ios-star::before {
+  content: "\f384 \f384 \f384 \f384 \f384";
+  color: #f8ce0b;
+}
+
+.stars-inner {
+  width: 0;
+}
 // }
 // @media (min-width: 320px) and (max-width: 480px) {
 //    .coupon-box .inputTxt{
@@ -84,4 +111,35 @@ page-payments {
 //       width: 30%;
 //     }
 // }
+
+.center {
+  text-align: center;
+}
+.room-typelbl {
+  padding: 10px;
+  background: #FA9D00;
+  font-size: 25px;
+  font-weight: 500;
+  color: #fff;
+}
+.card-title{
+  color: #025fe1;
+}
+.paid-amount {
+  color: #5295FA;
+  font-size: 20px;
+  font-weight: 500;
+}
+.payment-wrap {
+  margin-top: 50px;
+  border-top: 1px solid #BBBBBB;
+  border-bottom: 1px solid #BBBBBB;
+}
+.datelbl {
+  padding:10px 15px;
+  border-bottom: 1px solid #BBBBBB; 
+}
+.item > ion-icon:first-child {
+  color: #f19d0b;
+}
 }

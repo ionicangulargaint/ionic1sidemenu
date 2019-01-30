@@ -234,4 +234,36 @@ page-dashboard {
   .item-cover {
     height: auto;
   }
+
+  .selectBox.item-md {
+    background-color:transparent;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .selectBox .label-md {
+    margin: 13px 0px;
+    color: #fff !important;
+  }
+
+  .select-md .select-icon {
+    width: 15px;
+    }
+  .select-md .select-icon .select-icon-inner {
+    left: 0px;
+  }
+
+  .toolbar-content-md {
+    height: 69.8px;
+  }
+
+  .title-md {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -35,24 +35,31 @@
     font-weight: 500;
     margin: 5px;
     font-size: 17px;
-}   
-ion-menu ion-header{
-    // display: contents;    
-}
+}  
+
 ion-menu ion-header .toolbar-background-md {
     background: white;
 }
+
+ion-menu {
+    .toolbar-content-md {
+        height: 69.8px;
+      }
+    
+      .title-md {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+      }
+}
+
 .menu-item {
     color: #0e3f7e;
     font-weight: 500;
 }
-
-
-// @media (min-width:320px) {
-//     .smallSreeenFont .datetime-text{
-//       font-size: 1rem;
-//     }
-//   }
 
   @media (max-width: 320px) {
     .smallSreeenFont .datetime-text{
@@ -94,14 +101,16 @@ ion-menu ion-header .toolbar-background-md {
                 font-size: 1rem;
             }
  }
-//  @media (min-width: 321px) and (max-width: 480px) {
-//     .smallSreeenFont .datetime-text{
-//         font-size: 1.5rem;
-//       }
-//       page-payments .coupon-box .inputTxt{
-//         width: 70%;
-//       }
-//       page-payments .coupon-box .inputBtn {
-//         width: 30%;
-//       }
-//  }
+
+.main-header .toolbar-ios {
+    min-height: 75px;
+}
+
+.main-header .toolbar-ios ion-title {
+    padding: 0 45px 1px;
+        width: auto;
+}
+
+.ion-content {
+    top:31px;
+}
