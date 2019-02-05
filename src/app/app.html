@@ -1,5 +1,5 @@
 <ion-menu [content]="content">
-  <ion-header class="main-header">
+  <ion-header>
     <ion-toolbar>
       <ion-title>
         <img src="assets/img/menu-logo.png" height="70">
@@ -10,6 +10,11 @@
     <p class="sideMenu-text">Login to access your profile</p>
     <button block ion-button class="sideMenu-login-btn" (click)="navigateToLogin()">Login</button>
     <button block ion-button outline class="sideMenu-register-btn" (click)="navigateToRegistration()">Create an Account</button>
+    <!-- <ion-list>
+        <button class="menu-item" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          {{p.title}}
+        </button>
+      </ion-list> -->
   </ion-content>
   <ion-content *ngIf="userLogin"> 
     <ion-list>

@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { User, Api } from '../../providers';
 import { MainPage } from '../';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+//import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({
@@ -39,7 +39,7 @@ export class SignupPage {
     public translateService: TranslateService,
     private httpClient: HttpClient,
     public loadingCtrl: LoadingController,
-    private fb: Facebook,
+    //private fb: Facebook,
     public events: Events
     ) {
     this.signUpFormByEmail = this._FORMBUILDER.group({
@@ -190,22 +190,22 @@ export class SignupPage {
   }
 
   loginWithFacebook() {
-    this.fb.login(['public_profile', 'email'])
-      .then((res: FacebookLoginResponse) => {
-        this.fb.api('me/?fields=id,first_name,last_name,email,picture.width(720).height(720).as(picture_large)',["public_profile","email"]).then( apires => {
-          var user = {
-            user_id:apires.id,
-            email:apires.email,
-            first_name:apires.first_name,
-            last_name:apires.last_name,
-            image:apires.picture_large.data.url,
-            loginFb:true
-          }
-          this.events.publish('user:loggedin', user, Date.now());
-          this.navCtrl.setRoot('DashboardPage');
-        }).catch(err => console.log('Error in profile info', err));
-      })
-      .catch(e => console.log('Error logging into Facebook', e));
-      this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+    // this.fb.login(['public_profile', 'email'])
+    //   .then((res: FacebookLoginResponse) => {
+    //     this.fb.api('me/?fields=id,first_name,last_name,email,picture.width(720).height(720).as(picture_large)',["public_profile","email"]).then( apires => {
+    //       var user = {
+    //         user_id:apires.id,
+    //         email:apires.email,
+    //         first_name:apires.first_name,
+    //         last_name:apires.last_name,
+    //         image:apires.picture_large.data.url,
+    //         loginFb:true
+    //       }
+    //       this.events.publish('user:loggedin', user, Date.now());
+    //       this.navCtrl.setRoot('DashboardPage');
+    //     }).catch(err => console.log('Error in profile info', err));
+    //   })
+    //   .catch(e => console.log('Error logging into Facebook', e));
+    //   this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
   }
 }

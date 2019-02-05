@@ -8,7 +8,6 @@ import { Api } from '../../providers';
   templateUrl: 'hotel-detail.html'
 })
 export class HotelDetailPage {
-
   imgagePath = "https://anytimecheckin.com/new/image/";
   selectedHotel: any = '';
   selectedHotelDetail: any;
@@ -144,7 +143,6 @@ export class HotelDetailPage {
       showBackdrop: false,
       cssClass: 'modal-backdrop-bg'
     }
-    console.log(photoList);
     var data = { message: photoList };
     var modalPage = this.modalCtrl.create('ImagesModalPage', data, options);
     modalPage.present();

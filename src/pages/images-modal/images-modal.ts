@@ -7,7 +7,7 @@ import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angul
   templateUrl: 'images-modal.html'
 })
 export class ImagesModalPage {
-  imgagePath = "https://anytimecheckin.com/new/";
+  
   imagesList:any = [];
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams) {
     this.imagesList = this.navParams.get('message');
