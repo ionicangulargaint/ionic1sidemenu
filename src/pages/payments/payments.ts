@@ -74,10 +74,11 @@ export class PaymentsPage {
   
 
   openLoginMOdal(){
-   // let loggedInUserId = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
-    //if(loggedInUserId){
-      //this.modalChangeStatus('ALREADYLOGIN');
-    //} else{
+   // if(JSON.parse(localStorage.getItem('userDetails'))
+    let loggedInUserId = (localStorage.getItem('userDetails'));
+    if(loggedInUserId){
+      this.modalChangeStatus('ALREADYLOGIN');
+    } else{
       let options = {
         showBackdrop: false,
         cssClass: 'modal-backdrop-bg'
@@ -85,7 +86,7 @@ export class PaymentsPage {
       var data = { message: '', change:this.modalChangeStatus.bind(this) };
       var modalPage = this.modalCtrl.create('LoginAsGuestModalPage', data, options);
       modalPage.present();
-    //}
+    }
     
   }
 

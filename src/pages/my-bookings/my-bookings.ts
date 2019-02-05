@@ -128,12 +128,12 @@ export class MyBookingsPage {
   }
 
 
-  openBookingDetailModal() {
+  openBookingDetailModal(hotel_booking_id, selectedHotelImage) {
     let options = {
       showBackdrop: false,
       cssClass: 'modal-backdrop-bg'
     }
-    var data = { message: '', change: this.modalChangeStatus.bind(this) };
+    var data = { id: hotel_booking_id, change: this.modalChangeStatus.bind(this), selectedHotelImage: selectedHotelImage };
     var modalPage = this.modalCtrl.create('MyBookingDetailModalPage', data, options);
     modalPage.present();
   }

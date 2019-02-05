@@ -279,6 +279,32 @@ export class DashboardPage {
     this.getTopHotels();
   }
 
+sentMessage(){
+  
+  let payment_frame:any = document.getElementById('payment_frame');
+  payment_frame.contentWindow.postMessage('hello', 'http://netmaxims.in');
+  window.addEventListener('message',function(event) {
+    if(event.origin !== 'http://netmaxims.in') return;
+    console.log('received response:  ',event.data);
+  },false);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getFeaturedAds() {
     this.commonService.createLoader();
     this.commonService.loading.present().then(() => {
@@ -345,5 +371,11 @@ export class DashboardPage {
       console.log('Error getting location', error);
     });
   }
+
+
+
+  //postmesage starts here
+
+
 
 }

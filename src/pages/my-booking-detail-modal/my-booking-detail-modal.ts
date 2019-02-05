@@ -10,6 +10,8 @@ import { Api } from '../../providers';
 })
 export class MyBookingDetailModalPage {
   changeStatus:any;
+  bookingId:any;
+  hotel_image:any;
   noRecordFound: boolean = false;
   bookingDetails:any ={};
   constructor(
@@ -23,6 +25,8 @@ export class MyBookingDetailModalPage {
     private navParams:NavParams
   ) {
     this.changeStatus =  this.navParams.get("change");
+    this.bookingId =  this.navParams.get("id");
+    this.hotel_image = this.navParams.get("selectedHotelImage");
     
   }
 
@@ -39,8 +43,8 @@ export class MyBookingDetailModalPage {
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {
-      this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=VQZ1014342`).subscribe((resp: any) => {
-        //this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=${this.bookingId}`).subscribe((resp: any) => {
+      //this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=VQZ1014342`).subscribe((resp: any) => {
+        this.api.get(`bookingConfirmed.php?bookingConfirmed=booking12345&transaction_id=${this.bookingId}`).subscribe((resp: any) => {
         this.loading.dismiss();
         this.bookingDetails = resp;
       }, (err) => {

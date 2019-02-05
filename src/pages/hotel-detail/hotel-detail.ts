@@ -100,9 +100,7 @@ export class HotelDetailPage {
     this.api.get(`user_vendor_review.php?UserReview=ARQP12345&hotel_id=${this.selectedHotel}`).subscribe((resp: any) => {
       if (resp.result == 'success') {
         this.selectedHotelReviews = resp.reviews;
-      } else {
-        this.noRecordFound = true;
-      }
+      } 
     }, (err) => {
       alert(err)
     });

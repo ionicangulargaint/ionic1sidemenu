@@ -6,10 +6,10 @@ page-payments {
     border-radius: 50%;
   }
   .hotel-lable {
-    color: #6591E4;
+    color: #6591e4;
     font-weight: 500;
   }
-  .main-rating ion-icon{
+  .main-rating ion-icon {
     color: #cfc8a6;
     font-size: 13px;
   }
@@ -21,17 +21,17 @@ page-payments {
   .payment-list {
     font-size: 13px;
     font-weight: 500;
-    border: 1px solid #D7D7D7;
-    padding: 5px 0px 5px 5px;;
+    border: 1px solid #d7d7d7;
+    padding: 5px 0px 5px 5px;
     border-bottom: none;
   }
   .payment-list:last-child {
-    border-bottom: 1px solid #D7D7D7;
-    background: #F5F5F5;
+    border-bottom: 1px solid #d7d7d7;
+    background: #f5f5f5;
   }
   .tax-lable {
     font-size: 10px;
-    color:#969696;
+    color: #969696;
   }
   .paypal-amount {
     font-size: 23px;
@@ -44,102 +44,211 @@ page-payments {
     font-size: 10px;
     font-weight: 500;
     text-align: center;
-    color:#969696;
+    color: #969696;
   }
   .coupon-box {
     padding: 10px;
   }
-  .coupon-box input[type=text] {
+  .coupon-box input[type="text"] {
     padding: 10px;
     height: auto;
-    font-size: 1.6rem; 
+    font-size: 1.6rem;
     font-weight: 400;
-    border: 1px solid #E5E5E5;
+    border: 1px solid #e5e5e5;
     float: left;
     width: 80%;
-    background: #F5F5F5;
-}
-.coupon-box button {
+    background: #f5f5f5;
+  }
+  .coupon-box button {
     float: left;
     width: 20%;
     padding: 11px;
-    background: #3B5999;
+    background: #3b5999;
     color: white;
-    font-size: 1.6rem; 
+    font-size: 1.6rem;
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
-}
+  }
 
-.coupon-box::after {
+  .coupon-box::after {
     content: "";
     clear: both;
     display: table;
-}
-.stars-outer {
-  display: inline-block;
-  position: relative;
-}
- 
-.stars-outer.ion-ios-star-outline::before {
-  content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
-}
+  }
+  .stars-outer {
+    display: inline-block;
+    position: relative;
+  }
 
-.stars-inner {
-  position: absolute;
-  top: 0;
-  left: 0px;
-  font-size: 14px !important;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-}
-.stars-inner.ion-ios-star::before {
-  content: "\f384 \f384 \f384 \f384 \f384";
-  color: #f8ce0b;
-}
+  .stars-outer.ion-ios-star-outline::before {
+    content: "\f4b2 \f4b2 \f4b2 \f4b2 \f4b2";
+  }
 
-.stars-inner {
-  width: 0;
-}
-// }
-// @media (min-width: 320px) and (max-width: 480px) {
-//    .coupon-box .inputTxt{
-//       width: 70%;
-//     }
-//    .coupon-box .inputBtn {
-//       width: 30%;
-//     }
-// }
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    font-size: 14px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+  .stars-inner.ion-ios-star::before {
+    content: "\f384 \f384 \f384 \f384 \f384";
+    color: #f8ce0b;
+  }
 
-.center {
-  text-align: center;
-}
-.room-typelbl {
-  padding: 10px;
-  background: #FA9D00;
-  font-size: 25px;
-  font-weight: 500;
-  color: #fff;
-}
-.card-title{
-  color: #025fe1;
-}
-.paid-amount {
-  color: #5295FA;
-  font-size: 20px;
-  font-weight: 500;
-}
-.payment-wrap {
-  margin-top: 50px;
-  border-top: 1px solid #BBBBBB;
-  border-bottom: 1px solid #BBBBBB;
-}
-.datelbl {
-  padding:10px 15px;
-  border-bottom: 1px solid #BBBBBB; 
-}
-.item > ion-icon:first-child {
-  color: #f19d0b;
-}
+  .stars-inner {
+    width: 0;
+  }
+  // }
+  // @media (min-width: 320px) and (max-width: 480px) {
+  //    .coupon-box .inputTxt{
+  //       width: 70%;
+  //     }
+  //    .coupon-box .inputBtn {
+  //       width: 30%;
+  //     }
+  // }
+
+  .center {
+    text-align: center;
+  }
+  .room-typelbl {
+    padding: 10px;
+    background: #fa9d00;
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .card-title {
+    color: #025fe1;
+  }
+  .paid-amount {
+    color: #5295fa;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .payment-wrap {
+    margin-top: 50px;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+  }
+  .datelbl {
+    padding: 10px 15px;
+    border-bottom: 1px solid #bbbbbb;
+  }
+  .item > ion-icon:first-child {
+    color: #353535;
+    font-size: 2.2rem;
+  }
+
+  .main-rating {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+
+  .img-loaded + ion-spinner {
+    display: none;
+  }
+
+  .spinner-center-custom {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #ffffff;
+  }
+  ion-card img {
+    height: 11.6rem;
+  }
+
+  .toolbar-background {
+    background: #0f4187;
+    border-color: transparent;
+  }
+  .toolbar-title {
+    color: #fff;
+  }
+  .center {
+    text-align: center;
+  }
+  .right {
+    text-align: right;
+  }
+  .hotel-name {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 15px;
+    text-transform: capitalize;
+  }
+  .segment-md .segment-button {
+    padding: unset;
+    color: #39a7d1;
+    height: unset;
+    margin: 8px 5px;
+    border: none;
+    border-right: 1px dotted #656565;
+  }
+  .segment-md .segment-button:last-child {
+    border: none;
+  }
+  .segment-md .segment-button .text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+  .segment-md .segment-button.segment-activated {
+    border-color: #bababa;
+    opacity: 1;
+    color: #000;
+  }
+  .small-lable {
+    font-size: 10px;
+    padding-left: 15px;
+    color: #969696;
+  }
+  .checkin-lbl {
+    font-size: 13px;
+    padding: 2px;
+    color: #33abd0;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .date-lbl {
+    font-size: 11px;
+    padding-left: 5px;
+    padding: 2px;
+  }
+  .right-dotted-border {
+    border: none;
+    border-right: 1px dotted #656565;
+  }
+  .btn-wrap {
+    margin: 10px 5px;
+  }
+  .bed{
+    height: 22px;
+    width: 19px;
+  }
+  .total-price-container{
+    background: #3b3d4c;
+    color: white;
+  }
+  .item-block {
+    min-height: 3.4rem;
+  }
+
+  .item-md {
+    padding-left: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .item-md [item-start] {
+    margin: 0px -17px 0px 0;
+  }
 }

@@ -74,6 +74,7 @@ export class LoginAsGuestModalPage {
           this.loginError.show = true;
           this.loginError.msg = 'Wrong email or password.';
         } else {         
+          this.events.publish('user:loggedin', resp, Date.now());
           this.changeParentStatus('LOGIN', resp.user_id);
         }
       }, (err) => {

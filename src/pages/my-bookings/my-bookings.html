@@ -23,7 +23,7 @@
   <div [ngSwitch]="bookingOptionsModel">
     <div *ngSwitchCase="'Upcoming'">
       <ion-card *ngFor="let upcomig of upcomingBookingDetail">        
-          <ion-grid (click)="openBookingDetailModal()">
+          <ion-grid (click)="openBookingDetailModal(upcomig.hotel_booking_id, imgagePath + upcomig.hotel_image_thumb)">
             <ion-row>
               <ion-col col-5>                                              
                   <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{upcomig.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + upcomig.hotel_image_thumb}}"
@@ -32,7 +32,7 @@
               </ion-col>
               <ion-col col-7>
                 <div class="hotel-name">{{upcomig.hotel_name}}</div>
-                <div class="small-lable">Booking ID: {{upcomig.booking_id}}</div>
+                <div class="small-lable">Booking ID: {{upcomig.hotel_booking_id}}</div>
                 <ion-grid>
                   <ion-row class="center">
                     <ion-col col-6 class="right-dotted-border">
@@ -105,7 +105,7 @@
 
     <div *ngSwitchCase="'Completed'">
         <ion-card *ngFor="let completed of completedBookingDetail">        
-            <ion-grid (click)="openBookingDetailModal()">
+            <ion-grid (click)="openBookingDetailModal(completed.hotel_booking_id, imgagePath + completed.hotel_image_thumb)">
               <ion-row>
                 <ion-col col-5>                                              
                     <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{completed.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + completed.hotel_image_thumb}}"
@@ -114,7 +114,7 @@
                 </ion-col>
                 <ion-col col-7>
                   <div class="hotel-name">{{completed.hotel_name}}</div>
-                  <div class="small-lable">Booking ID: {{completed.booking_id}}</div>
+                  <div class="small-lable">Booking ID: {{completed.hotel_booking_id}}</div>
                   <ion-grid>
                     <ion-row class="center">
                       <ion-col col-6 class="right-dotted-border">
@@ -151,7 +151,7 @@
     <div *ngSwitchCase="'Cancelled'">
       <ion-card *ngFor="let cancel of cancelledBookingDetail">
         <div >
-          <ion-grid (click)="openBookingDetailModal()">
+          <ion-grid (click)="openBookingDetailModal(cancel.hotel_booking_id, imgagePath + cancel.hotel_image_thumb)">
             <ion-row>
               <ion-col col-5>
                   <img class="hotel-img" onError="this.src='assets/imgs/no-image-found.png';" src="{{cancel.hotel_image_thumb == null ? 'assets/imgs/no-image-found.png' : imgagePath + cancel.hotel_image_thumb}}"
@@ -160,7 +160,7 @@
               </ion-col>
               <ion-col col-7>
                 <div class="hotel-name">{{cancel.hotel_name}}</div>
-                <div class="small-lable">Booking ID: {{cancel.booking_id}}</div>
+                <div class="small-lable">Booking ID: {{cancel.hotel_booking_id}}</div>
                 <ion-grid>
                   <ion-row class="center">
                     <ion-col col-6 class="right-dotted-border">
