@@ -51,8 +51,10 @@ export class BookingConfirmedPage {
       });
     })
   }
+
   backToHome(){
-    this.navCtrl.popToRoot();
+   // this.navCtrl.popToRoot();
+   this.navCtrl.push('ThankyouPage');
   }
 
 }

@@ -1,0 +1,31 @@
+page-thankyou {
+    .wrapper{
+        border:10px solid #0F3F84; 
+        text-align: center
+    }
+    img {
+        height: 165px; 
+        margin-top: 40px;
+    }
+    .thankyou-msg {
+        color: #0F3F84;
+        font-size: 45px;
+        font-weight: 600;
+        text-align: center;
+        font-family: cursive;
+        margin-top: -35px;
+        margin-bottom: 20px;
+    }
+    .sub-msg {
+        color: #0F3F84;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+    }
+    .sub-msg1 {
+        color: #B6B4B6;
+        font-size: 14px;
+        text-align: center;
+        margin: 18px;
+    }
+}
