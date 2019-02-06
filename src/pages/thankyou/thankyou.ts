@@ -15,7 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ThankyouPage {
 
+  useremailId:any = '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this.useremailId = this.navParams.get("userEmail");
   }
 
   ionViewDidLoad() {

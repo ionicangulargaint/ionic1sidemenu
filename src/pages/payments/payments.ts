@@ -14,6 +14,7 @@ export class PaymentsPage {
   imgagePath = "https://anytimecheckin.com/new/image/";
   serverBookingPaymentDetails:any ={};
   totalNoOfDays:any;
+  userEmailId:any='';
 
   constructor(
     public api: Api,
@@ -114,14 +115,17 @@ export class PaymentsPage {
     }
     
     if(item.type == 'LOGIN'){
-      apiParam.user_id = item.data;
+      apiParam.user_id = item.data.user_id;
+      this.userEmailId = item.data.email;
     } else if(item == 'ALREADYLOGIN'){
       apiParam.user_id = (JSON.parse(localStorage.getItem('userDetails'))).user_id;
+      this.userEmailId = (JSON.parse(localStorage.getItem('userDetails'))).email;
     }else{
       apiParam.fname = item.data.fname;
       apiParam.lname = item.data.lname;
       apiParam.email = item.data.email;
       apiParam.mob_no = item.data.mobile;
+      this.userEmailId = item.data.email;
     }
     this.confirmBooking(apiParam);
   }
@@ -144,7 +148,7 @@ export class PaymentsPage {
   }
 
   navigateToBookingConfirmed(bookingId) {    
-    this.navCtrl.push('BookingConfirmedPage', {booking_id: bookingId, hotelDetails: this.bookingDetails.hotelDetails});
+    this.navCtrl.push('ThankyouPage', {userEmail: this.userEmailId});
   }
 
   navigateToPymentsDetails() {
