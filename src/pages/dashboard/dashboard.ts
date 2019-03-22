@@ -341,6 +341,23 @@ sentMessage(){
   }
 
   navigateToHotelDetail(item) {
+    let data = {
+      optradio: this.selectedTypeDay ? 1 : 2,
+      check_in_date: this.selectedTypeDay ? this.selectedDates.checkInDate : this.selectedTime.checkInDate,
+      check_in_time: this.selectedTypeDay ? '00:00' : this.selectedTime.checkInTime,
+      check_out_date: this.selectedTypeDay ? this.selectedDates.checkoutDate : this.getCheckOutDate(),
+      check_out_time: this.selectedTypeDay ? '00:00' : this.getCheckOutTime(),
+      no_of_adults: this.guestDetails.adult,
+      no_of_rooms: this.guestDetails.rooms,
+      no_of_childs: this.guestDetails.children,
+      lat: this.selectedLocation.lat,
+      lng: this.selectedLocation.lng,
+      selectedTypeDay: this.selectedTypeDay,
+      selectedAddress: this.selectedLocation.address
+    }
+    localStorage.setItem('dashboardSearch', JSON.stringify(data));
+
+
     localStorage.setItem('selected_hotel_id', item.hotel_id)
     this.navCtrl.push('HotelDetailPage', { 'item': item.hotel_id });
   }

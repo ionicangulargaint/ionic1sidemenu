@@ -8,10 +8,10 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides pager>
-        <ion-slide *ngFor="let image of imagesList">
+    <ion-slides pager zoom>
+        <ion-slide *ngFor="let item of imagesList">
             <div class="swiper-zoom-container">
-                <img onError="this.src='assets/imgs/no-image-found.png';" src="{{image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                <img onError="this.src='assets/imgs/no-image-found.png';" src="{{item.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
             </div>
         </ion-slide>

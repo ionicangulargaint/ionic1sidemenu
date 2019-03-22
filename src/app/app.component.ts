@@ -85,6 +85,7 @@ export class MyApp {
   }
 
   logout() {
+    localStorage.clear();
     this.userLogin = false;
     this.nav.setRoot('DashboardPage');
     this.menuCtrl.close();
