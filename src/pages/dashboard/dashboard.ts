@@ -268,7 +268,8 @@ export class DashboardPage {
       lat: this.selectedLocation.lat,
       lng: this.selectedLocation.lng,
       selectedTypeDay: this.selectedTypeDay,
-      selectedAddress: this.selectedLocation.address
+      selectedAddress: this.selectedLocation.address,
+      hr: this.selectedTime.selectedHours
     }
     localStorage.setItem('dashboardSearch', JSON.stringify(data));
     this.navCtrl.push('SearchedHotelListPage');
