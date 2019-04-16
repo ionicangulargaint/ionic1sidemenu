@@ -32,6 +32,12 @@ export class MyApp {
     });
     this.initTranslate();
 
+    if (localStorage.getItem('userDetails')) {
+      this.userLogin = true;
+    } else {
+      this.userLogin = false;
+    }
+
     events.subscribe('user:loggedin', (user, time) => {
       this.userLogin = true;
       localStorage.setItem('userDetails', JSON.stringify(user));
@@ -90,5 +96,5 @@ export class MyApp {
     this.nav.setRoot('DashboardPage');
     this.menuCtrl.close();
   }
-  
+
 }
