@@ -8,21 +8,21 @@
   <ion-list no-border>
     <ion-item>
       <h1 item-start>{{guestDetails.rooms}}</h1>
-      Room
+      {{guestDetails.rooms <= 1 ? 'Room' : 'Rooms'}}
       <ion-icon name='ios-remove-circle-outline' item-end color="primary"(click)="updateRooms('remove')"></ion-icon>
       <ion-icon name='ios-add-circle-outline' item-end color="secondary" (click)="updateRooms('add')"></ion-icon>
     </ion-item>
 
     <ion-item>
       <h1 item-start>{{guestDetails.adult}}</h1>
-      Adults
+      {{guestDetails.adult <= 1 ? 'Adult' : 'Adults'}} 
       <ion-icon name='ios-remove-circle-outline' item-end color="primary" (click)="updateAdult('remove')"></ion-icon>
       <ion-icon name='ios-add-circle-outline' item-end color="secondary" (click)="updateAdult('add')"></ion-icon>
     </ion-item>
 
     <ion-item>
       <h1 item-start>{{guestDetails.children}}</h1>
-      Children
+      {{guestDetails.children <= 1 ? 'child' : 'children'}}
       <ion-icon name='ios-remove-circle-outline' item-end color="primary" (click)="updateChildren('remove')"></ion-icon>
       <ion-icon name='ios-add-circle-outline' item-end color="secondary" (click)="updateChildren('add')"></ion-icon>
     </ion-item>

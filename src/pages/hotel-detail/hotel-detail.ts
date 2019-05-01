@@ -113,7 +113,7 @@ export class HotelDetailPage {
     roomType.forEach(element => {
       element.roomDisplayThumb = `${this.imgagePath}Room/${element.thumb_image[0]}`;
       element.roomPhotoList = [];
-      element.totalPriceCalculated = this.searchCriteria.no_of_rooms * element.price_per_day;
+      element.totalPriceCalculated = this.searchCriteria.optradio == 1 ? this.searchCriteria.no_of_rooms * element.price_per_day : this.searchCriteria.no_of_rooms * element.price_per_hour;
       if (this.searchCriteria) {
         element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
         element.check_in_date = this.searchCriteria.check_in_date
@@ -133,7 +133,7 @@ export class HotelDetailPage {
   }
 
   noOfRoomChange(currentRoomType) {
-    currentRoomType.totalPriceCalculated = currentRoomType.price_per_day * currentRoomType.selectedNoOfRooms;
+    currentRoomType.totalPriceCalculated = this.searchCriteria.optradio == 1 ? currentRoomType.price_per_day * currentRoomType.selectedNoOfRooms : currentRoomType.selectedNoOfRooms * currentRoomType.price_per_hour;
     currentRoomType;
   }
 

@@ -93,6 +93,12 @@ export class DashboardPage {
     });
   }
 
+  chekInDateChangeEvent(){
+    let checkoutDateConverted = new Date(this.selectedDates.checkInDate);
+    this.selectedDates.checkoutDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 1));
+    this.selectedDates.checkoutMinDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 1));
+  }
+
   updateSearchResults() {
     if (this.autocompleteInput == '') {
       this.autocompleteItems = [];
