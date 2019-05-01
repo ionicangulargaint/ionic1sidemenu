@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, Events, LoadingController, Loading } from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../providers';
+import { Api, User } from '../../providers';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @IonicPage()
@@ -40,7 +40,8 @@ export class LoginPage {
     public events: Events,
     private httpClient: HttpClient,
     public loadingCtrl: LoadingController,
-    private fb: Facebook
+    private fb: Facebook,
+    public api: Api
   ) {
 
     this.loginFormByEmail = this._FORMBUILDER.group({
@@ -85,8 +86,6 @@ export class LoginPage {
         this.loading.dismiss();
       });
     })
-
-
   }
 
   doLoginByMobile() {
@@ -162,7 +161,15 @@ export class LoginPage {
             loginFb:true
           }
           this.events.publish('user:loggedin', user, Date.now());
-          this.navCtrl.setRoot('DashboardPage');
+          this.api.get(`facebook.php?loginByEmail=FACEBOOK123&email=${user.email}`).subscribe((resp: any) => {
+            if (resp.result == 'success') {
+              this.navCtrl.setRoot('DashboardPage');
+            } 
+          }, (err) => {
+            this.loginError.show = true;
+            this.loginError.msg = 'An server error occured.';
+          });
+          
         }).catch(err => console.log('Error in profile info', err));
       })
       .catch(e => console.log('Error logging into Facebook', e));
