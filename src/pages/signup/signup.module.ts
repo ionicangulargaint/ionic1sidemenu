@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
-import { Facebook } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { SignupPage } from './signup';
 
 @NgModule({

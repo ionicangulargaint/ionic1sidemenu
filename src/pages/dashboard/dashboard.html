@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content no-bounce class="no-scroll">
-    <ion-searchbar [(ngModel)]="autocompleteInput" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="autocompleteInput" (ionInput)="updateSearchResults()" placeholder="Search for a place">
+    </ion-searchbar>
     <ion-list class="search-list" [hidden]="autocompleteItems.length == 0">
         <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
             {{ item.description }}
@@ -57,13 +58,15 @@
                 <ion-col col-6>
                     <ion-item>
                         <ion-label class="exmedium-white">Day</ion-label>
-                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeDay" (ionChange)="change('Day')"></ion-checkbox>
+                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeDay" (ionChange)="change('Day')">
+                        </ion-checkbox>
                     </ion-item>
                 </ion-col>
                 <ion-col col-6>
                     <ion-item>
                         <ion-label class="exmedium-white">Hour</ion-label>
-                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeHour" (ionChange)="change('Hour')"></ion-checkbox>
+                        <ion-checkbox color="dark" [(ngModel)]="selectedTypeHour" (ionChange)="change('Hour')">
+                        </ion-checkbox>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -76,14 +79,16 @@
                         <div>CHECK IN</div>
                         <!-- <div>{{selectedDates.checkInDate}}</div> -->
                         <ion-datetime class="smallSreeenFont" displayFormat="DD MMM YY" pickerFormat="YYYY MMMM DD"
-                             max={{selectedDates.checkoutDate}} [(ngModel)]="selectedDates.checkInDate"></ion-datetime>
+                            min={{selectedDates.checkInMinDate}} max={{selectedDates.checkInMaxDate}}
+                            [(ngModel)]="selectedDates.checkInDate"></ion-datetime>
                     </ion-col>
                     <ion-col col-2></ion-col>
                     <ion-col col-5 class="check-wrap">
                         <div>CHECK OUT</div>
                         <!-- <div>{{selectedDates.checkoutDate}}</div> -->
                         <ion-datetime class="smallSreeenFont" displayFormat="DD MMM YY" pickerFormat="YYYY MMMM DD"
-                            min="{{selectedDates.checkInDate}}" [(ngModel)]="selectedDates.checkoutDate"></ion-datetime>
+                            min="{{selectedDates.checkoutMinDate}}" max="{{selectedDates.checkoutMaxDate}}"
+                            [(ngModel)]="selectedDates.checkoutDate"></ion-datetime>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -91,8 +96,9 @@
         <div class="checkin-hour" *ngIf="selectedTypeHour">
             <div class="checkInlable">Check In Hour</div>
             <div class="check-wrap center" style="margin-top: 5px;">
-                <ion-datetime class="smallSreeenFont" displayFormat="DD MMM YY" pickerFormat="YYYY MMMM DD" min="{{selectedTime.checkInMinDate}}" max={{selectedTime.checkInMaxDate}}
-                        [(ngModel)]="selectedTime.checkInDate"></ion-datetime> 
+                <ion-datetime class="smallSreeenFont" displayFormat="DD MMM YY" pickerFormat="YYYY MMMM DD"
+                    min="{{selectedTime.checkInMinDate}}" max={{selectedTime.checkInMaxDate}}
+                    [(ngModel)]="selectedTime.checkInDate"></ion-datetime>
             </div>
             <ion-grid class="center" style="padding: 5px 0;">
                 <ion-row>
@@ -125,10 +131,11 @@
         </div>
         <button (click)="navigateToSearchedList()" ion-button block color="light">SEARCH</button>
     </div>
-    <ion-slides *ngIf="slides.length!=0" padding pager="true" dir="{{dir}}" (ionSlideWillChange)="onSlideChangeStart($event)">
+    <ion-slides *ngIf="slides.length!=0" padding pager="true" dir="{{dir}}"
+        (ionSlideWillChange)="onSlideChangeStart($event)">
         <ion-slide *ngFor="let slide of slides">
-            <img class="slide-image" src="{{imgagePath}}{{slide.banner}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}"
-                [hidden]="!loaded" />
+            <img class="slide-image" src="{{imgagePath}}{{slide.banner}}" (load)="loaded = true"
+                [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
             <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
 
             <!-- <img src="{{imgagePath}}{{slide.banner}}" class="slide-image" /> -->
@@ -146,8 +153,8 @@
         <div class="one-item" (click)="navigateToHotelDetail(slide)" *ngFor="let slide of topHotelsLIst">
             <ion-card class="myCard">
                 <!-- <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}" /> -->
-                <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}" (load)="loaded = true"
-                    [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                <img class="holtel-img" alt="Image missing" height="250" src="{{imgagePath}}{{slide.image}}"
+                    (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}" *ngIf="!loaded"></ion-spinner>
                 <div class="myOverlay">
                     <div class="card-title1">RM {{slide.price}}</div>
@@ -163,7 +170,8 @@
                         <ion-col class="col-5">
                             <div class="main-rating">
                                 <ion-icon class="stars-outer" name="ios-star-outline">
-                                    <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * slide.rating + '%'}"></ion-icon>
+                                    <ion-icon class="stars-inner" name="ios-star"
+                                        [ngStyle]="{'width': 20 * slide.rating + '%'}"></ion-icon>
                                 </ion-icon>
                             </div>
                         </ion-col>
@@ -184,5 +192,5 @@
         </button>
     </div>
     <!-- <button (click)="sentMessage()">send message</button>
-<iframe width="100%" height="200" src="https://anytimecheckin.com/new/pay-paypal-new.php?hotel_id=17&payment=1&no_of_room=1&hotel_room_type_id=17&no_of_person=1&no_of_childs=0&check_in_date=2019-01-30&check_out_date=2019-01-31&check_in_time=23:15&check_out_time=01:15&booking_type=2&total_amount=0&discount_amount=0&booked_price=0&user_id=2&fname=&lname=&email=&mob_no=" id="payment_frame"></iframe> -->
+<iframe width="100%" height="700" src="https://anytimecheckin.com/new/pay-paypal-new.php?hotel_id=17&payment=1&no_of_room=1&hotel_room_type_id=17&no_of_person=1&no_of_childs=0&check_in_date=2019-01-30&check_out_date=2019-01-31&check_in_time=23:15&check_out_time=01:15&booking_type=2&total_amount=0&discount_amount=0&booked_price=0&user_id=2&fname=&lname=&email=&mob_no=" id="payment_frame"></iframe> -->
 </ion-content>
