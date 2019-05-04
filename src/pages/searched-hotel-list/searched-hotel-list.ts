@@ -103,6 +103,7 @@ export class SearchedHotelListPage {
       rating3: this.filterObj.rating3.checked ? '3' : '',
       rating4: this.filterObj.rating4.checked ? '4' : '',
       rating5: this.filterObj.rating5.checked ? '5' : '',
+      hr:  this.searchParam.hr
     }
     return obj;
   }

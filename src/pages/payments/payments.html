@@ -31,11 +31,28 @@
                 <div class="small-lable">{{ serverBookingPaymentDetails.check_out_date | date : "EEE" }}</div>
               </ion-col>
             </ion-row>
-          </ion-grid>
-          <p class="small-lable">{{bookingDetails.hotelDetails.room_type_name}}</p>
+          </ion-grid>                             
         </ion-col>
       </ion-row>
     </ion-grid>
+
+
+    <ion-row class="center">
+        <ion-col>
+            <strong class="small-lable">Room type - {{bookingDetails.hotelDetails.room_type_name}}</strong>
+        </ion-col>
+        <ion-col>
+            <strong *ngIf="serverBookingPaymentDetails.booking_type ==2" class="small-lable">
+                Booked for {{serverBookingPaymentDetails.no_of_hours}} Hours
+            </strong>
+            <strong *ngIf="serverBookingPaymentDetails.booking_type !=2" class="small-lable">
+                Booked for {{totalNoOfDays}} {{totalNoOfDays > 1 ? 'Days' : 'Day'}}
+            </strong>
+        </ion-col>
+      </ion-row> 
+
+
+
   </ion-card>
 
   <!-- <ion-card>
@@ -87,7 +104,12 @@
     <ion-grid>
       <ion-row class="payment-list">
         <ion-col col-8>
-          Original price (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
+          <span *ngIf="serverBookingPaymentDetails.booking_type ==2 ">
+              Original price (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{serverBookingPaymentDetails.no_of_hours}} Hours)
+          </span>
+          <span *ngIf="serverBookingPaymentDetails.booking_type !=2 ">
+              Original price (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
+          </span>          
         </ion-col>
         <ion-col col-4>
           {{serverBookingPaymentDetails.total_amount | currency:"RM"}}
@@ -95,7 +117,13 @@
       </ion-row>
       <ion-row class="payment-list">
         <ion-col col-8>
-          Discount (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
+            <span *ngIf="serverBookingPaymentDetails.booking_type ==2 ">
+                Discount (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{serverBookingPaymentDetails.no_of_hours}} Hours)
+            </span>
+            <span *ngIf="serverBookingPaymentDetails.booking_type !=2 ">
+                Discount (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{totalNoOfDays}} Night)
+              </span>
+          
 
         </ion-col>
         <ion-col col-4>

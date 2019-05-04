@@ -55,11 +55,25 @@
     <div *ngFor="let room of selectedHotelRoomType">
       <ion-card (click)="showImagesModal(room.roomPhotoList)" class="hotel-type-card">
         <h4 class="lineHeight-text hotel-name" style="text-transform: capitalize">{{room.room_type_name}}</h4>
-        <img onError="this.src='assets/imgs/no-image-found.png';" src="{{(room.thumb_image == 0 || !room.thumb_image) ? 'assets/imgs/no-image-found.png' : room.thumb_image}}"
+        <!-- <img onError="this.src='assets/imgs/no-image-found.png';" src="{{(room.roomDisplayThumb == 0 || !room.roomDisplayThumb) ? 'assets/imgs/no-image-found.png' : room.roomDisplayThumb}}"
           (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
         <div class="loader-container" *ngIf="!loaded">
           <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}"></ion-spinner>
-        </div>
+        </div> -->
+
+
+
+
+        <img onError="this.src='assets/imgs/no-image-found.png';" src="{{room.roomDisplayThumb}}"
+        (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+      <div class="loader-container" *ngIf="!loaded">
+        <ion-spinner name="bubbles" [ngClass]="{'spinner-center-custom':true}"></ion-spinner>
+      </div>
+
+
+
+
+
         <div class="myOverlay roomTypeOverLay">
           <div class="discount" *ngIf="room.room_type_discount.discount_percen">{{room.room_type_discount.discount_percent}}%
             Off</div>
@@ -198,5 +212,12 @@
       </ion-row>
     </ion-card>
   </div>
-  <h1 padding *ngIf="noRecordFound"> No data found for the hotel.</h1>
+
+  <div class="row search-again-btn" *ngIf="noRecordFound">
+    <div class="col">            
+      <img src="../assets/imgs/404-hotel.png">
+        <button ion-button (click)="backToDashborad()">Back</button>
+    </div>
+  </div>
+  <!-- <h1 padding *ngIf="noRecordFound"> No data found for the hotel.</h1> -->
 </ion-content>

@@ -172,8 +172,6 @@ export class SignupPage {
         console.log("Error", error);
       }
       );
-
-
   }
 
   ionViewDidLoad() {
@@ -202,7 +200,14 @@ export class SignupPage {
             loginFb:true
           }
           this.events.publish('user:loggedin', user, Date.now());
-          this.navCtrl.setRoot('DashboardPage');
+          this.api.get(`facebook.php?loginByEmail=FACEBOOK123&email=${user.email}`).subscribe((resp: any) => {
+            if (resp.result == 'success') {
+              this.navCtrl.setRoot('DashboardPage');
+            } 
+          }, (err) => {
+            //this.loginError.show = true;
+            //this.loginError.msg = 'An server error occured.';
+          });
         }).catch(err => console.log('Error in profile info', err));
       })
       .catch(e => console.log('Error logging into Facebook', e));

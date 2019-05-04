@@ -17,6 +17,8 @@ export class MyBookingsPage {
     });
   }
 
+  noRecordFound:boolean =  true;
+
   upcomingBookingDetail: any = [];
   completedBookingDetail: any = [];
   cancelledBookingDetail: any = [];
@@ -42,14 +44,16 @@ export class MyBookingsPage {
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
+          this.noRecordFound = false;
           this.upcomingBookingDetail = res.data;
         } else {
-          let toast = this.toastCtrl.create({
-            message: 'An server error occured,',
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
+          this.noRecordFound = true;
+          // let toast = this.toastCtrl.create({
+          //   message: 'An server error occured,',
+          //   duration: 3000,
+          //   position: 'top'
+          // });
+          // toast.present();
         }
       }, err => {
         this.loading.dismiss();
@@ -66,14 +70,16 @@ export class MyBookingsPage {
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
+          this.noRecordFound = false;
           this.completedBookingDetail = res.data;
         } else {
-          let toast = this.toastCtrl.create({
-            message: 'An server error occured,',
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
+          // let toast = this.toastCtrl.create({
+          //   message: 'An server error occured,',
+          //   duration: 3000,
+          //   position: 'top'
+          // });
+          // toast.present();
+          this.noRecordFound = true;
         }
       }, err => {
         this.loading.dismiss();
@@ -90,14 +96,16 @@ export class MyBookingsPage {
       seq.subscribe((res: any) => {
         this.loading.dismiss();
         if (res.result == "success") {
+          this.noRecordFound = false;
           this.cancelledBookingDetail = res.data;
         } else {
-          let toast = this.toastCtrl.create({
-            message: 'An server error occured,',
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
+          // let toast = this.toastCtrl.create({
+          //   message: 'An server error occured,',
+          //   duration: 3000,
+          //   position: 'top'
+          // });
+          // toast.present();
+          this.noRecordFound = true;
         }
       }, err => {
         this.loading.dismiss();

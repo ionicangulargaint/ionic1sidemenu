@@ -75,11 +75,11 @@ export class HotelDetailPage {
       this.api.get(`hotelDetail.php?hotelDetail=Hotel12345&hotel_id=${this.selectedHotel}`).subscribe((resp: any) => {
         // this.api.get('hotelDetail.php?hotelDetail=Hotel12345&hotel_id=24').subscribe((resp: any) => {        
         this.loading.dismiss();
-        if (resp.result == 'success') {
+        if (resp) {
           this.selectedHotelDetail = resp.hotel_detail;
           let imageList = [];
           this.selectedHotelDetail.hotel_images.forEach((myString) => {
-            imageList.push(this.imgagePath + myString);
+            imageList.push({'image': this.imgagePath + myString});
           });
           this.selectedHotelDetail.customeImageList = imageList;
           if (resp.room_type) {
@@ -111,14 +111,16 @@ export class HotelDetailPage {
 
   createRoomTypeData(roomType) {
     roomType.forEach(element => {
+      element.roomDisplayThumb = `${this.imgagePath}Room/${element.thumb_image[0]}`;
       element.roomPhotoList = [];
-      element.totalPriceCalculated = this.searchCriteria.no_of_rooms * element.price_per_day;
+      element.totalPriceCalculated = this.searchCriteria.optradio == 1 ? this.searchCriteria.no_of_rooms * element.price_per_day : this.searchCriteria.no_of_rooms * element.price_per_hour;
       if (this.searchCriteria) {
         element.selectedNoOfRooms = this.searchCriteria.no_of_rooms;
         element.check_in_date = this.searchCriteria.check_in_date
       } else {
         element.selectedNoOfRooms = 1;
       }
+      
       if (element.room_image) {
         element.room_image.forEach(img => {
           element.roomPhotoList.push({ 'image': this.imgagePath + img });
@@ -131,7 +133,7 @@ export class HotelDetailPage {
   }
 
   noOfRoomChange(currentRoomType) {
-    currentRoomType.totalPriceCalculated = currentRoomType.price_per_day * currentRoomType.selectedNoOfRooms;
+    currentRoomType.totalPriceCalculated = this.searchCriteria.optradio == 1 ? currentRoomType.price_per_day * currentRoomType.selectedNoOfRooms : currentRoomType.selectedNoOfRooms * currentRoomType.price_per_hour;
     currentRoomType;
   }
 
@@ -165,7 +167,7 @@ export class HotelDetailPage {
           check_out_time: this.searchCriteria.check_out_time,
           optradio: this.searchCriteria.optradio,
           no_of_days: this.totalNoOfDays,
-          no_of_hours: ''
+          no_of_hours: this.searchCriteria.hr
         },
         hotelDetails: {
           hotel_image: this.selectedHotelDetail.main_image,
@@ -179,6 +181,10 @@ export class HotelDetailPage {
         }
       })
     });
+  }
+
+  backToDashborad(){
+    this.navCtrl.pop();
   }
 
 }

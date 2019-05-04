@@ -3,8 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController, Events, LoadingController, Loading } from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../providers';
-//import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Api, User } from '../../providers';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @IonicPage()
 @Component({
@@ -40,7 +40,8 @@ export class LoginPage {
     public events: Events,
     private httpClient: HttpClient,
     public loadingCtrl: LoadingController,
-   // private fb: Facebook
+    private fb: Facebook,
+    public api: Api
   ) {
 
     this.loginFormByEmail = this._FORMBUILDER.group({
@@ -85,8 +86,6 @@ export class LoginPage {
         this.loading.dismiss();
       });
     })
-
-
   }
 
   doLoginByMobile() {
@@ -150,23 +149,31 @@ export class LoginPage {
   }
 
   loginWithFacebook() {
-    // this.fb.login(['public_profile', 'email'])
-    //   .then((res: FacebookLoginResponse) => {
-    //     this.fb.api('me/?fields=id,first_name,last_name,email,picture.width(720).height(720).as(picture_large)',["public_profile","email"]).then( apires => {
-    //       var user = {
-    //         user_id:apires.id,
-    //         email:apires.email,
-    //         first_name:apires.first_name,
-    //         last_name:apires.last_name,
-    //         image:apires.picture_large.data.url,
-    //         loginFb:true
-    //       }
-    //       this.events.publish('user:loggedin', user, Date.now());
-    //       this.navCtrl.setRoot('DashboardPage');
-    //     }).catch(err => console.log('Error in profile info', err));
-    //   })
-    //   .catch(e => console.log('Error logging into Facebook', e));
+    this.fb.login(['public_profile', 'email'])
+      .then((res: FacebookLoginResponse) => {
+        this.fb.api('me/?fields=id,first_name,last_name,email,picture.width(720).height(720).as(picture_large)',["public_profile","email"]).then( apires => {
+          var user = {
+            user_id:apires.id,
+            email:apires.email,
+            first_name:apires.first_name,
+            last_name:apires.last_name,
+            image:apires.picture_large.data.url,
+            loginFb:true
+          }
+          this.events.publish('user:loggedin', user, Date.now());
+          this.api.get(`facebook.php?loginByEmail=FACEBOOK123&email=${user.email}`).subscribe((resp: any) => {
+            if (resp.result == 'success') {
+              this.navCtrl.setRoot('DashboardPage');
+            } 
+          }, (err) => {
+            this.loginError.show = true;
+            this.loginError.msg = 'An server error occured.';
+          });
+          
+        }).catch(err => console.log('Error in profile info', err));
+      })
+      .catch(e => console.log('Error logging into Facebook', e));
 
-    //   this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
+      this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
   }
 }
