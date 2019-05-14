@@ -48,9 +48,16 @@ page-dashboard {
     background: #235091;
   }
   .choose-wrap { 
-    background: #235091;
+    background: #235091 !important;
     font-size: 11px ; 
-    color: #fff;
+    color: #fff !important;
+  }
+  .item-ios {
+    font-size: 1.4rem;
+    color: #f1f1f1;
+    background-color: #fff0;
+    -webkit-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
   }
   .small-white {
     font-size: 12px ; 
