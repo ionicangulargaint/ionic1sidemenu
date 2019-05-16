@@ -105,12 +105,16 @@ ion-menu {
 .main-header .toolbar-ios {
     min-height: 75px;
 }
-
 .main-header .toolbar-ios ion-title {
     padding: 0 45px 1px;
         width: auto;
 }
-
 .ion-content {
     top:31px;
+}
+.side-menu .header-ios .toolbar-ios {
+    height: 80px;
+  }
+.side-menu .content-ios {
+    top:0px;
 }
