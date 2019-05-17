@@ -2,18 +2,30 @@
     <ion-navbar no-border-bottom>
         <ion-title>Hotel images</ion-title>
         <ion-buttons end>
-            <button ion-button (click)="closeModal()"> <ion-icon name="md-close"></ion-icon></button>
+            <button ion-button (click)="closeModal()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <ion-slides pager zoom>
+<ion-content class="modal-bg">
+    <ion-slides pager zoom #slides>
         <ion-slide *ngFor="let item of imagesList">
             <div class="swiper-zoom-container">
-                <img onError="this.src='assets/imgs/no-image-found.png';" src="{{item.image}}" (load)="loaded = true" [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
+                <img onError="this.src='assets/imgs/no-image-found.png';" src="{{item.image}}" (load)="loaded = true"
+                    [ngClass]="{'img-loaded':loaded}" [hidden]="!loaded" />
                 <ion-spinner name="bubbles" [ngClass]="{'center':true}" *ngIf="!loaded"></ion-spinner>
             </div>
         </ion-slide>
     </ion-slides>
+
+    <button *ngIf="hidePrev" ion-button color="light" outline icon-only class="btnPrev" (click)="prev()" style="left: 0;">
+        <ion-icon name='ios-arrow-dropleft' is-active="false"></ion-icon>
+    </button>
+
+    <button *ngIf="hideNext" ion-button color="light" outline icon-only class="btnNext" (click)="next()" style="right: 0;">
+        <ion-icon name='ios-arrow-dropright' is-active="false"></ion-icon>
+    </button>
+
 </ion-content>

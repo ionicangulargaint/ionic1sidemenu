@@ -96,7 +96,7 @@ export class DashboardPage {
   chekInDateChangeEvent(){
     let checkoutDateConverted = new Date(this.selectedDates.checkInDate);
     this.selectedDates.checkoutDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 1));
-    this.selectedDates.checkoutMinDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 1));
+    this.selectedDates.checkoutMinDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 0));
   }
 
   updateSearchResults() {
@@ -210,8 +210,26 @@ export class DashboardPage {
   change(type) {
     if (type == 'Day') {
       this.selectedTypeHour = !this.selectedTypeDay;
+      this.selectedTime = {
+        selectedHours: 2,
+        checkInDate: this.getFormatedDate(new Date()),
+        checkInTime: this.getFormatedTime(new Date()),
+        //checkoutTime: this.getFormatedTime(new Date(new Date().setHours(new Date().getHours() + 2))),
+        checkoutTime: this.getFormatedTime(new Date(new Date().setHours(new Date().getHours() + 2))),
+        checkInMinDate: this.getFormatedDate(new Date()),
+        //checkInMaxDate: this.getFormatedDate(new Date().setDate(new Date().getDate() + 3)),
+        checkInMaxDate: this.getFormatedDate((new Date(this.nextSixMonth)).setDate((new Date(this.nextSixMonth)).getDate() + 1))
+      }
     } else {
       this.selectedTypeDay = !this.selectedTypeHour;
+      this.selectedDates = {
+        checkInDate: this.getFormatedDate(new Date()),
+        checkInMinDate: this.getFormatedDate(new Date()),
+        checkInMaxDate: this.getFormatedDate(this.nextThreeMonth),
+        checkoutDate: this.getFormatedDate(this.checkoutDate),
+        checkoutMinDate: this.getFormatedDate(this.checkoutDate),
+        checkoutMaxDate: this.getFormatedDate((new Date(this.nextThreeMonth)).setDate((new Date(this.nextThreeMonth)).getDate() + 1))
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, IonicPage, Loading, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Api } from '../../providers';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @IonicPage()
 @Component({
   selector: 'page-payments',
@@ -21,7 +22,8 @@ export class PaymentsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private inappBrowes: InAppBrowser
   ) {
     this.bookingDetails = JSON.parse(this.navParams.get("bookingDetails"));
   }
@@ -131,6 +133,14 @@ export class PaymentsPage {
   }
 
   confirmBooking(param){
+
+
+
+  //   const browser = this.inappBrowes.create('https://anytimecheckin.com/new/api/pay-paypal.php?user_id&optradio&check_in_date=13 May 2019&check_out_date=14 May 2019&check_in_time&check_out_time&hotel_id=24&hotel_room_type_id=54&discounted_price&childs&total_price=445&noofroom=1&no_of_person=1&fname=chirag&lname=singhal&email=chiragsinghal002@gmail.com&mob_no=9560855334');
+
+  //   browser.on('loadstop').subscribe(event => {
+  //     browser.insertCSS({ code: "body{color: red;" });
+  //  });
     this.createLoader();
     this.noRecordFound = false;
     this.loading.present().then(() => {

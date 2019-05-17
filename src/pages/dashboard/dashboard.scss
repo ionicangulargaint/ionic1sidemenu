@@ -47,12 +47,16 @@ page-dashboard {
     border-radius: 50%;
     background: #235091;
   }
+  .bar-button-default-ios{
+    color: #0f4187 !important;
+    background-color: transparent;
+  }
   .choose-wrap { 
     background: #235091 !important;
     font-size: 11px ; 
     color: #fff !important;
   }
-  .item-ios {
+  .selectBox {
     font-size: 1.4rem;
     color: #f1f1f1;
     background-color: #fff0;

@@ -20,7 +20,12 @@ export class AddGuestDetailPage {
 
   updateRooms(type) {
     if (type == 'add') {
-      this.guestDetails.rooms = this.guestDetails.rooms + 1;
+      if(this.guestDetails.rooms == 9){
+        this.guestDetails.rooms = 1;
+      } else{
+        this.guestDetails.rooms = this.guestDetails.rooms + 1;
+      }
+      
     } else if(this.guestDetails.rooms > 1) {
       this.guestDetails.rooms = this.guestDetails.rooms - 1;
     }
@@ -28,7 +33,11 @@ export class AddGuestDetailPage {
 
   updateAdult(type) {
     if (type == 'add') {
-      this.guestDetails.adult = this.guestDetails.adult + 1;
+      if(this.guestDetails.adult == 9){
+        this.guestDetails.adult = 1;
+      } else{
+        this.guestDetails.adult = this.guestDetails.adult + 1;
+      }      
     } else if(this.guestDetails.adult > 1) {
       this.guestDetails.adult = this.guestDetails.adult - 1;
     }
@@ -36,7 +45,11 @@ export class AddGuestDetailPage {
 
   updateChildren(type) {
     if (type == 'add') {
-      this.guestDetails.children = this.guestDetails.children + 1;
+      if(this.guestDetails.children == 9){
+        this.guestDetails.children = 0;
+      } else{
+        this.guestDetails.children = this.guestDetails.children + 1;
+      }      
     } else if(this.guestDetails.children) {
       this.guestDetails.children = this.guestDetails.children - 1;
     }

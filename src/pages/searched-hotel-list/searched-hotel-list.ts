@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { ToastController, IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { Api, CommonService } from '../../providers';
 
 @IonicPage()
@@ -36,7 +36,8 @@ export class SearchedHotelListPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public commonService: CommonService
+    public commonService: CommonService,
+    public toastCtrl: ToastController
   ) {
     this.searchParam  = JSON.parse(localStorage.getItem('dashboardSearch'));
     if(this.searchParam){
@@ -70,11 +71,28 @@ export class SearchedHotelListPage {
           this.noResultFound = false;
         } else {
           this.noResultFound = true;
+          this.presentToast('No hotel found. Try search again!');
         }
       }, (err) => {
         this.loading.dismiss();
       });
     })
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      position: 'middle',
+      showCloseButton: true,
+      closeButtonText:	"Ok",
+      dismissOnPageChange: true	
+    });
+  
+    toast.onDidDismiss(() => {
+      //this.searchAgain();
+    });
+  
+    toast.present();
   }
 
   createObj() {
