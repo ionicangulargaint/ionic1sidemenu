@@ -92,6 +92,6 @@
         <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.40.0" />
     </plugin>
-    <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
