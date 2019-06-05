@@ -85,7 +85,8 @@ export class SearchedHotelListPage {
       position: 'middle',
       showCloseButton: true,
       closeButtonText:	"Ok",
-      dismissOnPageChange: true	
+      dismissOnPageChange: true,
+      duration: 3000	
     });
   
     toast.onDidDismiss(() => {

@@ -81,7 +81,12 @@
           <ion-list>
             <ion-item>
               <ion-icon name="moon" item-start></ion-icon>
-              {{totalNoOfDays}} Night
+              <span *ngIf="serverBookingPaymentDetails.booking_type ==2 ">
+                   {{serverBookingPaymentDetails.no_of_hours}} Hours
+              </span>
+              <span *ngIf="serverBookingPaymentDetails.booking_type !=2 ">
+                  {{totalNoOfDays}} Night
+             </span>              
             </ion-item>
             <ion-item>
               <ion-icon item-start>
@@ -90,7 +95,7 @@
               {{serverBookingPaymentDetails.no_of_rooms}} Room,
               {{serverBookingPaymentDetails.no_adult}} Adults
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="serverBookingPaymentDetails.no_child != 0">
               <ion-icon name="md-people" item-start></ion-icon>
               {{serverBookingPaymentDetails.no_child}} Child (0-6 year)
             </ion-item>
@@ -115,7 +120,7 @@
           {{serverBookingPaymentDetails.total_amount | currency:"RM"}}
         </ion-col>
       </ion-row>
-      <ion-row class="payment-list">
+      <ion-row class="payment-list" *ngIf="serverBookingPaymentDetails.discount_amount">
         <ion-col col-8>
             <span *ngIf="serverBookingPaymentDetails.booking_type ==2 ">
                 Discount (Room {{serverBookingPaymentDetails.no_of_rooms}} X {{serverBookingPaymentDetails.no_of_hours}} Hours)

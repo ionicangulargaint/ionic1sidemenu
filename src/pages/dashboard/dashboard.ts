@@ -94,9 +94,11 @@ export class DashboardPage {
   }
 
   chekInDateChangeEvent(){
+    if((new Date(this.selectedDates.checkInDate)) >= (new Date(this.selectedDates.checkoutDate))){    
     let checkoutDateConverted = new Date(this.selectedDates.checkInDate);
     this.selectedDates.checkoutDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 1));
     this.selectedDates.checkoutMinDate = this.getFormatedDate(checkoutDateConverted.setDate(checkoutDateConverted.getDate() + 0));
+    }
   }
 
   updateSearchResults() {

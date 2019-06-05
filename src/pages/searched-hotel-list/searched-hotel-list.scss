@@ -91,15 +91,14 @@ page-searched-hotel-list {
     background: #ffffff;
 }
 .not-found {
-  background-image: url(../assets/imgs/404-hotel.png);  
+  //background-image: url(../assets/imgs/404-hotel.png);  
   background-position: 49% 65%;
   background-repeat: no-repeat;
   background-size: 150%;
 }
 .search-again-btn {
-  position: absolute;
-  bottom: 2%;
-  left: 35%;
+  text-align: center;
+    margin-top: 25%;
 }
 
 .stars-outer {

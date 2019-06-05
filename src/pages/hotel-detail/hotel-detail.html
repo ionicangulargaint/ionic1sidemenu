@@ -41,7 +41,7 @@
               <ion-icon class="stars-outer" name="ios-star-outline">
                 <ion-icon class="stars-inner" name="ios-star" [ngStyle]="{'width': 20 * selectedHotelDetail.hotel_star_category + '%'}"></ion-icon>
               </ion-icon>&nbsp;&nbsp;&nbsp;
-              <a class="review-link" (click)="scrollToId()">Review {{selectedHotelDetail.review_count}}</a>
+              <a *ngIf="selectedHotelDetail.review_count" class="review-link" (click)="scrollToId()">Review {{selectedHotelDetail.review_count}}</a>
             </div>
           </ion-col>
         </ion-row>

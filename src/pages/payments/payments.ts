@@ -186,17 +186,17 @@ export class PaymentsPage {
 
     const browser = this.inappBrowes.create(paramData);
 
-    
-    let source = new EventSource("https://anytimecheckin.com/new/api/response.php");
-    source.onmessage = ((event)=>  {
-      event.data;
-      if(event.data == 2){
-        browser.close();
-        setTimeout(() => {
-          this.navigateToBookingConfirmed('s');
-        }, 200);
-      }
-    });
+    // let eventSource = window['EventSource'];
+    // let source = new EventSource("https://anytimecheckin.com/new/api/response.php");
+    // source.onmessage = ((event)=>  {
+    //   event.data;
+    //   if(event.data == 2){
+    //     browser.close();
+    //     setTimeout(() => {
+    //       this.navigateToBookingConfirmed('s');
+    //     }, 200);
+    //   }
+    // });
     browser.on('loadstop').subscribe(event => {
       browser.insertCSS({ code: "body{color: red;" });
     });

@@ -118,7 +118,8 @@
 
 <ion-content [ngClass]="noResultFound?'not-found':''">
   <div class="row search-again-btn" *ngIf="noResultFound">
-    <div class="col">            
+    <div class="col">  
+      <h3>No result found</h3>          
         <button ion-button (click)="searchAgain()">Search again</button>
     </div>
   </div>
